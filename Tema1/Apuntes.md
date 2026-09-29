@@ -150,7 +150,7 @@ Otro modo de clasificar las BD es según dónde se encuentren ubicadas. Veamos l
 
 **1. BD locales**
 
-En este caso, la base de datos y el usuario están en el **mismo ordenador**.
+En este caso, la BD y el usuario están en el **mismo ordenador**.
 
 * Ejemplo: **Microsoft Access**, que resulta sencillo de manejar para usuarios poco expertos.
 * Funciona bien en modo local siempre que no tenga que almacenar grandes volúmenes de información.
@@ -158,10 +158,10 @@ En este caso, la base de datos y el usuario están en el **mismo ordenador**.
 
 **2. BD centralizadas**
 
-En los sistemas centralizados, toda la base de datos está en un **único servidor**, al que acceden todos los usuarios.
+En los sistemas centralizados, la BD está en un **único servidor**, al que acceden todos los usuarios.
 
 * Que esté en un mismo servidor no significa que esté en un solo archivo o en un único disco; puede estar repartida internamente.
-* En el modelo **Cliente/Servidor**, la base de datos reside en el servidor y los usuarios acceden a ella simultáneamente desde sus ordenadores (clientes) a través de una red, ya sea local o Internet.
+* En el modelo **Cliente/Servidor**, la BD reside en el servidor y los usuarios acceden a ella simultáneamente desde sus ordenadores (clientes) a través de una red, ya sea local o Internet.
 * Es el sistema más utilizado en empresas actualmente.
 * Ejemplos comerciales: Oracle Database, Microsoft SQL Server, IBM Db2, MySQL Enterprise.
 
@@ -188,18 +188,12 @@ En este modelo, la información está repartida en distintas localizaciones que 
 
 ## 3. BASES DE DATOS RELACIONALES
 
-En este curso trabajaremos con BD relacionales y BD no relacionales.  
-Veremos conceptos básicos sobre BD en general y BD relacionales en particular. Las BD no relacionales las veremos a final de curso.
-
-
 ### 3.1. CONCEPTOS
 
 - **Datos:** hechos conocidos que pueden registrarse y tienen un significado.  
   Ejemplo: nombres, números de teléfono y direcciones de personas.
 
 - **Tipo de dato:** indica la naturaleza del campo.  
-  - Datos numéricos: se pueden usar para cálculos aritméticos (sumas, restas…).  
-  - Datos alfanuméricos: contienen caracteres alfabéticos y números.
 
 - **Tabla:** conjunto de filas y columnas bajo un mismo nombre, que almacena valores para una serie de datos.  
   Ejemplo: la información de todos los clientes de una BD se guarda en la tabla `CLIENTES`.
@@ -209,8 +203,6 @@ Veremos conceptos básicos sobre BD en general y BD relacionales en particular. 
 
 - **Campo clave:** campo especial que Identifica de forma única cada registro.  
   Ejemplo: el `NIF` es único para cada persona, por lo que puede ser su campo clave.  
-  > ⚠️ Atención:
-  > Existen distintos tipos de campos clave que se verán más adelante.
 
 - **Registro (o tupla):** cada fila de la tabla. Contiene todos los valores de un conjunto de campos para un elemento.  
   Ejemplo: en la tabla `CLIENTES`, un registro puede contener la información de Juan García o Fernando Martínez.
@@ -251,7 +243,7 @@ Veremos conceptos básicos sobre BD en general y BD relacionales en particular. 
   - Ejemplo: no podemos tener un Vehículo cuyo código de cliente **no exista** previamente en la tabla de Clientes.
 
 - **Metadatos:**  
-  - Son **datos sobre los datos** presentes en la base de datos.  
+  - Son **datos sobre los datos** presentes en la BD.  
   - Ejemplos:  
     - Qué tipo de datos se van a almacenar (texto, números, fechas…)  
     - Qué nombre se le da a cada dato (nombre, apellidos, fecha, precio, edad…)  
@@ -261,12 +253,12 @@ Veremos conceptos básicos sobre BD en general y BD relacionales en particular. 
 
 ### 3.3. SISTEMAS GESTORES DE BASES DE DATOS
 
-Un Sistema Gestor de Bases de Datos (SGBD) es una aplicación que permite a los usuarios **definir, crear y mantener una base de datos**, proporcionando acceso controlado a la misma.
+Un Sistema Gestor de Bases de Datos (SGBD) es una aplicación que permite a los usuarios definir, crear y mantener una BD, proporcionando acceso controlado a la misma.
 
 #### Servicios que proporciona un SGBD
 
 - **DDL (Data Description Language):**  
-  - Permite la **definición de la base de datos** mediante el lenguaje de definición de datos.  
+  - Permite la **definición** de la BD mediante el lenguaje de definición de datos.  
   - Especifica la **estructura**, el **tipo de datos** y las **restricciones** que se almacenan en la BD.
 
 - **DML (Data Manipulation Language):**  
@@ -279,23 +271,6 @@ Un Sistema Gestor de Bases de Datos (SGBD) es una aplicación que permite a los 
   - Sistema de **control de concurrencia**, permitiendo el acceso compartido.  
   - Sistema de **recuperación**, restableciendo la BD tras fallos de hardware o software.  
   - **Diccionario de datos** o catálogo accesible al usuario que describe los datos de la BD.
-
-> 💡 Importante:
-> La principal herramienta de un SGBD es la **interfaz de usuario**, normalmente mediante **SQL (Structure Query Language)**, un lenguaje estandarizado que permite interactuar con el servidor de manera uniforme.
-
-
-### 3.4. TIPOS DE SGBD
-
-Los SGBD se pueden clasificar según el tipo de BD que gestionan (jerárquicas, relacionales, orientadas a objetos…), pero actualmente se suele clasificar según **capacidad y potencia**:
-
-- **SGBD ofimáticos:**  
-  - Manejan BD pequeñas, para datos domésticos o de pequeñas empresas.  
-  - Ejemplos: Microsoft Access, LibreOffice Base.
-
-- **SGBD corporativos:**  
-  - Gestionan BD grandes, para medianas o grandes empresas con alto volumen de datos y transacciones.  
-  - Ejemplos: ORACLE, DB2.  
-  - Para aprendizaje se pueden usar versiones gratuitas educativas, limitadas pero útiles para entender la filosofía de ORACLE.
 
 #### 🖥️ Hojas de ejercicios
 
