@@ -275,4 +275,3 @@ Un Sistema Gestor de Bases de Datos (SGBD) es una aplicación que permite a los 
 #### 🖥️ Hojas de ejercicios
 
 > - Hoja de ejercicios 1
-> - Hoja de ejercicios 2
