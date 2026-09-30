@@ -30,11 +30,14 @@ unit_title: "Unidad 2. Diseño lógico de la base de datos."
 
 ## 1. MODELO DE DATOS
 
-Un modelo pretende crear una simplificación de la realidad para poder comprenderla mejor.  
-Para realizar un modelo se realiza una abstracción más simple de la realidad.  
+Un modelo pretende crear una simplificación de la realidad para poder comprenderla mejor.
+
+Para realizar un modelo se realiza una abstracción más simple de la realidad.
+
 Se usan modelos en diferentes áreas de la informática, como por ejemplo:  
 - UML en Ingeniería del Software  
-- Modelo Entidad/Relación en BD  
+- Modelo Entidad/Relación en BD
+
 Un modelo de datos es un conjunto de herramientas y reglas para representar datos, relaciones entre ellos y restricciones.
 
 ### 1.1. Modelos más utilizados
@@ -59,12 +62,14 @@ En este tema vamos a trabajar el modelo conceptual (modelo Entidad-Relación) y 
 
 ## 2. DIAGRAMA ENTIDAD-RELACIÓN (DER)
 
-El **Modelo Entidad-Relación (MER)** es el esquema conceptual que describe la estructura de los datos de un sistema: los conjuntos de entidades, sus atributos, las relaciones entre ellas y las restricciones.<br>
-El **Diagrama Entidad-Relación (DER)** es la representación gráfica concreta de ese modelo y es **independiente del SGBD**.
+El **Modelo Entidad-Relación (MER)** es el esquema conceptual que describe la estructura de los datos de un sistema: los conjuntos de entidades, sus atributos, las relaciones entre ellas y las restricciones.
+
+El **Diagrama Entidad-Relación (DER)** es la representación gráfica concreta de ese modelo y es independiente del SGBD.
 En un DER representamos de manera gráfica cómo se organiza la información en una BD. Consta solo de tres elementos:
 - Entidades
 - Atributos
 - Relaciones
+
 De esta forma, el diagrama nos permite ver de un vistazo qué entidades forman parte del sistema, qué características tiene cada una y cómo se relacionan entre ellas.
 En la siguiente imagen vemos un ejemplo de Diagrama E-R (DER):  
 
@@ -78,26 +83,30 @@ En los siguientes apartados vamos a ir desgranando los elementos que lo componen
 ### 2.1. ENTIDADES
 
 Una entidad es un objeto, sujeto o concepto sobre el que se recoge información básica en el sistema.  
+
 En el esquema anterior serían entidades: ALUMNO, MODULO y PROFESOR.
-Cada entidad se representa con un *rectángulo*. 
+
+Cada entidad se representa con un *rectángulo*.
+
 <img src="img/entidades.png" alt="Entidades" width="400px"/>
 
 
 ### 2.2. ATRIBUTOS Y TIPOS
 
-Un atributo es una propiedad o característica de una entidad. Como veremos más adelante, las **relaciones también pueden tener atributos**.  
-Cada atributo se representan con un *círculo*. Estos círculos se encuentran unidosn a la entidad a la que pertenecen.  
-Por ejemplo, la entidad ALUMNO puede tener los atributos:  
-- Numero  
-- Nombre  
-- Apellidos  
-- Fecha Nacimiento  
-- Población  
-Los atributos de una entidad se representan mediante **pequeños círculos unidos a la entidad por una línea**.  Al lado de cada círculo se escribe el nombre del atributo.  
-<img src="img/atributo1.png" alt="Atributos" width="400px"/>
-El **dominio de un atributo** es todo el conjunto de valores que se pueden asignar a ese atributo.  
+Un atributo es una propiedad o característica de una entidad. <br>
+Como veremos más adelante, las relaciones también pueden tener atributos.  
 
-Ejemplos de atributos y dominios de la entidad EMPLEADO:  
+Para el ejemplo, la entidad ALUMNO tiene los atributos:  
+- NumExpediente  
+- Nombre
+- Apellido  
+- FechaNac    
+
+Los atributos de una entidad se representan mediante *pequeños círculos unidos a la entidad por una línea*. Al lado de cada círculo se escribe el nombre del atributo.  
+
+El **dominio** de un atributo es todo el conjunto de valores que se pueden asignar a ese atributo.  
+
+Ejemplos de atributos y dominios de una entidad EMPLEADO:  
 
 | Atributo        | Dominio                                      |
 |-----------------|----------------------------------------------|
@@ -110,20 +119,15 @@ Ejemplos de atributos y dominios de la entidad EMPLEADO:
 | JornadaCompleta | Verdadero o Falso                            |
 
 
-#### ✍️ Ejercicio
-
-**Realiza el siguiente ejercicio:**
-
-Indica cuál sería el **dominio** de cada uno de los siguientes atributos de la entidad **PERSONA**:
-
-- Fecha de nacimiento  
-- Localidad de nacimiento  
-- Edad  
-- EsMayorDeEdad  
-- DNI  
-- Teléfonos  
-- Nombre  
-- Apellidos  
+> #### ✍️ Ejercicio: Indica cuál sería el **dominio** de cada uno de los siguientes atributos de una entidad PERSONA:
+> - Fecha de nacimiento  
+> - Localidad de nacimiento  
+> - Edad  
+> - EsMayorDeEdad  
+> - DNI  
+> - Teléfonos  
+> - Nombre  
+> - Apellidos  
 
 
 #### Tipos de atributos
