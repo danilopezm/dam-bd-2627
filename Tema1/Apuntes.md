@@ -9,43 +9,56 @@ unit_title: "Unidad 1. Sistemas de información."
    - [TIPOS DE BASES DE DATOS](#21-tipos-de-bases-de-datos)
 3. [BASES DE DATOS RELACIONALES](#3-bases-de-datos-relacionales)
    - [CONCEPTOS](#31-conceptos)
-   - [OTROS CONCEPTOS](#32-otros-conceptos)
-   - [SISTEMAS GESTORES DE BASES DE DATOS](#33-sistemas-gestores-de-bases-de-datos)
-   - [TIPOS DE SGBD](#34-tipos-de-sgbd)
+   - [SISTEMAS GESTORES DE BASES DE DATOS](#32-sistemas-gestores-de-bases-de-datos)
 
 ## 1. FICHEROS
 
-Un ordenador almacena muchos tipos de información. Toda esta información se guarda en los dispositivos de almacenamiento del ordenador. Para organizarla, se utilizan ficheros o archivos.  
+Un ordenador almacena distintos tipos de información en sus dispositivos de almacenamiento. Para organizar esa información se utilizan **ficheros** o **archivos**.
 
-Los ficheros son estructuras de información creadas por los sistemas operativos para almacenar datos. Cada fichero tiene un nombre y una extensión, que indica su formato.
+Un fichero es una unidad de información almacenada en un dispositivo, identificada normalmente por un nombre. Su contenido está formado por bits (ceros y unos) y debe interpretarse según un formato determinado.
+
+Un fichero puede tener una **extensión**, como `.txt`, `.pdf`, `.jpg` o `.mp3`, que orienta al sistema operativo y al usuario sobre el tipo de contenido y la aplicación con la que puede abrirse. Sin embargo, la extensión no garantiza el formato real del fichero.
 
 ### 1.1. TIPOS DE FICHEROS Y FORMATOS
 
-El formato y tipo de fichero determinan cómo se interpreta la información que contiene. Un fichero es una ristra de bits (ceros y unos), por lo que es necesaria su interpretación para dar sentido a los datos.
+El formato de un fichero determina cómo se organizan e interpretan los datos que contiene. Como todos los ficheros son secuencias de bits, es necesario conocer su formato para dar significado a la información almacenada.
 
 #### 1.1.1. SEGÚN EL CONTENIDO
-- **Ficheros de texto**: caracteres alfabéticos y números que entiende el ser humano.  
-- **Ficheros binarios**: bits que almacenan sonido, vídeo, imágenes, etc. No se leen directamente como texto.
+
+- **Ficheros de texto**: almacenan caracteres, letras, números y símbolos que pueden interpretarse mediante una codificación de caracteres, como UTF-8. Se pueden leer y editar con un editor de texto.  
+  - Ejemplos: `.txt`, `.csv`, `.html`, `.json` y `.py`.
+
+- **Ficheros binarios**: almacenan datos en un formato que no está pensado para ser leído directamente como texto. Para interpretarlos correctamente se necesita un programa compatible con su formato.  
+  - Ejemplos: imágenes, archivos de audio, vídeos, documentos PDF, hojas de cálculo, programas ejecutables y archivos de bases de datos.
 
 #### 1.1.2. SEGÚN LA ORGANIZACIÓN
-Indica la forma de acceso a los datos:
-- **Secuencial**: los datos están uno detrás de otro; para acceder a un dato concreto, se recorren los anteriores.  
-- **Directa**: permite acceder directamente a un dato sin necesidad de leer los anteriores.  
-- **Indexada**: acceso mediante un índice, facilitando la búsqueda rápida, como el índice de un libro.
 
-> ⚠️ Atención:
-> Existen variantes que combinan varias organizaciones para optimizar el acceso a los datos.
+La organización de un fichero indica cómo se estructuran sus registros y cómo se puede acceder a ellos:
+
+- **Secuencial**: los registros se almacenan uno detrás de otro. Para llegar a un registro concreto suele ser necesario recorrer los anteriores.
+   Ejemplo: leer línea a línea un fichero de texto.
+
+- **Directa o aleatoria**: permite acceder a un registro concreto sin recorrer necesariamente todos los anteriores. Normalmente se utiliza una posición, una dirección o una clave para localizarlo.  
+
+- **Indexada**: utiliza un índice que relaciona una clave con la posición de los registros dentro del fichero. Facilita la búsqueda rápida, de forma similar al índice de un libro.  
+
+> ⚠️ Atención: existen variantes que combinan distintas formas de organización y acceso para optimizar el rendimiento según el uso previsto del fichero.
 
 #### 1.1.3. SEGÚN LA UTILIDAD
-Indica el uso del fichero:
-- **Maestros**: contienen datos fundamentales para la organización. Ejemplo: datos de alumnos de un instituto.  
-- **Movimientos**: almacenan cambios o actualizaciones de los ficheros maestros.  
-- **Históricos**: guardan datos antiguos que ya no se usan en procesos diarios.
+
+Según su finalidad dentro de un sistema de información, los ficheros pueden clasificarse en:
+
+- **Maestros**: contienen los datos principales y relativamente estables de una organización.
+   Ejemplo: el fichero con los datos de los alumnos de un instituto.
+
+- **De movimientos**: contienen las operaciones que se realizan sobre los datos maestros, como altas, bajas, modificaciones, ventas, matrículas o pagos.  
+
+- **Históricos**: almacenan datos antiguos que ya no se usan en los procesos cotidianos, pero que se conservan para consultas, auditorías, estadísticas o motivos legales.
 
 #### 📝 Actividades
 
 > **Actividad 1. Abrir un fichero**.
-> 1. Busca en tu ordenador un fichero con extensión `.docx`.
+> 1. Busca en tu ordenador un fichero con extensión '.docx'.
 > 2. Ábrelo con el Bloc de notas.
 > 3. Responde: ¿por qué no se ve bien el contenido del fichero?
 
@@ -66,112 +79,120 @@ Indica el uso del fichero:
 > Indica para cada fichero su tipo y qué contiene o para qué se usa.
 
 
-
-
 ## 2. BASES DE DATOS
 
-Una **Base de datos (BD)** es un conjunto de **datos estructurados** que pertenecen a un mismo contexto. Su función es administrar de forma electrónica grandes cantidades de información.
+Una **Base de Datos (BD)** es un conjunto organizado de datos relacionados entre sí, almacenados de forma estructurada y pertenecientes a un mismo contexto. Una BD permite conservar, consultar y compartir información de manera eficiente.
 
-Anteriormente, se utilizaban ficheros tradicionales (como los vistos en el apartado anterior). Veamos las diferencias según su definición:
+Para definir, crear, consultar, modificar y administrar una BD se utiliza un **Sistema Gestor de Bases de Datos (SGBD)**.
+
+Antes de utilizar bases de datos, era habitual almacenar la información mediante sistemas de ficheros tradicionales. A continuación se muestran las principales diferencias:
 
 - **Ficheros tradicionales:**  
-  - Almacenan los datos en archivos individuales, exclusivos de cada aplicación.  
-  - Los datos de un fichero no están relacionados con otros ficheros; son **unidades independientes**.  
-  - Pueden existir **datos redundantes** y la actualización es más lenta.
+  - Almacenan los datos en archivos independientes, normalmente creados para una aplicación concreta.  
+  - Cada aplicación suele gestionar sus propios ficheros, por lo que los datos pueden quedar aislados y ser difíciles de compartir con otras aplicaciones.  
+  - Es habitual que existan **datos redundantes**, es decir, que la misma información se repita en varios archivos.  
+  - Actualizar un dato puede requerir modificar varios ficheros, lo que aumenta el tiempo de mantenimiento y el riesgo de inconsistencias.  
+  - Existe una fuerte dependencia entre los programas y la estructura de los ficheros.
 
 - **Bases de datos:**  
-  - El almacenamiento de datos está **formalmente definido** y controlado **centralmente**.  
-  - Permite **servir a múltiples aplicaciones**.  
-  - Los datos son **compartidos** por varios usuarios para diversas aplicaciones.
+  - Los datos se almacenan de forma organizada, con una estructura o esquema definido, y son gestionados por un **SGBD**.  
+  - Permiten que varias aplicaciones y usuarios accedan a los mismos datos de forma controlada.  
+  - Reducen la redundancia de datos y ayudan a mantener su consistencia.  
+  - Facilitan la consulta, actualización, seguridad, recuperación y control del acceso a la información.  
+  - Separan, en cierta medida, los datos de las aplicaciones que los utilizan.
 
-> ⚠️ Atención:
-> En un sistema de ficheros tradicional, la información está dispersa en varios archivos y requiere programas adicionales para recuperarla y agruparla.  
-
+> ⚠️ Atención:  
+> En un sistema tradicional de ficheros, la información puede estar dispersa en varios archivos. Las relaciones entre esos archivos y la recuperación conjunta de los datos deben ser programadas y controladas por cada aplicación. En una base de datos, el SGBD centraliza la gestión, el acceso y las reglas de integridad de la información.
 
 ### 2.1. TIPOS DE BASES DE DATOS
 
-#### Evolución histórica de las bases de datos
+Las bases de datos se pueden clasificar según distintos criterios. Uno de los más habituales es el **modelo de datos**, es decir, la forma en que organizan y representan la información.
 
-A lo largo de la historia, las BD han utilizado distintos modelos según su evolución tecnológica:
+#### 2.1.1. EVOLUCIÓN HISTÓRICA DE LOS MODELOS DE BASES DE DATOS
 
 **1. Primeros sistemas (años 60–70)**
 
-- **BD jerárquicas**  
-  - Datos organizados en árbol (padre-hijo).  
+- BD jerárquicas  
+  - Organizan los datos en una estructura de árbol formada por registros padre e hijo.  
+  - Cada registro hijo depende normalmente de un único registro padre.  
   - Ejemplo: IMS de IBM.
 
-- **BD en red**  
-  - Nodos con múltiples relaciones.  
-  - Basadas en CODASYL.
+- BD en red  
+  - Organizan los registros mediante una red de relaciones, de forma que un registro puede estar relacionado con varios registros.  
+  - El modelo fue definido por el grupo CODASYL.
 
-**2. BD relacionales (años 70–80)**
+**2. BD relacionales (desde los años 70)**
 
-- Organizadas en **tablas** con filas y columnas.  
-- Uso de **SQL**.  
-- Ejemplos: Oracle, MySQL, PostgreSQL, SQL Server.
+- Organizan los datos en tablas, formadas por filas (registros) y columnas (campos o atributos).
+- Las tablas se relacionan mediante claves primarias y claves foráneas.
+- Utilizan principalmente el lenguaje SQL (*Structured Query Language*) para definir estructuras y consultar o modificar datos.
+- Ejemplos de SGBD relacionales: Oracle Database, MySQL, PostgreSQL y Microsoft SQL Server.
 
-**3. BD orientadas a objetos (años 80–90)**
+**3. BD orientadas a objetos (desde los años 80)**
 
-- Datos almacenados como **objetos** con atributos y métodos.  
-- Útiles en aplicaciones multimedia o CAD.  
-- Ejemplo: ObjectDB.
+- Almacenan los datos como objetos, que pueden incluir atributos y métodos.
+- Resultan adecuadas para determinados ámbitos con estructuras complejas, como aplicaciones CAD, multimedia o científicas.
+- Ejemplos: ObjectDB y db4o.
 
-**4. BD distribuidas (años 90–2000)**
+**4. BD NoSQL (desde los años 2000)**
 
-- Datos repartidos en distintos nodos físicos.  
-- Permiten acceso como si fueran una sola base.  
-- Ejemplo: Oracle Distributed, replicación en MySQL.
-
-**5. BD NoSQL (2000 en adelante)**
-
-- Diseñadas para **Big Data** y datos no estructurados.  
+- No se basan necesariamente en tablas relacionales ni requieren un esquema rígido.
+- Se utilizan cuando se necesita flexibilidad, escalabilidad horizontal o un modelo de datos especializado.
 - Principales tipos:  
-  - Clave-valor → Redis, DynamoDB.  
-  - Documentales → MongoDB, CouchDB.  
-  - Columnas → Cassandra, HBase.  
-  - Grafos → Neo4j, OrientDB.
+  - Clave-valor: almacenan pares formados por una clave y un valor.  
+    - Ejemplos: Redis y Amazon DynamoDB.  
+  - Documentales: almacenan documentos, habitualmente con estructuras similares a JSON.  
+    - Ejemplos: MongoDB y CouchDB.  
+  - Columnas anchas: organizan los datos en familias de columnas y están orientadas a grandes volúmenes distribuidos.  
+    - Ejemplos: Apache Cassandra y HBase.  
+  - Grafos: almacenan nodos y relaciones, llamados aristas.  
+    - Ejemplos: Neo4j y OrientDB.
 
-**6. BD en la nube (2010 en adelante)**
+**5. BD modernas y emergentes**
 
-- Escalables y con pago por uso.  
-- Ejemplos: Amazon RDS, Google BigQuery, Azure SQL Database.
+- NewSQL: combinan SQL y transacciones consistentes con arquitecturas distribuidas y escalables.  
+  - Ejemplos: Google Cloud Spanner y VoltDB.
 
-**7. BD modernas y emergentes**
+- En memoria: mantienen una parte importante de los datos en memoria RAM para ofrecer gran velocidad de acceso.  
+  - Ejemplo: SAP HANA.
 
-- NewSQL → Google Spanner, VoltDB.  
-- En memoria → SAP HANA.  
-- Multimodelo → ArangoDB, CosmosDB.  
-- Para IA / vectoriales → Pinecone, Milvus.
+- Multimodelo: permiten utilizar más de un modelo de datos dentro del mismo sistema.  
+  - Ejemplos: ArangoDB y Azure Cosmos DB.
 
+- Vectoriales: almacenan y buscan vectores numéricos, utilizados especialmente en sistemas de IA, búsqueda semántica y aplicaciones con modelos de lenguaje.  
+  - Ejemplos: Pinecone y Milvus.
 
-#### Clasificación de las BD según su ubicación
+#### 2.1.2. CLASIFICACIÓN DE LAS BASES DE DATOS SEGÚN SU UBICACIÓN
 
-Otro modo de clasificar las BD es según dónde se encuentren ubicadas. Veamos las más importantes:
+Otra forma de clasificar las bases de datos es según dónde se almacenan y desde dónde se accede a ellas. Las principales son las siguientes:
 
 **1. BD locales**
 
-En este caso, la BD y el usuario están en el **mismo ordenador**.
+En una base de datos local, los datos y la aplicación que los utiliza se encuentran normalmente en el mismo ordenador o dispositivo.
 
-* Ejemplo: **Microsoft Access**, que resulta sencillo de manejar para usuarios poco expertos.
-* Funciona bien en modo local siempre que no tenga que almacenar grandes volúmenes de información.
-* Otros ejemplos: SQLite (muy usado en móviles y aplicaciones de escritorio), dBase (uno de los primeros sistemas personales).
+* Son adecuadas para aplicaciones personales, educativas, de escritorio o móviles, especialmente cuando el número de usuarios concurrentes es reducido.
+* Ejemplo: **Microsoft Access**, que permite crear y gestionar bases de datos de forma relativamente sencilla.
+* **SQLite** es otro ejemplo habitual: se utiliza en muchas aplicaciones móviles y de escritorio, ya que se integra dentro de la propia aplicación y almacena la base de datos en un archivo local.
+* Otros ejemplos históricos son **dBase** y **Paradox**.
 
 **2. BD centralizadas**
 
-En los sistemas centralizados, la BD está en un **único servidor**, al que acceden todos los usuarios.
+En los sistemas centralizados, la base de datos se administra desde un **servidor central**, al que acceden los usuarios y las aplicaciones a través de una red.
 
-* Que esté en un mismo servidor no significa que esté en un solo archivo o en un único disco; puede estar repartida internamente.
-* En el modelo **Cliente/Servidor**, la BD reside en el servidor y los usuarios acceden a ella simultáneamente desde sus ordenadores (clientes) a través de una red, ya sea local o Internet.
-* Es el sistema más utilizado en empresas actualmente.
-* Ejemplos comerciales: Oracle Database, Microsoft SQL Server, IBM Db2, MySQL Enterprise.
+* Que la base de datos esté centralizada no significa que se guarde en un único archivo o en un solo disco: internamente puede usar múltiples ficheros, discos o sistemas de almacenamiento.
+* En una arquitectura **cliente/servidor**, el SGBD se ejecuta en el servidor y los clientes se conectan a él mediante una red local o Internet.
+* El servidor puede atender a varios usuarios y aplicaciones de forma simultánea.
+* Es un modelo muy habitual en organizaciones y empresas.
+* Ejemplos de SGBD utilizados en este modelo: **PostgreSQL**, **Oracle Database**, **Microsoft SQL Server**, **IBM Db2** y **MySQL**.
 
 **3. BD distribuidas**
 
-En este modelo, la información está repartida en distintas localizaciones que se encuentran conectadas mediante una red y gestionadas por un sistema de bases de datos distribuidas.
+En una base de datos distribuida, los datos se almacenan o replican en varios nodos conectados mediante una red. Los nodos pueden encontrarse en ubicaciones geográficas diferentes.
 
-* Estas localizaciones suelen estar en lugares geográficos distintos.
-* El sistema gestor se encarga de que los usuarios perciban los datos como si estuvieran en una única base.
-* Ejemplos comerciales: Google Spanner, Amazon Aurora, Microsoft Cosmos DB, CockroachDB, Cassandra (DataStax Enterprise).
+* El sistema gestor coordina los distintos nodos para que los usuarios puedan trabajar con los datos como si formaran parte de una única base de datos lógica.
+* Los datos pueden estar **fragmentados**, es decir, repartidos entre varios nodos, o **replicados**, es decir, copiados en varios nodos para mejorar la disponibilidad.
+* Este modelo puede aumentar la disponibilidad, la tolerancia a fallos y la cercanía de los datos a los usuarios, pero también hace más compleja la sincronización y el mantenimiento de la consistencia.
+* Ejemplos: **Google Cloud Spanner**, **CockroachDB**, **Apache Cassandra** y algunos servicios de bases de datos distribuidas en la nube.
 
 #### 📝 Actividades
 
@@ -184,93 +205,77 @@ En este modelo, la información está repartida en distintas localizaciones que 
 > Investiga sobre los tipos de datos más comunes en las bases de datos relacionales. Puedes utilizar PostgreSQL como referencia, ya que será el sistema gestor de bases de datos que emplearemos. Incluye una breve descripción y un ejemplo de uso para cada tipo de dato. En próximas sesiones profundizaremos en estos conceptos.
 
 
-
-
 ## 3. BASES DE DATOS RELACIONALES
 
 ### 3.1. CONCEPTOS
 
-- **Datos:** hechos conocidos que pueden registrarse y tienen un significado.  
-  Ejemplo: nombres, números de teléfono y direcciones de personas.
+- **Datos:** hechos conocidos que se pueden registrar y que tienen un significado.  
 
-- **Tipo de dato:** indica la naturaleza del campo.  
+- **Tipo de dato:** indica la naturaleza de un dato y los valores que puede almacenar un campo.  
+   - Ejemplos: texto, número, fecha, valor lógico o decimal.
 
-- **Tabla:** conjunto de filas y columnas bajo un mismo nombre, que almacena valores para una serie de datos.  
-  Ejemplo: la información de todos los clientes de una BD se guarda en la tabla `CLIENTES`.
+- **Entidad:** todo aquello sobre lo que interesa almacenar información.  
+   - Ejemplos: 'Persona', 'Producto', 'Animal', 'Cliente' o 'Vehiculo'.
 
-- **Campo:** cada una de las columnas de una tabla. Identifica una familia de datos.  
-  Ejemplo: `fechaNacimiento` representa las fechas de nacimiento de todos los clientes.
+- **Atributo o campo:** característica o propiedad de una entidad. En una tabla relacional, se representa mediante una columna.  
+   - Ejemplo: para la entidad 'CLIENTE', algunos atributos pueden ser 'nif', 'nombre', 'apellidos', 'direccion' y 'telefono'.  
 
-- **Campo clave:** campo especial que Identifica de forma única cada registro.  
-  Ejemplo: el `NIF` es único para cada persona, por lo que puede ser su campo clave.  
+- **Tabla o relación:** conjunto de datos organizados en filas y columnas, identificado mediante un nombre. Normalmente representa una entidad.
+   - Ejemplo: la información de todos los clientes de una BD se puede guardar en la tabla 'CLIENTES'.
 
-- **Registro (o tupla):** cada fila de la tabla. Contiene todos los valores de un conjunto de campos para un elemento.  
-  Ejemplo: en la tabla `CLIENTES`, un registro puede contener la información de Juan García o Fernando Martínez.
+- **Registro, fila o tupla:** cada una de las filas de una tabla. Contiene los valores de todos los campos correspondientes a un elemento concreto.  
+   - Ejemplo: en la tabla 'CLIENTES', un registro puede contener la información de una persona, como Pedro Picapiedra.
 
-![Tabla](img/Tabla.png)
+- **Clave primaria:** campo, o conjunto de campos, que identifica de forma única cada registro de una tabla. No puede repetirse ni tener un valor nulo.  
+   - Ejemplo: el 'nif' puede ser la clave primaria de la tabla 'CLIENTES', ya que es único para cada persona.
 
+- **Clave foránea o clave ajena:** campo de una tabla que contiene valores de la clave primaria de otra tabla. Permite establecer relaciones entre ambas tablas.  
+   - Ejemplo: el campo 'codCliente' de la tabla 'VEHICULOS' puede ser una clave foránea que hace referencia a la clave primaria 'codCliente' de la tabla 'CLIENTES'.
 
-### 3.2. OTROS CONCEPTOS
+- **Relación:** vínculo establecido entre dos tablas mediante una clave primaria y una clave foránea.  
+   - Ejemplo: un cliente puede tener varios vehículos. Las tablas 'CLIENTES' y 'VEHICULOS' se relacionan mediante el campo 'codCliente'.
 
-- **Entidades:** Todo aquello de lo cual interesa guardar datos.  
-  Ejemplos: Persona, Producto, Animal.  
+- **Integridad referencial:** regla que garantiza que toda clave foránea tenga un valor válido en la clave primaria de la tabla relacionada. Evita referencias a registros inexistentes.  
+   - Ejemplo: no se puede registrar un vehículo con un 'codCliente' que no exista previamente en la tabla 'CLIENTES'. La integridad referencial sirve precisamente para que las referencias entre tablas sean consistentes.
 
-  > Ejemplo práctico:  
-  > Si queremos almacenar datos de la entidad Persona, sus atributos pueden ser:  
-  > - DNI  
-  > - Nombre  
-  > - Apellidos  
-  > - Dirección  
-  > - Teléfono
+- **Metadatos:** son datos que describen otros datos y la estructura de la BD.  
 
-- **Claves primarias y foráneas (ajenas). Relaciones:**  
-  - Cada entidad tiene una **clave primaria** (campo clave o llave) que identifica unívocamente cada registro.  
-  - Cuando una entidad incluye la clave primaria de otra entidad, se denomina **clave foránea** o **clave ajena**.  
-  - Las entidades se relacionan entre sí a través de estas claves foráneas, creando vínculos entre los datos.
+### 3.2. SISTEMAS GESTORES DE BASES DE DATOS
 
-![Relacion](img/Relacion.png)
+Un **Sistema Gestor de Bases de Datos (SGBD)** es un software que permite a los usuarios definir, crear, consultar, modificar y administrar una base de datos, proporcionando un acceso controlado a la información.
 
-- **Ejemplo de entidades y claves:**  
-  - En este gráfico tenemos dos entidades: **Clientes** y **Vehículos**.  
-  - La **clave primaria** de Clientes es: `CodCliente`  
-  - La **clave primaria** de Vehículos es: `Matricula`  
-  - La **clave foránea** de Vehículos es: `CodCliente`.  
-    - Los Clientes se relacionan con Vehículos a través del `CodCliente` que figura en ambas tablas.
+Entre los principales servicios que proporciona un SGBD se encuentran los siguientes:
 
-- **Restricción de integridad referencial:**  
-  - Esta restricción garantiza que un **campo clave ajena** siempre esté relacionado con un valor válido de la **clave primaria** de la tabla principal.  
-  - Mantiene la relación entre dos tablas **sincronizada** durante operaciones de actualización y eliminación.  
-  - Ejemplo: no podemos tener un Vehículo cuyo código de cliente **no exista** previamente en la tabla de Clientes.
+- **Definición de datos (DDL, Data Definition Language):**  
+  Permite definir y modificar la estructura de la base de datos. Con DDL se crean, alteran o eliminan objetos como bases de datos, tablas, vistas, índices y restricciones.  
+  - Ejemplos de sentencias: `CREATE`, `ALTER` y `DROP`.
 
-- **Metadatos:**  
-  - Son **datos sobre los datos** presentes en la BD.  
-  - Ejemplos:  
-    - Qué tipo de datos se van a almacenar (texto, números, fechas…)  
-    - Qué nombre se le da a cada dato (nombre, apellidos, fecha, precio, edad…)  
-    - Cómo están agrupados los datos  
-    - Cómo se relacionan entre sí
+- **Manipulación de datos (DML, Data Manipulation Language):**  
+  Permite insertar, consultar, modificar y eliminar los datos almacenados en las tablas.  
+  - Ejemplos de sentencias: `INSERT`, `SELECT`, `UPDATE` y `DELETE`.
 
+- **Control de datos (DCL, Data Control Language):**  
+  Permite controlar el acceso de los usuarios a la base de datos mediante permisos y privilegios.  
+  - Ejemplos de sentencias: `GRANT` y `REVOKE`.
 
-### 3.3. SISTEMAS GESTORES DE BASES DE DATOS
+- **Control de transacciones (TCL, Transaction Control Language):**  
+  Permite confirmar o deshacer grupos de operaciones para mantener la consistencia de los datos.  
+  - Ejemplos de sentencias: `COMMIT`, `ROLLBACK` y `SAVEPOINT`.
 
-Un Sistema Gestor de Bases de Datos (SGBD) es una aplicación que permite a los usuarios definir, crear y mantener una BD, proporcionando acceso controlado a la misma.
+- **Sistema de seguridad:**  
+  Evita que usuarios no autorizados accedan, consulten o modifiquen la información de la base de datos.
 
-#### Servicios que proporciona un SGBD
+- **Sistema de integridad:**  
+  Garantiza que los datos sean válidos y coherentes mediante reglas y restricciones, como las claves primarias, las claves foráneas o los valores obligatorios.
 
-- **DDL (Data Description Language):**  
-  - Permite la **definición** de la BD mediante el lenguaje de definición de datos.  
-  - Especifica la **estructura**, el **tipo de datos** y las **restricciones** que se almacenan en la BD.
+- **Sistema de control de concurrencia:**  
+  Permite que varios usuarios accedan a la base de datos al mismo tiempo, evitando conflictos e inconsistencias cuando intentan modificar los mismos datos.
 
-- **DML (Data Manipulation Language):**  
-  - Permite **insertar, actualizar, eliminar y consultar** datos mediante el lenguaje de manipulación de datos.
+- **Sistema de recuperación:**  
+  Permite restaurar la base de datos a un estado coherente después de un fallo de hardware, software, alimentación eléctrica o una operación incorrecta.
 
-- **DCL (Data Control Language):**  
-  Proporciona **acceso controlado** mediante:  
-  - Sistema de **seguridad**, evitando que usuarios no autorizados accedan a la BD.  
-  - Sistema de **integridad**, manteniendo la consistencia de los datos.  
-  - Sistema de **control de concurrencia**, permitiendo el acceso compartido.  
-  - Sistema de **recuperación**, restableciendo la BD tras fallos de hardware o software.  
-  - **Diccionario de datos** o catálogo accesible al usuario que describe los datos de la BD.
+- **Diccionario de datos o catálogo:**  
+  Contiene los metadatos de la base de datos: información sobre las tablas, campos, tipos de datos, restricciones, relaciones, usuarios y permisos.
 
 #### 🖥️ Hojas de ejercicios
 
