@@ -88,13 +88,15 @@ En el esquema anterior serían entidades: ALUMNO, MODULO y PROFESOR.
 
 Cada entidad se representa con un *rectángulo*.
 
-<img src="img/entidades.png" alt="Entidades" width="400px"/>
+<div style="text-align: center;">
+  <img src="img/entidades.png" alt="Entidades" width="500px"/>
+</div>
 
 
 ### 2.2. ATRIBUTOS Y TIPOS
 
 Un atributo es una propiedad o característica de una entidad. <br>
-Como veremos más adelante, las relaciones también pueden tener atributos.  
+>⚠️ Atención: Las relaciones también pueden tener atributos.  
 
 Para el ejemplo, la entidad ALUMNO tiene los atributos:  
 - NumExpediente  
@@ -118,8 +120,8 @@ Ejemplos de atributos y dominios de una entidad EMPLEADO:
 | Categoría       | Enumerado de categorías                      |
 | JornadaCompleta | Verdadero o Falso                            |
 
-
-> #### ✍️ Ejercicio: Indica cuál sería el **dominio** de cada uno de los siguientes atributos de una entidad PERSONA:
+#### 📝 Actividades
+> **Actividad 1.** Indica cuál sería el **dominio** de cada uno de los siguientes atributos de una entidad PERSONA:
 > - Fecha de nacimiento  
 > - Localidad de nacimiento  
 > - Edad  
@@ -132,38 +134,39 @@ Ejemplos de atributos y dominios de una entidad EMPLEADO:
 
 #### Tipos de atributos
 
-1. *Atributos simples y atributos compuestos*  
-    - Un atributo es simple si su contenido no se considera dividido en partes, por ejemplo **NOMBRE**.  
-    - Es compuesto si admite dividirse en partes. Por ejemplo, **FECHA** podría ser compuesto si se considera que de FECHA se puede usar aisladamente **DÍA**, **MES** y **AÑO**.
+1. Atributos simples y compuestos.
+    - Un atributo es simple si su contenido no se considera dividido en partes, por ejemplo, **nombre**.  
+    - Es compuesto si admite dividirse en partes. Por ejemplo, **fecha** podría ser compuesto si se considera que de ella se puede usar aisladamente **día**, **mes** y **año**.
 
-    <img src="img/atributo2.png" alt="Atributos simples y compuestos" width="400px"/>
+    <div style="text-align: center;">
+      <img src="img/atributo2.png" alt="Atributos simples y compuestos" width="400px"/>
+    </div>
 
-2. *Atributos monovaluados y atributos multivaluados*  
+2. Atributos monovaluados y multivaluados.
     - Un atributo es monovaluado si admite, para cada elemento de la entidad, un solo valor; por ejemplo, el **nombre** de una persona.  
     - Si un atributo admite una lista de valores para cada elemento, sería multivaluado; por ejemplo, si un atributo de la entidad **CLIENTE** fuese **teléfono_cliente**, éste podría ser multivaluado.
 
-    <img src="img/atributo3.png" alt="Atributos monovaluados y multivaluados" width="400px"/>
+    <div style="text-align: center;">
+      <img src="img/atributo3.png" alt="Atributos monovaluados y multivaluados" width="400px"/>
+    </div>
 
-3. *Atributos obligatorios y atributos opcionales*  
+3. Atributos obligatorios y opcionales.
     - Un atributo es **obligatorio** si para todo elemento debe contener algún valor, y es **opcional** si puede haber elementos que no tengan asignado ningún valor para ese atributo. Por ejemplo, el atributo **Aficiones** podría ser opcional para una entidad **CLIENTE**.  
-    - Un atributo opcional se representa:
 
-    <img src="img/atributo4.png" alt="Atributos opcionales" width="400px"/>
-
-4. *Atributos derivados y no derivados*  
+4. Atributos derivados y no derivados.
     - Un atributo es **derivado** si se puede obtener a partir de los datos contenidos en otros atributos. Por ejemplo, **IMPORTE DE VENTA** si se obtiene de **UNIDADES VENDIDAS** × **PRECIO UNIDAD** (no es recomendable abusar de atributos derivados).  
     - Un atributo es **no derivado** si su valor no depende de ningún otro atributo.
 
-5. *Atributo Clave*  
+5. Atributo Clave.
     Una **clave** sirve para identificar de forma única a cada elemento de una entidad. Puede estar formada por uno o varios atributos y no permite valores repetidos ni puede estar sin valor o vacío. En una entidad puede haber dos tipos de clave:  
     - **Clave primaria o principal**: entre los posibles conjuntos de atributos que identifican a los elementos, debería ser la más adecuada por **simplicidad**, **longitud**, **representatividad** y **estabilidad**.  
     - **Clave secundaria o alternativa**: puede haber varias en una entidad, pero no se debe abusar de ellas. Son todas aquellas que decidamos aparte de la primaria.
 
-<img src="img/atributos.png" alt="Resumen Atributos" width="400px"/>
-
 **Representación de los distintos tipos de atributos:**
 
-<img src="img/atributo5.png" alt="Representación de tipos de atributos" width="400px"/>
+<div style="text-align: center;">
+  <img src="img/atributo5.png" alt="Representación de tipos de atributos" width="500px"/>
+</div>
 
 **Observa y analiza el siguiente ejemplo:**  
 Indica para cada atributo de qué tipo es, haciendo un examen lo más exhaustivo posible. Indica para cada campo si es **obligatorios/opcionales**, **compuestos/simples**, **derivado/no derivado**, **monovaluado/multivaluado**.
