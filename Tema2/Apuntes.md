@@ -32,11 +32,9 @@ unit_title: "Unidad 2. Diseño lógico de la base de datos."
 
 Un modelo pretende crear una simplificación de la realidad para poder comprenderla mejor.  
 Para realizar un modelo se realiza una abstracción más simple de la realidad.  
-
 Se usan modelos en diferentes áreas de la informática, como por ejemplo:  
 - UML en Ingeniería del Software  
 - Modelo Entidad/Relación en BD  
-
 Un modelo de datos es un conjunto de herramientas y reglas para representar datos, relaciones entre ellos y restricciones.
 
 ### 1.1. Modelos más utilizados
@@ -46,81 +44,57 @@ Un modelo de datos es un conjunto de herramientas y reglas para representar dato
 - Orientado a Objetos  
 - Relacional orientado a objetos  
 
----
 
 ### 1.2. CLASIFICACIÓN DE LOS MODELOS DE DATOS
-
 Una opción bastante usada a la hora de clasificar los modelos de datos es hacerlo de acuerdo al nivel de abstracción que presentan:
-
 - **Modelos de Datos Conceptuales**: se usan en la fase de Análisis. Representan datos y relaciones.  
   Ejemplo: Modelo Entidad-Relación (MER).
-
 - **Modelos de Datos Lógicos**: describen la estructura de la BD según el SGBD.  
   Ejemplo: Modelo Relacional.
-
 - **Modelos de Datos Físicos**: indican cómo se implementan los datos en el SGBD.  
   Ejemplos: Access, MySQL, PostgreSQL, Oracle...  
-
 En este tema vamos a trabajar el modelo conceptual (modelo Entidad-Relación) y el modelo lógico (Modelo Relacional).
+
+
 
 ## 2. DIAGRAMA ENTIDAD-RELACIÓN (DER)
 
-El **Modelo Entidad-Relación (MER)** es el esquema conceptual que describe la estructura de los datos de un sistema: los conjuntos de entidades, sus atributos, las relaciones entre ellas y las restricciones..
+El **Modelo Entidad-Relación (MER)** es el esquema conceptual que describe la estructura de los datos de un sistema: los conjuntos de entidades, sus atributos, las relaciones entre ellas y las restricciones.<br>
 El **Diagrama Entidad-Relación (DER)** es la representación gráfica concreta de ese modelo y es **independiente del SGBD**.
-
 En un DER representamos de manera gráfica cómo se organiza la información en una BD. Consta solo de tres elementos:
-
-- **Entidades**: son los objetos principales sobre los que queremos almacenar información.
-  Por ejemplo, 'Cliente' o 'Coche'.
-  Cada entidad se representa con un *rectángulo*.  
-- **Atributos**: son las propiedades o características de las entidades.
-  Por ejemplo, un Cliente puede tener como atributos nombre, teléfono o dirección, y un Coche puede tener matrícula o marca.
-  Cada atributo se representan con un *círculo*. Estos círculos se encuentran unidosn a la entidad a la que pertenecen.  
-- **Relaciones**: muestran cómo se conectan las entidades entre sí.
-  Por ejemplo, un Cliente puede alquilar un Coche.
-  Cada relación se representa con un *rombo*, que se une mediante *líneas* a las entidades que relaciona.
-
+- Entidades
+- Atributos
+- Relaciones
 De esta forma, el diagrama nos permite ver de un vistazo qué entidades forman parte del sistema, qué características tiene cada una y cómo se relacionan entre ellas.
-
-
-Se han desarrollado varios modelos E/R y diagramas de representación para el modelo. Vemos en la siguiente imagen un ejemplo de Diagrama E-R que utilizaremos en clase:  
+En la siguiente imagen vemos un ejemplo de Diagrama E-R (DER):  
 
 <div style="text-align: center;">
   <img src="img/esquemaER.png" alt="Esquema E-R" width="500px"/>
 </div>
 
-En los siguientes apartados vamos a ir desgranando los elementos que componen un diagrama E-R y cómo se construye.  
+En los siguientes apartados vamos a ir desgranando los elementos que lo componen y cómo se construye.  
 
 
 ### 2.1. ENTIDADES
 
-Las **entidades** son uno de los elementos usados en los diagramas E/R. Una entidad es un objeto, sujeto o concepto sobre el que se recoge información básica en el sistema para poder realizar los procesos que se requieran.  
-
-En el esquema anterior, serían entidades:  
-- ALUMNO  
-- MODULO  
-- PROFESOR  
-
-Una entidad se representa en un diagrama E/R mediante un **rectángulo**.  
-
+Una entidad es un objeto, sujeto o concepto sobre el que se recoge información básica en el sistema.  
+En el esquema anterior serían entidades: ALUMNO, MODULO y PROFESOR.
+Cada entidad se representa con un *rectángulo*. 
 <img src="img/entidades.png" alt="Entidades" width="400px"/>
 
 
 ### 2.2. ATRIBUTOS Y TIPOS
 
-Un **atributo** es una propiedad o característica de una entidad. Como veremos más adelante, las **relaciones también pueden tener atributos**.  
-
+Un atributo es una propiedad o característica de una entidad. Como veremos más adelante, las **relaciones también pueden tener atributos**.  
+Cada atributo se representan con un *círculo*. Estos círculos se encuentran unidosn a la entidad a la que pertenecen.  
 Por ejemplo, la entidad ALUMNO puede tener los atributos:  
 - Numero  
 - Nombre  
 - Apellidos  
 - Fecha Nacimiento  
 - Población  
-
 Los atributos de una entidad se representan mediante **pequeños círculos unidos a la entidad por una línea**.  Al lado de cada círculo se escribe el nombre del atributo.  
-
 <img src="img/atributo1.png" alt="Atributos" width="400px"/>
-
 El **dominio de un atributo** es todo el conjunto de valores que se pueden asignar a ese atributo.  
 
 Ejemplos de atributos y dominios de la entidad EMPLEADO:  
@@ -194,7 +168,8 @@ Indica para cada atributo de qué tipo es, haciendo un examen lo más exhaustivo
 
 ### 2.3. RELACIONES
 
-Una **relación** es una asociación entre varias entidades a través de una acción realizable entre ellas. Los podemos localizar en los enunciados de los ejercicios porque suelen representarse con **verbos o formas verbales**.  
+Una **relación** es una asociación entre varias entidades a través de una acción realizable entre ellas. Los podemos localizar en los enunciados de los ejercicios porque suelen representarse con **verbos o formas verbales**.
+Cada relación se representa con un *rombo*, que se une mediante *líneas* a las entidades que relaciona.
 
 Ejemplos:  
 - COMPRAR (entre CLIENTE y PRODUCTO)  
