@@ -108,7 +108,7 @@ Los atributos de una entidad se representan mediante *pequeños círculos unidos
 
 El **dominio** de un atributo es todo el conjunto de valores que se pueden asignar a ese atributo.  
 
-Ejemplos de atributos y dominios de una entidad EMPLEADO:  
+Ejemplo de atributos y dominios de una entidad 'EMPLEADO':  
 
 | Atributo        | Dominio                                      |
 |-----------------|----------------------------------------------|
@@ -133,7 +133,7 @@ Ejemplos de atributos y dominios de una entidad EMPLEADO:
 
 #### Tipos de atributos
 
-1. **Atributos simples y compuestos**
+1. **Atributos simples y compuestos**<br>
    Un atributo es **simple** si su contenido no se considera dividido en partes, por ejemplo, 'nombre'.  
    Es **compuesto** si admite dividirse en partes. Por ejemplo, **fecha** podría ser compuesto si se considera que de ella se puede usar aisladamente 'dia', 'mes' y 'año'.
 
@@ -141,7 +141,7 @@ Ejemplos de atributos y dominios de una entidad EMPLEADO:
       <img src="img/atributo2.png" alt="Atributos simples y compuestos" width="500px"/>
     </div>
 
-2. **Atributos monovaluados y multivaluados**
+2. **Atributos monovaluados y multivaluados**<br>
    Un atributo es **monovaluado** si admite, para cada elemento de la entidad, un solo valor; por ejemplo, el 'nombre' de una persona.  
    Si un atributo admite una lista de valores para cada elemento, sería **multivaluado**; por ejemplo, si un atributo de la entidad 'CLIENTE' fuese 'telefono_cliente', éste podría ser multivaluado.
 
@@ -149,14 +149,14 @@ Ejemplos de atributos y dominios de una entidad EMPLEADO:
       <img src="img/atributo3.png" alt="Atributos monovaluados y multivaluados" width="500px"/>
     </div>
 
-3. **Atributos obligatorios y opcionales**
+3. **Atributos obligatorios y opcionales**<br>
    Un atributo es **obligatorio** si para todo elemento debe contener algún valor, y es **opcional** si puede haber elementos que no tengan asignado ningún valor para ese atributo. Por ejemplo, el atributo 'aficiones' podría ser opcional para una entidad 'CLIENTE'.  
 
-4. **Atributos derivados y no derivados**
+4. **Atributos derivados y no derivados**<br>
    Un atributo es **derivado** si se puede obtener a partir de los datos contenidos en otros atributos. Por ejemplo, 'importe_venta' si se obtiene de 'unidades_vendidas' × 'precio_unidad' (no es recomendable abusar de atributos derivados).  
    Un atributo es **no derivado** si su valor no depende de ningún otro atributo.
 
-5. **Atributo Clave**
+5. **Atributo Clave**<br>
     Una **clave** sirve para identificar de forma única a cada elemento de una entidad. Puede estar formada por uno o varios atributos y no permite valores repetidos ni puede estar sin valor o vacío. En una entidad puede haber dos tipos de clave:  
     - **Clave primaria o principal**: entre los posibles conjuntos de atributos que identifican a los elementos, debería ser la más adecuada por **simplicidad**, **longitud**, **representatividad** y **estabilidad**.  
     - **Clave secundaria o alternativa**: puede haber varias en una entidad, pero no se debe abusar de ellas. Son todas aquellas que decidamos aparte de la primaria.
