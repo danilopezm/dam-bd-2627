@@ -288,15 +288,7 @@ Veamos un ejemplo de cómo se diferencian las entidades fuertes y débiles:
 - **Entidad fuerte**: `Factura` → existe por sí misma y tiene un identificador único (**IDFactura**).  
 - **Entidad débil**: `DetalleFactura` → depende de la `Factura` a la que pertenece. Su identificación completa requiere el **IDFactura** y su propio número de línea (**NumLinea**).
 
-
-<img src="img/ejemplo-factura.png" alt="Factura" width="400px"/>  
-
-- **Factura** → entidad fuerte  
-- **DetalleFactura** → entidad débil, depende de Factura para existir
-
-
 Una entidad débil solo se da en una relación de 1:N.  
-
 
 Las entidades débiles se representan en los diagramas E/R **rodeadas por una línea doble**:  
 
@@ -505,10 +497,7 @@ Al modificar el contenido de una **CITY**, se comprueba que el nuevo valor carga
   - **Modificación en cascada (MC)**: Si se modifica el código de un país, se modifica **countrycode** de todas las ciudades del país.  
   - **Modificación restringida (MR)**: Si se trata de modificar el código de un país y hay ciudades de ese país en la tabla CITY, no se permite la modificación.  
   - **Modificación con puesta a nulos (MN)**: Si se trata de modificar el código de un país y hay ciudades de ese país en la tabla CITY, se carga NULL en la columna clave ajena (**countrycode**) de CITY de todas las ciudades de ese país.  
-
-#### RESUMEN VISUAL
-
-<img src="img/resumen.png" alt="Esquema relacional" width="400px"/>  
+ 
 
 ### 5.5. REPRESENTACIÓN DEL MODELO RELACIONAL
 
@@ -580,18 +569,14 @@ Para convertir un modelo E/R a relacional, todo se reduce a **relaciones represe
 
 <img src="img/paso10.png" alt="Especialización modo 3" width="400px"/>  
 
-📄 Documento resumen de conversión E-R → Relacional:  
-[Resumen](ConversionER-Relacional.pdf)  
 
-**Realiza el siguiente ejercicio:**
-
-1. Representa el esquema relacional correspondiente a una BD sobre la red de albergues del Camino de Santiago del Norte.  
-- De cada albergue se registrará su nombre, dirección, localidad y km que faltan para el destino final (Santiago de Compostela).  
-- Existen albergues con el mismo nombre genérico (Albergue de peregrino, por ejemplo).  
-- Los albergues son de propiedad municipal y pertenecen a Ayuntamientos. Un determinado Ayuntamiento puede disponer de varios albergues.  
-- De cada Ayuntamiento debemos conocer su nombre, dirección, teléfono y URL de su web.  
-- En los albergues pernoctan peregrinos, de los que se registra un número de tarjeta (único), su nombre y nacionalidad.  
-- Se debe registrar la fecha de entrada de cada peregrino en el albergue correspondiente.  
+> **Ejercicio: ** Representa el esquema relacional correspondiente a una BD sobre la red de albergues del Camino de Santiago del Norte.  
+>- De cada albergue se registrará su nombre, dirección, localidad y km que faltan para el destino final (Santiago de Compostela).  
+>- Existen albergues con el mismo nombre genérico (Albergue de peregrino, por ejemplo).  
+>- Los albergues son de propiedad municipal y pertenecen a Ayuntamientos. Un determinado Ayuntamiento puede disponer de varios albergues.  
+>- De cada Ayuntamiento debemos conocer su nombre, dirección, teléfono y URL de su web.  
+>- En los albergues pernoctan peregrinos, de los que se registra un número de tarjeta (único), su nombre y nacionalidad.  
+>- Se debe registrar la fecha de entrada de cada peregrino en el albergue correspondiente.  
 
 #### HOJAS DE EJERCICIOS
 
