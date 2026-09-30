@@ -1,3 +1,8 @@
+---
+unit_title: "Unidad 2. Diseño lógico de la base de datos."
+---
+[Volver a Inicio](../README.md)
+
   - [1. MODELO DE DATOS](#1---modelo-de-datos)
     - [1.1. MODELOS DE DATOS MÁS UTILIZADOS](#-modelos-de-datos-más-utilizados)
     - [1.2. CLASIFICACIÓN DE LOS MODELOS DE DATOS](#11---clasificación-de-los-modelos-de-datos)
