@@ -3,26 +3,26 @@ unit_title: "Unidad 2. Diseño lógico de la base de datos."
 ---
 [Volver a Inicio](../README.md)
 
-  - [1. MODELO DE DATOS](#1---modelo-de-datos)
+[1. MODELO DE DATOS](#1---modelo-de-datos)
     - [1.1. MODELOS DE DATOS MÁS UTILIZADOS](#-modelos-de-datos-más-utilizados)
     - [1.2. CLASIFICACIÓN DE LOS MODELOS DE DATOS](#11---clasificación-de-los-modelos-de-datos)
-  - [2. DIAGRAMAS E/R](#2--️-diagramas-er)
+[2. DIAGRAMAS E/R](#2--️-diagramas-er)
     - [2.1. ENTIDADES](#21---entidades)
     - [2.2. ATRIBUTOS Y TIPOS](#22---atributos-y-tipos)
     - [2.3. RELACIONES](#23---relaciones)
     - [2.4. CARDINALIDAD](#24---cardinalidad)
     - [2.5. TIPO DE CORRESPONDENCIA](#25---tipo-de-correspondencia)
     - [2.6. DEBILIDAD](#26--️-debilidad)
-  - [3. EL MODELO E/R AMPLIADO](#3--️-el-modelo-er-ampliado)
-  - [4. CONSTRUCCIÓN DE UN DIAGRAMA E/R](#4--️-construcción-de-un-diagrama-er)
-  - [5. MODELO RELACIONAL](#5--️-modelo-relacional)
+[3. EL MODELO E/R AMPLIADO](#3--️-el-modelo-er-ampliado)
+[4. CONSTRUCCIÓN DE UN DIAGRAMA E/R](#4--️-construcción-de-un-diagrama-er)
+[5. MODELO RELACIONAL](#5--️-modelo-relacional)
     - [5.1. ELEMENTOS DE UNA RELACIÓN](#51---elementos-de-una-relación)
     - [5.2. RESTRICCIONES DEL MODELO RELACIONAL](#52--️-restricciones-del-modelo-relacional)
     - [5.3. CLAVES PRIMARIAS Y CLAVES AJENAS](#53---claves-primarias-y-claves-ajenas)
     - [5.4. INTEGRIDAD REFERENCIAL](#54--️-integridad-referencial)
     - [5.5. REPRESENTACIÓN DEL MODELO RELACIONAL](#55--️-representación-del-modelo-relacional)
     - [5.6. PASO DEL MODELO E/R AL MODELO RELACIONAL](#56---paso-del-modelo-er-al-modelo-relacional)
-  - [6. NORMALIZACIÓN](#6---normalización)
+[6. NORMALIZACIÓN](#6---normalización)
     - [6.1. 1FN (PRIMERA FORMA NORMAL)](#61--1fn-primera-forma-normal)
     - [6.2. 2FN (SEGUNDA FORMA NORMAL)](#62--2fn-segunda-forma-normal)
     - [6.3. 3FN (TERCERA FORMA NORMAL)](#63--3fn-tercera-forma-normal)
@@ -31,18 +31,15 @@ unit_title: "Unidad 2. Diseño lógico de la base de datos."
 ## 1. MODELO DE DATOS
 
 Un modelo pretende crear una simplificación de la realidad para poder comprenderla mejor.  
-Para realizar un modelo se realiza una **abstracción más simple** de la realidad.  
+Para realizar un modelo se realiza una abstracción más simple de la realidad.  
 
 Se usan modelos en diferentes áreas de la informática, como por ejemplo:  
 - UML en Ingeniería del Software  
-- Modelo Entidad/Relación para BD  
+- Modelo Entidad/Relación en BD  
 
-Un **modelo de datos** es un conjunto de herramientas y reglas para representar:  
-- Datos  
-- Relaciones entre éstos  
-- Restricciones de una BD  
+Un modelo de datos es un conjunto de herramientas y reglas para representar datos, relaciones entre ellos y restricciones.
 
-### 1.1. Modelos de datos más utilizados
+### 1.1. Modelos más utilizados
 - Relacional  
 - Jerárquico  
 - En red  
@@ -53,38 +50,44 @@ Un **modelo de datos** es un conjunto de herramientas y reglas para representar:
 
 ### 1.2. CLASIFICACIÓN DE LOS MODELOS DE DATOS
 
-Una opción bastante usada a la hora de clasificar los modelos de datos es hacerlo de acuerdo al **nivel de abstracción** que presentan:
+Una opción bastante usada a la hora de clasificar los modelos de datos es hacerlo de acuerdo al nivel de abstracción que presentan:
 
-- **Modelos de Datos Conceptuales**  
-  Se usan en la fase de *Análisis*. Representan datos y relaciones.  
-  Ejemplo: *Modelo Entidad-Relación*  
+- **Modelos de Datos Conceptuales**: se usan en la fase de Análisis. Representan datos y relaciones.  
+  Ejemplo: Modelo Entidad-Relación (MER).
 
-- **Modelos de Datos Lógicos**  
-  Describen la estructura de la BD según el SGBD.  
-  Ejemplo: *Modelo Relacional*  
+- **Modelos de Datos Lógicos**: describen la estructura de la BD según el SGBD.  
+  Ejemplo: Modelo Relacional.
 
-- **Modelos de Datos Físicos**  
-  Indican cómo se implementan los datos en el SGBD.  
+- **Modelos de Datos Físicos**: indican cómo se implementan los datos en el SGBD.  
   Ejemplos: Access, MySQL, PostgreSQL, Oracle...  
 
-En este tema vamos a trabajar el modelo conceptual, más concretamente el modelo Entidad-Relación, o modelo E-R y el modelo lógico, con el modelo Relacional.
+En este tema vamos a trabajar el modelo conceptual (modelo Entidad-Relación) y el modelo lógico (Modelo Relacional).
 
-## 2. DIAGRAMAS E/R
+## 2. DIAGRAMA ENTIDAD-RELACIÓN (DER)
 
-El modelo Entidad-Relación es un modelo **puramente conceptual**. Representa el funcionamiento de un sistema de información mediante un diagrama Entidad-Relación (E/R). Facilita enormemente el diseño de una BD. Es muy representativo del funcionamiento del sistema de información y es **independiente del SGBD**. Toma como referencia la percepción que tenemos del funcionamiento del mundo real.
+El **Modelo Entidad-Relación (MER)** es el esquema conceptual que describe la estructura de los datos de un sistema: los conjuntos de entidades, sus atributos, las relaciones entre ellas y las restricciones..
+El **Diagrama Entidad-Relación (DER)** es la representación gráfica concreta de ese modelo y es **independiente del SGBD**.
 
-En un **esquema Entidad–Relación** representamos de manera gráfica cómo se organiza la información en una BD. Consta solo de tres elementos:
+En un DER representamos de manera gráfica cómo se organiza la información en una BD. Consta solo de tres elementos:
 
-- **Entidades**: son los objetos principales sobre los que queremos almacenar información (por ejemplo, un *Cliente*, un *Coche*, un *Empleado*…). Cada entidad se representa con un **rectángulo**.  
-- **Atributos**: son las propiedades o características de las entidades. Por ejemplo, un *Cliente* puede tener como atributos *nombre*, *teléfono* o *dirección*, y un *Coche* puede tener *matrícula* o *marca*. Los atributos se representan con **círculos**, unidos a la entidad a la que pertenecen.  
-- **Relaciones**: muestran cómo se conectan las entidades entre sí. Por ejemplo, un *Cliente* puede **alquilar** un *Coche*. Las relaciones se representan con un **rombo**, que se une mediante **líneas** a las entidades que relaciona.
+- **Entidades**: son los objetos principales sobre los que queremos almacenar información.
+  Por ejemplo, 'Cliente' o 'Coche'.
+  Cada entidad se representa con un *rectángulo*.  
+- **Atributos**: son las propiedades o características de las entidades.
+  Por ejemplo, un Cliente puede tener como atributos nombre, teléfono o dirección, y un Coche puede tener matrícula o marca.
+  Cada atributo se representan con un *círculo*. Estos círculos se encuentran unidosn a la entidad a la que pertenecen.  
+- **Relaciones**: muestran cómo se conectan las entidades entre sí.
+  Por ejemplo, un Cliente puede alquilar un Coche.
+  Cada relación se representa con un *rombo*, que se une mediante *líneas* a las entidades que relaciona.
 
 De esta forma, el diagrama nos permite ver de un vistazo qué entidades forman parte del sistema, qué características tiene cada una y cómo se relacionan entre ellas.
 
 
 Se han desarrollado varios modelos E/R y diagramas de representación para el modelo. Vemos en la siguiente imagen un ejemplo de Diagrama E-R que utilizaremos en clase:  
 
-<img src="img/esquemaER.png" alt="Esquema E-R" width="400px"/>
+<div style="text-align: center;">
+  <img src="img/esquemaER.png" alt="Esquema E-R" width="500px"/>
+</div>
 
 En los siguientes apartados vamos a ir desgranando los elementos que componen un diagrama E-R y cómo se construye.  
 
