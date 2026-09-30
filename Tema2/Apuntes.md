@@ -1,32 +1,29 @@
-# UNIDAD 2. DISEÑO LÓGICO DE LA BASE DE DATOS.
-
-- [UNIDAD 2. DISEÑO LÓGICO DE LA BASE DE DATOS.](#unidad-2-diseño-lógico-de-la-base-de-datos)
-  - [1.- 📊 MODELO DE DATOS](#1---modelo-de-datos)
-    - [📌 Modelos de datos más utilizados](#-modelos-de-datos-más-utilizados)
-    - [1.1.- 🔎 Clasificación de los modelos de datos](#11---clasificación-de-los-modelos-de-datos)
-  - [2.- 🗂️ LOS DIAGRAMAS E/R](#2--️-los-diagramas-er)
-    - [2.1.- 🟦 Entidades](#21---entidades)
-    - [2.2.- 📝 Atributos y tipos](#22---atributos-y-tipos)
-    - [2.3.- 🔗 Relaciones](#23---relaciones)
-    - [2.4.- 🔢 Cardinalidad](#24---cardinalidad)
-    - [2.5.- 🔄 Tipo de Correspondencia](#25---tipo-de-correspondencia)
-    - [2.6.- 🏛️ Debilidad](#26--️-debilidad)
-  - [3.- 🏗️ EL MODELO E/R AMPLIADO](#3--️-el-modelo-er-ampliado)
-  - [4.- 🛠️ CONSTRUCCIÓN DE UN DIAGRAMA E/R](#4--️-construcción-de-un-diagrama-er)
-  - [5.- 🗄️ MODELO RELACIONAL](#5--️-modelo-relacional)
-    - [5.1.- 📋 Elementos de una relación](#51---elementos-de-una-relación)
-    - [5.2.- ⚖️ Restricciones del modelo relacional](#52--️-restricciones-del-modelo-relacional)
-    - [5.3.- 🔑 Claves primarias y claves ajenas](#53---claves-primarias-y-claves-ajenas)
-    - [5.4.- 🛡️ Integridad referencial](#54--️-integridad-referencial)
-    - [5.5.- 🖼️ Representación del modelo Relacional](#55--️-representación-del-modelo-relacional)
-    - [5.6.- 🔄 Paso del modelo E/R al modelo Relacional](#56---paso-del-modelo-er-al-modelo-relacional)
-  - [6.- 🧩 NORMALIZACIÓN](#6---normalización)
-    - [6.1.- 1FN (Primera forma normal)](#61--1fn-primera-forma-normal)
-    - [6.2.- 2FN (Segunda forma normal)](#62--2fn-segunda-forma-normal)
-    - [6.3.- 3FN (Tercera forma normal)](#63--3fn-tercera-forma-normal)
+  - [1. MODELO DE DATOS](#1---modelo-de-datos)
+    - [1.1. MODELOS DE DATOS MÁS UTILIZADOS](#-modelos-de-datos-más-utilizados)
+    - [1.2. CLASIFICACIÓN DE LOS MODELOS DE DATOS](#11---clasificación-de-los-modelos-de-datos)
+  - [2. DIAGRAMAS E/R](#2--️-diagramas-er)
+    - [2.1. ENTIDADES](#21---entidades)
+    - [2.2. ATRIBUTOS Y TIPOS](#22---atributos-y-tipos)
+    - [2.3. RELACIONES](#23---relaciones)
+    - [2.4. CARDINALIDAD](#24---cardinalidad)
+    - [2.5. TIPO DE CORRESPONDENCIA](#25---tipo-de-correspondencia)
+    - [2.6. DEBILIDAD](#26--️-debilidad)
+  - [3. EL MODELO E/R AMPLIADO](#3--️-el-modelo-er-ampliado)
+  - [4. CONSTRUCCIÓN DE UN DIAGRAMA E/R](#4--️-construcción-de-un-diagrama-er)
+  - [5. MODELO RELACIONAL](#5--️-modelo-relacional)
+    - [5.1. ELEMENTOS DE UNA RELACIÓN](#51---elementos-de-una-relación)
+    - [5.2. RESTRICCIONES DEL MODELO RELACIONAL](#52--️-restricciones-del-modelo-relacional)
+    - [5.3. CLAVES PRIMARIAS Y CLAVES AJENAS](#53---claves-primarias-y-claves-ajenas)
+    - [5.4. INTEGRIDAD REFERENCIAL](#54--️-integridad-referencial)
+    - [5.5. REPRESENTACIÓN DEL MODELO RELACIONAL](#55--️-representación-del-modelo-relacional)
+    - [5.6. PASO DEL MODELO E/R AL MODELO RELACIONAL](#56---paso-del-modelo-er-al-modelo-relacional)
+  - [6. NORMALIZACIÓN](#6---normalización)
+    - [6.1. 1FN (PRIMERA FORMA NORMAL)](#61--1fn-primera-forma-normal)
+    - [6.2. 2FN (SEGUNDA FORMA NORMAL)](#62--2fn-segunda-forma-normal)
+    - [6.3. 3FN (TERCERA FORMA NORMAL)](#63--3fn-tercera-forma-normal)
 
 
-## 1.- 📊 MODELO DE DATOS
+## 1. MODELO DE DATOS
 
 Un modelo pretende crear una simplificación de la realidad para poder comprenderla mejor.  
 Para realizar un modelo se realiza una **abstracción más simple** de la realidad.  
@@ -38,9 +35,9 @@ Se usan modelos en diferentes áreas de la informática, como por ejemplo:
 Un **modelo de datos** es un conjunto de herramientas y reglas para representar:  
 - Datos  
 - Relaciones entre éstos  
-- Restricciones de una base de datos  
+- Restricciones de una BD  
 
-### 📌 Modelos de datos más utilizados
+### 1.1. Modelos de datos más utilizados
 - Relacional  
 - Jerárquico  
 - En red  
@@ -49,31 +46,29 @@ Un **modelo de datos** es un conjunto de herramientas y reglas para representar:
 
 ---
 
-### 1.1.- 🔎 Clasificación de los modelos de datos
+### 1.2. CLASIFICACIÓN DE LOS MODELOS DE DATOS
 
 Una opción bastante usada a la hora de clasificar los modelos de datos es hacerlo de acuerdo al **nivel de abstracción** que presentan:
 
-- 🧠 **Modelos de Datos Conceptuales**  
+- **Modelos de Datos Conceptuales**  
   Se usan en la fase de *Análisis*. Representan datos y relaciones.  
   Ejemplo: *Modelo Entidad-Relación*  
 
-- ⚙️ **Modelos de Datos Lógicos**  
-  Describen la estructura de la base de datos según el SGBD.  
+- **Modelos de Datos Lógicos**  
+  Describen la estructura de la BD según el SGBD.  
   Ejemplo: *Modelo Relacional*  
 
-- 💾 **Modelos de Datos Físicos**  
+- **Modelos de Datos Físicos**  
   Indican cómo se implementan los datos en el SGBD.  
   Ejemplos: Access, MySQL, PostgreSQL, Oracle...  
 
-<img src="img/modeloDatos.png" alt="Clasificación de los modelos de datos" width="400">
-
 En este tema vamos a trabajar el modelo conceptual, más concretamente el modelo Entidad-Relación, o modelo E-R y el modelo lógico, con el modelo Relacional.
 
-## 2.- 🗂️ LOS DIAGRAMAS E/R
+## 2. DIAGRAMAS E/R
 
-El modelo Entidad-Relación es un modelo **puramente conceptual**. Representa el funcionamiento de un sistema de información mediante un diagrama Entidad-Relación (E/R). Facilita enormemente el diseño de una base de datos. Es muy representativo del funcionamiento del sistema de información y es **independiente del SGBD**. Toma como referencia la percepción que tenemos del funcionamiento del mundo real.
+El modelo Entidad-Relación es un modelo **puramente conceptual**. Representa el funcionamiento de un sistema de información mediante un diagrama Entidad-Relación (E/R). Facilita enormemente el diseño de una BD. Es muy representativo del funcionamiento del sistema de información y es **independiente del SGBD**. Toma como referencia la percepción que tenemos del funcionamiento del mundo real.
 
-En un **esquema Entidad–Relación** representamos de manera gráfica cómo se organiza la información en una base de datos. Consta solo de tres elementos:
+En un **esquema Entidad–Relación** representamos de manera gráfica cómo se organiza la información en una BD. Consta solo de tres elementos:
 
 - **Entidades**: son los objetos principales sobre los que queremos almacenar información (por ejemplo, un *Cliente*, un *Coche*, un *Empleado*…). Cada entidad se representa con un **rectángulo**.  
 - **Atributos**: son las propiedades o características de las entidades. Por ejemplo, un *Cliente* puede tener como atributos *nombre*, *teléfono* o *dirección*, y un *Coche* puede tener *matrícula* o *marca*. Los atributos se representan con **círculos**, unidos a la entidad a la que pertenecen.  
@@ -89,7 +84,7 @@ Se han desarrollado varios modelos E/R y diagramas de representación para el mo
 En los siguientes apartados vamos a ir desgranando los elementos que componen un diagrama E-R y cómo se construye.  
 
 
-### 2.1.- 🟦 Entidades
+### 2.1. ENTIDADES
 
 Las **entidades** son uno de los elementos usados en los diagramas E/R. Una entidad es un objeto, sujeto o concepto sobre el que se recoge información básica en el sistema para poder realizar los procesos que se requieran.  
 
@@ -103,7 +98,7 @@ Una entidad se representa en un diagrama E/R mediante un **rectángulo**.
 <img src="img/entidades.png" alt="Entidades" width="400px"/>
 
 
-### 2.2.- 📝 Atributos y tipos
+### 2.2. ATRIBUTOS Y TIPOS
 
 Un **atributo** es una propiedad o característica de una entidad. Como veremos más adelante, las **relaciones también pueden tener atributos**.  
 
@@ -137,43 +132,43 @@ Ejemplos de atributos y dominios de la entidad EMPLEADO:
 
 **Realiza el siguiente ejercicio:**
 
-1️⃣ Indica cuál sería el **dominio** de cada uno de los siguientes atributos de la entidad **PERSONA**:
+Indica cuál sería el **dominio** de cada uno de los siguientes atributos de la entidad **PERSONA**:
 
-- 📅 Fecha de nacimiento  
-- 🏙️ Localidad de nacimiento  
-- 🔢 Edad  
-- ✅ EsMayorDeEdad  
-- 🆔 DNI  
-- 📞 Teléfonos  
-- 📝 Nombre  
-- 🧑‍🤝‍🧑 Apellidos  
+- Fecha de nacimiento  
+- Localidad de nacimiento  
+- Edad  
+- EsMayorDeEdad  
+- DNI  
+- Teléfonos  
+- Nombre  
+- Apellidos  
 
 
-#### 🧭 Tipos de atributos
+#### Tipos de atributos
 
-1. 🧩 *Atributos simples y atributos compuestos*  
+1. *Atributos simples y atributos compuestos*  
     - Un atributo es simple si su contenido no se considera dividido en partes, por ejemplo **NOMBRE**.  
     - Es compuesto si admite dividirse en partes. Por ejemplo, **FECHA** podría ser compuesto si se considera que de FECHA se puede usar aisladamente **DÍA**, **MES** y **AÑO**.
 
     <img src="img/atributo2.png" alt="Atributos simples y compuestos" width="400px"/>
 
-2. 🔢 *Atributos monovaluados y atributos multivaluados*  
+2. *Atributos monovaluados y atributos multivaluados*  
     - Un atributo es monovaluado si admite, para cada elemento de la entidad, un solo valor; por ejemplo, el **nombre** de una persona.  
     - Si un atributo admite una lista de valores para cada elemento, sería multivaluado; por ejemplo, si un atributo de la entidad **CLIENTE** fuese **teléfono_cliente**, éste podría ser multivaluado.
 
     <img src="img/atributo3.png" alt="Atributos monovaluados y multivaluados" width="400px"/>
 
-3. ⚠️ *Atributos obligatorios y atributos opcionales*  
+3. *Atributos obligatorios y atributos opcionales*  
     - Un atributo es **obligatorio** si para todo elemento debe contener algún valor, y es **opcional** si puede haber elementos que no tengan asignado ningún valor para ese atributo. Por ejemplo, el atributo **Aficiones** podría ser opcional para una entidad **CLIENTE**.  
     - Un atributo opcional se representa:
 
     <img src="img/atributo4.png" alt="Atributos opcionales" width="400px"/>
 
-4. 🧮 *Atributos derivados y no derivados*  
+4. *Atributos derivados y no derivados*  
     - Un atributo es **derivado** si se puede obtener a partir de los datos contenidos en otros atributos. Por ejemplo, **IMPORTE DE VENTA** si se obtiene de **UNIDADES VENDIDAS** × **PRECIO UNIDAD** (no es recomendable abusar de atributos derivados).  
     - Un atributo es **no derivado** si su valor no depende de ningún otro atributo.
 
-5. 🔑 *Atributo Clave*  
+5. *Atributo Clave*  
     Una **clave** sirve para identificar de forma única a cada elemento de una entidad. Puede estar formada por uno o varios atributos y no permite valores repetidos ni puede estar sin valor o vacío. En una entidad puede haber dos tipos de clave:  
     - **Clave primaria o principal**: entre los posibles conjuntos de atributos que identifican a los elementos, debería ser la más adecuada por **simplicidad**, **longitud**, **representatividad** y **estabilidad**.  
     - **Clave secundaria o alternativa**: puede haber varias en una entidad, pero no se debe abusar de ellas. Son todas aquellas que decidamos aparte de la primaria.
@@ -189,7 +184,7 @@ Indica para cada atributo de qué tipo es, haciendo un examen lo más exhaustivo
 
 <img src="img/atributo6.png" alt="Ejemplo de atributos" width="400px"/>
 
-### 2.3.- 🔗 Relaciones
+### 2.3. RELACIONES
 
 Una **relación** es una asociación entre varias entidades a través de una acción realizable entre ellas. Los podemos localizar en los enunciados de los ejercicios porque suelen representarse con **verbos o formas verbales**.  
 
@@ -201,7 +196,7 @@ Ejemplos:
 - COMPRAR (entre CLIENTE, PRODUCTO)  
 
 
-#### 🟦 Tipos de relaciones
+#### Tipos de relaciones
 
 1. **Relación binaria o de grado dos**: Cuando se da entre **dos entidades**.  
 
@@ -224,7 +219,7 @@ Antes de seguir avanzando con el resto de los conceptos, vamos a hacer algún ej
 
 💻 Hoja de ejercicios 1. Solo hacemos el ejercicio 1, 2 y 3, sin poner las cardinalidades. Los completaremos más adelante.
 
-### 2.4.- 🔢 Cardinalidad
+### 2.4. CARDINALIDAD
 
 En este apartado veremos una serie de definiciones clave para seguir entendiendo cómo construir un **diagrama E-R**.  
 
@@ -261,7 +256,7 @@ Pensando en la imagen anterior:
 
 📌 **Nota**: lo obtenido de las **2 primeras preguntas** se coloca al otro lado de la relación en **Materia**, y las **2 últimas en Alumno**.  
 
-#### 📊 Tipos de cardinalidad en relaciones
+#### Tipos de cardinalidad en relaciones
 
 | Cardinalidad | Significado |
 |--------------|-------------|
@@ -271,7 +266,7 @@ Pensando en la imagen anterior:
 | (1,N)        | Mínimo uno, máximo muchos |
 
 
-### 2.5.- 🔄 Tipo de Correspondencia
+### 2.5. TIPO DE CORRESPONDENCIA
 
 El tipo de correspondencia o relación de cardinalidad expresa el número máximo de elementos u ocurrencias que se pueden llegar a relacionar entre las entidades de una relación.
 
@@ -295,7 +290,7 @@ El tipo de correspondencia o relación de cardinalidad expresa el número máxim
 
 💻 Hoja de ejercicios 1.  Colocamos la cardinalidad y correspondencia de los tres primeros ejercicios y hacemos el resto de los ejercicios.
 
-### 2.6.- 🏛️ Debilidad
+### 2.6. DEBILIDAD
 
 Una entidad es **débil** frente a otra que es **fuerte** cuando para existir un elemento de la débil es necesario que exista un elemento de la fuerte.  
 Una manera de localizar este tipo de entidades, es cuando no tienes ningún campo en una entidad que pueda ser clave principal, pero en cambio si la puedes hacer con la clave principal de otra entidad.
@@ -309,8 +304,8 @@ Veamos un ejemplo de cómo se diferencian las entidades fuertes y débiles:
 
 <img src="img/ejemplo-factura.png" alt="Factura" width="400px"/>  
 
-- **◻️ Factura** → entidad fuerte  
-- **◻️ DetalleFactura** → entidad débil, depende de Factura para existir
+- **Factura** → entidad fuerte  
+- **DetalleFactura** → entidad débil, depende de Factura para existir
 
 
 Una entidad débil solo se da en una relación de 1:N.  
@@ -322,7 +317,7 @@ Las entidades débiles se representan en los diagramas E/R **rodeadas por una l�
 
 Hay dos tipos de dependencias en relaciones de debilidad:  
 
-1.- **Dependencia en existencia**: Las ocurrencias de una entidad débil no tienen ningún sentido en la base de datos sin una ocurrencia de la entidad fuerte con la que están relacionadas.  
+1.- **Dependencia en existencia**: Las ocurrencias de una entidad débil no tienen ningún sentido en la BD sin una ocurrencia de la entidad fuerte con la que están relacionadas.  
 
 <img src="img/debil2.png" alt="Dependencia en existencia" width="400px"/>  
 
@@ -338,9 +333,9 @@ Por ejemplo, cada línea de pedido se identificaría con **numPed** y **numLinea
 💻 Hoja de ejercicios 4.  
 
 
-## 3.- 🏗️ EL MODELO E/R AMPLIADO
+## 3. EL MODELO E/R AMPLIADO
 
-El **Modelo E/R ampliado** recoge todos los conceptos y especificaciones del modelo E/R y añade otros para mejorar el diseño de las bases de datos. Se definen los siguientes conceptos dentro de este modelo:
+El **Modelo E/R ampliado** recoge todos los conceptos y especificaciones del modelo E/R y añade otros para mejorar el diseño de las BD. Se definen los siguientes conceptos dentro de este modelo:
 
 - **Superclase**: Es una entidad genérica de la que derivan otras entidades. La superclase tiene unos atributos que van a tener también las entidades que derivan de ella.  
 
@@ -383,7 +378,7 @@ Las **cardinalidades de la especialización** para los cuatro casos que hemos vi
 💻 Hoja de ejercicios 5.  
 💻 Hoja de ejercicios 6.  
 
-## 4.- 🛠️ CONSTRUCCIÓN DE UN DIAGRAMA E/R
+## 4. CONSTRUCCIÓN DE UN DIAGRAMA E/R
 
 Los pasos a seguir serán:
 
@@ -412,11 +407,11 @@ Los pasos a seguir serán:
 💻 Hoja de ejercicios 7 bis. 
 
 
-## 5.- 🗄️ MODELO RELACIONAL
+## 5. MODELO RELACIONAL
 
 El **modelo relacional** organiza la información en tablas con filas y columnas, lo que facilita su comprensión y manejo. Permite relacionar datos de diferentes tablas, evitar duplicidades y mantener la integridad y consistencia de la información. Además, el uso de SQL hace que las consultas, actualizaciones y análisis sean rápidos y eficientes, adaptándose a entornos desde pequeños sistemas hasta grandes empresas.
 
-### 5.1.- 📋 Elementos de una relación
+### 5.1. ELEMENTOS DE UNA RELACIÓN
 
 El elemento principal del modelo relacional es la **RELACIÓN**. Una relación es una **tabla**. Cada elemento de la relación es una **fila**, denominada **tupla o registro**. Cada propiedad, atributo o característica de los elementos es una **columna**.  
 
@@ -427,13 +422,13 @@ El elemento principal del modelo relacional es la **RELACIÓN**. Una relación e
 
 ---
 
-#### 🔹 Relación en el modelo Entidad-Relación (ER)
-- 💡 **Concepto lógico** que representa una **asociación entre entidades**.  
-- 📌 Ejemplo: “Un cliente realiza un pedido” → relación entre *Cliente* y *Pedido*.
+#### Relación en el modelo Entidad-Relación (ER)
+- **Concepto lógico** que representa una **asociación entre entidades**.  
+- Ejemplo: “Un cliente realiza un pedido” → relación entre *Cliente* y *Pedido*.
 
-#### 🔹 Relación en el modelo relacional
-- 🗄️ **Estructura física o lógica** implementada como **tabla** en la base de datos.  
-- 📊 Contiene **tuplas (filas)** y **atributos (columnas)** que representan los datos de la asociación.
+#### Relación en el modelo relacional
+- **Estructura física o lógica** implementada como **tabla** en la BD.  
+- Contiene **tuplas (filas)** y **atributos (columnas)** que representan los datos de la asociación.
 
 ---
 
@@ -445,7 +440,7 @@ Al conjunto de valores que puede tomar una columna se le denomina **dominio**, y
 
 <img src="img/relacional2.png" alt="Dominios de columnas" width="200px"/>  
 
-### 5.2.- ⚖️ Restricciones del modelo relacional
+### 5.2. RESTRICCIONES DEL MODELO RELACIONAL
 
 Los datos que almacenan las BD tienen como objetivo fundamental representar situaciones del mundo real. En ocasiones esto no es así.  
 
@@ -453,13 +448,13 @@ Supongamos, por ejemplo, el caso de una relación **empleados** en la que su sue
 
 Existen dos tipos de restricciones:  
 
-- **Propias o inherentes al modelo relacional**: son condiciones más generales, propias de un modelo de datos, y se deben cumplir en toda base de datos que siga dicho modelo.  
+- **Propias o inherentes al modelo relacional**: son condiciones más generales, propias de un modelo de datos, y se deben cumplir en toda BD que siga dicho modelo.  
     - No puede haber dos tuplas o filas que tengan el mismo contenido en todas sus columnas.  
     - Ninguna columna que sea clave primaria (restricción de usuario) admite nulos.  
     - Ninguna columna que sea clave primaria admite valores repetidos en las tuplas.  
     - Ninguna columna que sea clave alternativa admite valores repetidos en las tuplas.  
 
-- **Propias del usuario**: son condiciones específicas de una base de datos concreta, es decir, son las que se deben cumplir en una base de datos particular con unos usuarios concretos, pero que no son necesariamente relevantes en otra base de datos. Por ejemplo, tener empleados con sueldo negativo. En otra BD, puede que no haya sueldo, o que sea siempre positivo.  
+- **Propias del usuario**: son condiciones específicas de una BD concreta, es decir, son las que se deben cumplir en una BD particular con unos usuarios concretos, pero que no son necesariamente relevantes en otra BD. Por ejemplo, tener empleados con sueldo negativo. En otra BD, puede que no haya sueldo, o que sea siempre positivo.  
   El modelo permite que el usuario establezca:  
     - **Clave primaria** (Primary Key)  
     - **Unicidad o clave alternativa** (UNIQUE)  
@@ -470,7 +465,7 @@ Existen dos tipos de restricciones:
     - **Disparadores** (TRIGGER)  
 
   
-### 5.3.- 🔑 Claves primarias y claves ajenas
+### 5.3.  CLAVES PRIMARIAS Y CLAVES AJENAS
 
 La **Clave primaria o principal (PRIMARY KEY)** es un conjunto de atributos o columnas que identifican de forma única a cada tupla de una relación (a cada fila de una tabla).  
 
@@ -493,7 +488,7 @@ Por ejemplo, si tenemos una tabla **COUNTRY** que contiene datos de todos los pa
 
 <img src="img/clave2.png" alt="Clave ajena" width="400px"/>  
 
-### 5.4.- 🛡️ Integridad referencial
+### 5.4. INTEGRIDAD REFERENCIAL
 
 Las **restricciones de integridad referencial** permiten que el SGBD controle incoherencias entre los datos cargados en la clave ajena y los datos existentes en la clave primaria de la tabla principal. 
 
@@ -528,7 +523,7 @@ Al modificar el contenido de una **CITY**, se comprueba que el nuevo valor carga
 
 <img src="img/resumen.png" alt="Esquema relacional" width="400px"/>  
 
-### 5.5.- 🖼️ Representación del modelo Relacional
+### 5.5. REPRESENTACIÓN DEL MODELO RELACIONAL
 
 Existen diversas formas de representar el modelo relacional. Veamos ejemplos de algunas de ellas:
 
@@ -543,7 +538,7 @@ Existen diversas formas de representar el modelo relacional. Veamos ejemplos de 
 
 <img src="img/esquema3.png" alt="Grafo relacional" width="400px"/>  
 
-### 5.6.- 🔄 Paso del modelo E/R al modelo Relacional
+### 5.6. PASO DEL MODELOO E/R AL MODELO RELACIONAL
 
 Para convertir un modelo E/R a relacional, todo se reduce a **relaciones representadas por tablas**.  
 
@@ -603,7 +598,7 @@ Para convertir un modelo E/R a relacional, todo se reduce a **relaciones represe
 
 **Realiza el siguiente ejercicio:**
 
-1. Representa el esquema relacional correspondiente a una base de datos sobre la red de albergues del Camino de Santiago del Norte.  
+1. Representa el esquema relacional correspondiente a una BD sobre la red de albergues del Camino de Santiago del Norte.  
 - De cada albergue se registrará su nombre, dirección, localidad y km que faltan para el destino final (Santiago de Compostela).  
 - Existen albergues con el mismo nombre genérico (Albergue de peregrino, por ejemplo).  
 - Los albergues son de propiedad municipal y pertenecen a Ayuntamientos. Un determinado Ayuntamiento puede disponer de varios albergues.  
@@ -621,9 +616,9 @@ Para convertir un modelo E/R a relacional, todo se reduce a **relaciones represe
 💻 Hoja de ejercicios 13.  
 💻 Hoja de ejercicios 14 y 14 bis.  
 
-## 6.- 🧩 NORMALIZACIÓN
+## 6. NORMALIZACIÓN
 
-Al diseñar una base de datos se ha de evaluar la calidad del diseño. Para ello, uno de los parámetros que se utiliza son las **formas normales** en las que se encuentra dicho diseño.  
+Al diseñar una BD se ha de evaluar la calidad del diseño. Para ello, uno de los parámetros que se utiliza son las **formas normales** en las que se encuentra dicho diseño.  
 Se llama **normalización** al proceso de obligar a los atributos incluidos en el diseño a cumplir varias formas normales.
 
 Las formas normales son reglas que aseguran que el esquema tenga buen comportamiento respecto a:
@@ -655,7 +650,7 @@ El origen de estas anomalías: la tabla Suministros describe dos hechos diferent
 
 Si la BD se diseña usando un modelo semántico (E/R), la normalización suele ser menos necesaria.  
 
-En bases de datos relacionales, las **formas normales (FN)** indican el grado de vulnerabilidad de una tabla a inconsistencias y anomalías. Cada FN incluye a las anteriores.
+En BD relacionales, las **formas normales (FN)** indican el grado de vulnerabilidad de una tabla a inconsistencias y anomalías. Cada FN incluye a las anteriores.
 
 <img src="img/formas1.png" alt="Formas normales" width="400px"/>  
 
@@ -667,7 +662,7 @@ En bases de datos relacionales, las **formas normales (FN)** indican el grado de
 - Determinante funcional: atributo del que depende otro.  
 - Dependencia multivaluada: A →→ B. Un valor de A implica varios valores de B.
 
-### 6.1.- 1FN (Primera forma normal)
+### 6.1. 1FN (PRIMERA FORMA NORMAL)
 
 Una relación está en 1FN si cada atributo es atómico, es decir, cada celda contiene un solo valor.  
 
@@ -681,7 +676,7 @@ Solución: crear una nueva tabla con estos campos y su clave primaria, dejando l
 
 <img src="img/formas3.png" alt="Tabla normalizada 1FN" width="400px"/>  
 
-### 6.2.- 2FN (Segunda forma normal)
+### 6.2. 2FN (SEGUNDA FORMA NORMAL)
 
 Una relación está en 2FN si está en 1FN y todos los atributos no clave dependen funcionalmente de la **clave completa**.  
 
@@ -709,7 +704,7 @@ Tablas en 2FN:
 - Articulos (clave principal Num_art)  
 
 
-### 6.3.- 3FN (Tercera forma normal)
+### 6.3. 3FN (TERCERA FORMA NORMAL)
 
 Una relación está en 3FN si y solo si está en 2FN y no existen **dependencias transitivas**.  
 Todas las dependencias funcionales deben ser respecto a la clave principal.  
@@ -741,8 +736,6 @@ El resultado final es:
 
 > Nota: en clase trabajaremos hasta la 3FN.  
 Si quieres profundizar en 4FN y 5FN, puedes consultar el siguiente enlace:  
-
-[Wikipedia: Normalización de bases de datos](https://es.wikipedia.org/wiki/Normalizaci%C3%B3n_de_bases_de_datos)
 
 #### HOJAS DE EJERCICIOS
 
