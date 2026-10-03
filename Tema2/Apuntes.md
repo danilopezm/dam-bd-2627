@@ -297,18 +297,18 @@ Una manera de localizar este tipo de entidades, es cuando no tienes ningún camp
 
 Veamos un ejemplo de cómo se diferencian las entidades fuertes y débiles:
 
-- **Entidad fuerte**: 'Factura' → existe por sí misma y tiene un identificador único (**IDFactura**).  
-- **Entidad débil**: 'DetalleFactura` → depende de la 'Factura' a la que pertenece. Su identificación completa requiere el **IDFactura** y su propio número de línea (**NumLinea**).
+- **Entidad fuerte**: 'Factura' → existe por sí misma y tiene un identificador único (IDFactura).  
+- **Entidad débil**: 'DetalleFactura` → depende de la 'Factura' a la que pertenece. Su identificación completa requiere el IDFactura y su propio número de línea (NumLinea).
 
 Una entidad débil solo se da en una relación de 1:N.  
 
-Las entidades débiles se representan en los diagramas E/R **rodeadas por una línea doble**:  
+Las entidades débiles se representan en los diagramas E/R rodeadas por una *línea doble**:  
 
 <div style="text-align: center;">
   <img src="img/debil1.png" alt="Entidad débil" width="500" style="max-width: 100%; height: auto;">
 </div> 
 
-Hay dos tipos de dependencias en relaciones de debilidad:  
+Hay **dos tipos de dependencias** en relaciones de debilidad:  
 
 a) **Dependencia en existencia**: Las ocurrencias de una entidad débil no tienen ningún sentido en la BD sin una ocurrencia de la entidad fuerte con la que están relacionadas.  
 
@@ -329,50 +329,64 @@ Por ejemplo, cada línea de pedido se identificaría con **numPed** y **numLinea
 > - Cuaderno de problemas de Diagramas E-R: Problema 3
 
 
-## 3. EL MODELO E/R AMPLIADO
+## 3. EL MODELO E-R AMPLIADO
 
-El **Modelo E/R ampliado** recoge todos los conceptos y especificaciones del modelo E/R y añade otros para mejorar el diseño de las BD. Se definen los siguientes conceptos dentro de este modelo:
+El **Modelo E-R Ampliado** recoge todos los conceptos y especificaciones del modelo E/R y añade otros para mejorar el diseño de las BD. Se definen los siguientes conceptos dentro de este modelo:
 
 - **Superclase**: Es una entidad genérica de la que derivan otras entidades. La superclase tiene unos atributos que van a tener también las entidades que derivan de ella.  
 
 - **Subclase**: Es una entidad que deriva de una entidad genérica o superclase. La subclase va a tener los atributos de la superclase más unos atributos específicos. Los elementos que hay en la subclase también estarán en la superclase, aunque esta contendrá normalmente muchos más elementos.  
 
-  Por ejemplo, **EMPLEADO** sería una superclase y **OPERARIO** y **ENCARGADO** serían subclases de ésta. Otro ejemplo, en un centro de estudios, **PERSONA** podría ser una superclase mientras **ALUMNO** y **PROFESOR** serían subclases.
+  Por ejemplo, 'EMPLEADO' sería una superclase y 'OPERARIO' y 'ENCARGADO' serían subclases de ésta. Otro ejemplo, en un centro de estudios, 'PERSONA' podría ser una superclase mientras 'ALUMNO' y 'PROFESOR' serían subclases.
 
 - **Generalización**: es el proceso de construir una superclase a partir de las características comunes o que comparten varias subclases del sistema de información.  
 
-  Una generalización se representa mediante un **triángulo invertido** que une la superclase y las subclases.  
+  Una generalización se representa mediante un *triángulo invertido* que une la superclase y las subclases.  
 
-  <img src="img/ampliado1.png" alt="Generalización" width="400px"/>  
+    <div style="text-align: center;">
+      <img src="img/ampliado1.png" alt="Generalización" width="300" style="max-width: 100%; height: auto;">
+    </div>
 
 - **Especialización**: es el proceso inverso a la generalización. En la especialización se trata de buscar los **atributos específicos de las subclases** y las **restricciones de existencia** de elementos de las entidades.  
 
-Conforme a las restricciones de existencia de elementos de las entidades, nos podemos encontrar con los siguientes tipos de especialización o generalización:
+Conforme a las restricciones de existencia de elementos de las entidades, nos podemos encontrar con los siguientes **tipos de especialización o generalización**:
 
-1. **Especialización exclusiva total**: Por ser exclusiva, un elemento de la superclase sólo puede estar en una subclase. Por ser total, todos los elementos de la superclase están en alguna de las subclases.  
+a) **Especialización exclusiva total**: Por ser exclusiva, un elemento de la superclase sólo puede estar en una subclase. Por ser total, todos los elementos de la superclase están en alguna de las subclases.  
 
-   <img src="img/ampliado2.png" alt="Especialización exclusiva total" width="400px"/>  
+<div style="text-align: center;">
+    <img src="img/ampliado2.png" alt="Especialización exclusiva total" width="500" style="max-width: 100%; height: auto;">
+</div>
 
-2. **Especialización exclusiva parcial**: Por ser exclusiva, un elemento de la superclase sólo puede estar en una subclase. Por ser parcial, no tienen por qué estar todos los elementos de la superclase en alguna de las subclases.  
+b) **Especialización exclusiva parcial**: Por ser exclusiva, un elemento de la superclase sólo puede estar en una subclase. Por ser parcial, no tienen por qué estar todos los elementos de la superclase en alguna de las subclases.  
 
-   <img src="img/ampliado3.png" alt="Especialización exclusiva parcial" width="400px"/>  
+<div style="text-align: center;">
+    <img src="img/ampliado3.png" alt="Especialización exclusiva parcial" width="500" style="max-width: 100%; height: auto;">
+</div>
 
-3. **Especialización solapada total**: Por ser solapada, un elemento de la superclase podría pertenecer a varias subclases. Por ser total, todos los elementos de la superclase están en alguna de las subclases.  
+c) **Especialización solapada total**: Por ser solapada, un elemento de la superclase podría pertenecer a varias subclases. Por ser total, todos los elementos de la superclase están en alguna de las subclases.  
 
-   <img src="img/ampliado4.png" alt="Especialización solapada total" width="400px"/>  
+<div style="text-align: center;">
+    <img src="img/ampliado4.png" alt="Especialización solapada total" width="500" style="max-width: 100%; height: auto;">
+</div>
 
-4. **Especialización solapada parcial**: Por ser solapada, un elemento de la superclase podría pertenecer a varias subclases. Por ser parcial, no tienen por qué estar todos los elementos de la superclase en alguna de las subclases.  
+d) **Especialización solapada parcial**: Por ser solapada, un elemento de la superclase podría pertenecer a varias subclases. Por ser parcial, no tienen por qué estar todos los elementos de la superclase en alguna de las subclases.  
 
-   <img src="img/ampliado5.png" alt="Especialización solapada parcial" width="400px"/>  
+<div style="text-align: center;">
+    <img src="img/ampliado5.png" alt="Especialización solapada parcial" width="500" style="max-width: 100%; height: auto;">
+</div>  
 
-Las **cardinalidades de la especialización** para los cuatro casos que hemos visto son de la siguiente manera:  
+> Las cardinalidades de la especialización para los cuatro casos que hemos visto son de la siguiente manera:  
+> 
+> ```html
+<div style="text-align: center;">
+  <img src="img/ampliado6.png" alt="Cardinalidades de especialización" width="500" style="max-width: 100%; height: auto;">
+</div>
+```
 
-<img src="img/ampliado6.png" alt="Cardinalidades de especialización" width="400px"/>  
+#### 📝 Problemas
 
-#### 📝 HOJAS DE EJERCICIOS
-
-💻 Hoja de ejercicios 5.  
-💻 Hoja de ejercicios 6.  
+> - Cuaderno de problemas de Diagramas E-R: Problema 4
+> - Cuaderno de problemas de Diagramas E-R: Problema 5
 
 ## 4. CONSTRUCCIÓN DE UN DIAGRAMA E/R
 
