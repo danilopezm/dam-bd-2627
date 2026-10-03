@@ -93,7 +93,7 @@ Cada entidad se representa con un *rectángulo*.
 </div>
 
 
-### 2.2. ATRIBUTOS Y TIPOS
+### 2.2. ATRIBUTOS
 
 Un atributo es una propiedad o característica de una entidad. <br>
 >⚠️ Atención: Las relaciones también pueden tener atributos.  
@@ -169,7 +169,7 @@ Ejemplo de atributos y dominios de una entidad 'EMPLEADO':
 
 #### 📝 Actividades
 > **Actividad 2.** Indica, para cada atributo, de qué tipo es:
-> - Obligatorios o opcional
+> - Obligatorio u opcional
 > - Compuesto o simple
 > - Derivado o no derivado
 > - Monovaluado o multivaluado
@@ -180,76 +180,80 @@ Ejemplo de atributos y dominios de una entidad 'EMPLEADO':
 
 ### 2.3. RELACIONES
 
-Una **relación** es una asociación entre varias entidades a través de una acción realizable entre ellas. Los podemos localizar en los enunciados de los ejercicios porque suelen representarse con **verbos o formas verbales**.
+Una **relación** es una asociación entre varias entidades a través de una acción realizable entre ellas. Los podemos localizar en los enunciados de los ejercicios porque suelen representarse con verbos o formas verbales.
 Cada relación se representa con un *rombo*, que se une mediante *líneas* a las entidades que relaciona.
-
-Ejemplos:  
-- COMPRAR (entre CLIENTE y PRODUCTO)  
-- CURSAR (entre ALUMNO y MÓDULO)  
-- SER_HIJO (entre ALUMNO y PADRE)  
-- SER_JEFE (EMPLEADO consigo misma)  
-- COMPRAR (entre CLIENTE, PRODUCTO)  
-
 
 #### Tipos de relaciones
 
-1. **Relación binaria o de grado dos**: Cuando se da entre **dos entidades**.  
+1. **Relación binaria (de grado dos)**: cuando se da entre **dos entidades**.  
 
-   <img src="img/relacion1.png" alt="Relación binaria" width="400px"/>  
+    <div style="text-align: center;">
+        <img src="img/relacion1.png" alt="Relación binaria" width="500">
+    </div>
 
-   En este ejemplo vemos que las relaciones también pueden tener **atributos**.  Lo veremos con detalle más adelante.
+   Como vemos en este ejemplo, las relaciones también pueden tener atributos.
 
-2. **Relación unaria, reflexiva o de grado uno**:  Cuando se da entre **elementos de la misma entidad**, es decir, un elemento se relaciona con uno o más elementos de la misma entidad.  
+2. **Relación unaria o reflexiva (de grado uno)**: cuando se da entre **elementos de la misma entidad**, es decir, un elemento se relaciona con uno o más elementos de la misma entidad.  
 
-   <img src="img/relacion2.png" alt="Relación unaria" width="400px"/>  
+    <div style="text-align: center;">
+        <img src="img/relacion2.png" alt="Relación unaria" width="500" style="max-width: 100%; height: auto;">
+    </div>
 
+3. **Relación ternaria (de grado tres)**: cuando se da entre **tres entidades**. Una relación ternaria siempre se puede sustituir por dos relaciones binarias. Son más sencillas de entender.
 
-3. **Relación ternaria o de grado tres**:  Cuando se da entre **tres entidades**.  Nosotros no vamos a utilizarlas, en principio. Una relación ternaria siempre se puede sustituir por dos relaciones binarias. Son más sencillas de entender.
-
-   <img src="img/relacion3.png" alt="Relación ternaria" width="400px"/>  
+    <div style="text-align: center;">
+        <img src="img/relacion3.png" alt="Relación ternaria" width="500" style="max-width: 100%; height: auto;">
+    </div>
 
 Antes de seguir avanzando con el resto de los conceptos, vamos a hacer algún ejercicio básico para practicar lo visto hasta ahora.
 
-#### 📝 HOJAS DE EJERCICIOS
+#### 📝 Problemas
 
-💻 Hoja de ejercicios 1. Solo hacemos el ejercicio 1, 2 y 3, sin poner las cardinalidades. Los completaremos más adelante.
+> - Cuaderno de problemas de Diagramas E-R: Problema 1 (Actividades 1, 2 y 3)
 
 ### 2.4. CARDINALIDAD
 
 En este apartado veremos una serie de definiciones clave para seguir entendiendo cómo construir un **diagrama E-R**.  
 
-- **Ocurrencia**: es una unidad del conjunto de elementos que representa una entidad.  
-  👉 Para la entidad **ALUMNO**, una ocurrencia sería un alumno concreto.  
+- **Ocurrencia**: es una unidad del conjunto de elementos que representa una entidad.
+  Para la entidad 'ALUMNO', una ocurrencia sería un alumno concreto.  
 
-- **Cardinalidad**: de una entidad **A** respecto de otra **B** en una relación, indica el **número mínimo y máximo de ocurrencias** de la entidad A que pueden estar relacionadas con una ocurrencia de la entidad B.  
+- **Cardinalidad**: de una entidad 'A' respecto de otra 'B' en una relación, indica el **número mínimo y máximo de ocurrencias** de la entidad 'A' que pueden estar relacionadas con una ocurrencia de la entidad 'B'.  
   (A veces aparece como *participación* en lugar de *cardinalidad*).  
 
 La cardinalidad se indica mediante una **pareja de números entre paréntesis**:  
 - El **primer número** indica el mínimo (0 o 1).  
 - El **segundo número** indica el máximo (1 o N, para muchos).  
 
-<img src="img/cardinalidad1.png" alt="Ejemplo de cardinalidad" width="400px"/>
+<div style="text-align: center;">
+  <img src="img/cardinalidad1.png" alt="Ejemplo de cardinalidad" width="500" style="max-width: 100%; height: auto;">
+</div>
 
 #### ❓ Preguntas para obtener mínimos y máximos
 
 Pensando en la imagen anterior:
 
 - ¿Cada alumno, como mínimo, cuántas materias puede cursar?  
-  👉 **1**, ya que si no, no estaría matriculado.  
+    **1**, ya que si no, no estaría matriculado.  
 
 - ¿Cada alumno, como máximo, cuántas materias puede cursar?  
-  👉 **N**, ya que puede cursar más de una.  
+    **N**, ya que puede cursar más de una.  
 
 - ¿Cada materia puede ser cursada como mínimo por cuántos alumnos?  
-  👉 **0**, ya que podría haber una materia sin alumnos (convalidada).  
+    **0**, ya que podría haber una materia sin alumnos (convalidada).  
 
 - ¿Cada materia puede ser cursada como máximo por cuántos alumnos?  
-  👉 **N**, ya que puede haber varios alumnos matriculados en ella.  
+    **N**, ya que puede haber varios alumnos matriculados en ella.  
 
-<img src="img/cardinalidad1.png" alt="Ejemplo cardinalidad alumno-materia" width="400px"/>  
-<img src="img/cardinalidad2.png" alt="Otro ejemplo de cardinalidad" width="400px"/>  
+<div style="text-align: center;">
+  <img src="img/cardinalidad1.png" alt="Ejemplo cardinalidad alumno-materia" width="500" style="max-width: 100%; height: auto;">
+</div>
 
-📌 **Nota**: lo obtenido de las **2 primeras preguntas** se coloca al otro lado de la relación en **Materia**, y las **2 últimas en Alumno**.  
+<div style="text-align: center;">
+  <img src="img/cardinalidad2.png" alt="Otro ejemplo de cardinalidad" width="500" style="max-width: 100%; height: auto;">
+</div>
+
+📌 **Nota**: lo obtenido de las **2 primeras preguntas** se coloca al otro lado de la relación en Materia, y las **2 últimas** en Alumno.  
 
 #### Tipos de cardinalidad en relaciones
 
@@ -271,53 +275,58 @@ El tipo de correspondencia o relación de cardinalidad expresa el número máxim
 
 **Representación de cardinalidad y tipo de correspondencia**  para una relación unaria:
 
-<img src="img/correspondencia1.png" alt="Correspondencia 1" width="400px"/>  
+<div style="text-align: center;">
+  <img src="img/correspondencia1.png" alt="Correspondencia 1" width="500" style="max-width: 100%; height: auto;">
+</div>
 
 **Representación de cardinalidad y tipo de correspondencia**  para una relación binaria:
 
-<img src="img/correspondencia2.png" alt="Correspondencia 2" width="400px"/>  
+<div style="text-align: center;">
+  <img src="img/correspondencia2.png" alt="Correspondencia 2" width="500" style="max-width: 100%; height: auto;">
+</div>
 
-**Realiza el siguiente ejercicio:**  
 
-1. En un supermercado hay productos que se organizan en categorías. Cada producto pertenece a una única categoría. Están previstas categorías que aún pueden no tener productos. Calcula las cardinalidades de cada entidad y el tipo de correspondencia y represéntalos en el esquema E/R.
+#### 📝 Problemas
 
-#### 📝 HOJAS DE EJERCICIOS
-
-💻 Hoja de ejercicios 1.  Colocamos la cardinalidad y correspondencia de los tres primeros ejercicios y hacemos el resto de los ejercicios.
+> - Cuaderno de problemas de Diagramas E-R: Problema 1 (Actividades 4 y 5)
 
 ### 2.6. DEBILIDAD
 
-Una entidad es **débil** frente a otra que es **fuerte** cuando para existir un elemento de la débil es necesario que exista un elemento de la fuerte.  
+Una entidad es débil frente a otra que es fuerte cuando para existir un elemento de la débil es necesario que exista un elemento de la fuerte.  
 Una manera de localizar este tipo de entidades, es cuando no tienes ningún campo en una entidad que pueda ser clave principal, pero en cambio si la puedes hacer con la clave principal de otra entidad.
-
 
 Veamos un ejemplo de cómo se diferencian las entidades fuertes y débiles:
 
-- **Entidad fuerte**: `Factura` → existe por sí misma y tiene un identificador único (**IDFactura**).  
-- **Entidad débil**: `DetalleFactura` → depende de la `Factura` a la que pertenece. Su identificación completa requiere el **IDFactura** y su propio número de línea (**NumLinea**).
+- **Entidad fuerte**: 'Factura' → existe por sí misma y tiene un identificador único (**IDFactura**).  
+- **Entidad débil**: 'DetalleFactura` → depende de la 'Factura' a la que pertenece. Su identificación completa requiere el **IDFactura** y su propio número de línea (**NumLinea**).
 
 Una entidad débil solo se da en una relación de 1:N.  
 
 Las entidades débiles se representan en los diagramas E/R **rodeadas por una línea doble**:  
 
-<img src="img/debil1.png" alt="Entidad débil" width="400px"/>  
+<div style="text-align: center;">
+  <img src="img/debil1.png" alt="Entidad débil" width="500" style="max-width: 100%; height: auto;">
+</div> 
 
 Hay dos tipos de dependencias en relaciones de debilidad:  
 
-1.- **Dependencia en existencia**: Las ocurrencias de una entidad débil no tienen ningún sentido en la BD sin una ocurrencia de la entidad fuerte con la que están relacionadas.  
+a) **Dependencia en existencia**: Las ocurrencias de una entidad débil no tienen ningún sentido en la BD sin una ocurrencia de la entidad fuerte con la que están relacionadas.  
 
-<img src="img/debil2.png" alt="Dependencia en existencia" width="400px"/>  
+<div style="text-align: center;">
+  <img src="img/debil2.png" alt="Dependencia en existencia" width="500" style="max-width: 100%; height: auto;">
+</div>
 
-2.- **Dependencia en identificación**: Además de la dependencia en existencia, la entidad débil necesita a la fuerte para poder crear una clave a partir de la clave que tiene la entidad fuerte.  
+b) **Dependencia en identificación**: Además de la dependencia en existencia, la entidad débil necesita a la fuerte para poder crear una clave a partir de la clave que tiene la entidad fuerte.  
 Por ejemplo, cada línea de pedido se identificaría con **numPed** y **numLinea**.  
 
-<img src="img/debil3.png" alt="Dependencia en identificación" width="400px"/>  
+<div style="text-align: center;">
+  <img src="img/debil3.png" alt="Dependencia en identificación" width="500" style="max-width: 100%; height: auto;">
+</div>
 
-#### 📝 HOJAS DE EJERCICIOS
+#### 📝 Problemas
 
-💻 Hoja de ejercicios 2.  
-💻 Hoja de ejercicios 3.  
-💻 Hoja de ejercicios 4.  
+> - Cuaderno de problemas de Diagramas E-R: Problema 2
+> - Cuaderno de problemas de Diagramas E-R: Problema 3
 
 
 ## 3. EL MODELO E/R AMPLIADO
