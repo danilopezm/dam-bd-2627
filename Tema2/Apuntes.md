@@ -351,25 +351,25 @@ Conforme a las restricciones de existencia de elementos de las entidades, nos po
 a) **Especialización exclusiva total**: Por ser exclusiva, un elemento de la superclase sólo puede estar en una subclase. Por ser total, todos los elementos de la superclase están en alguna de las subclases.  
 
 <div style="text-align: center;">
-    <img src="img/ampliado2.png" alt="Especialización exclusiva total" width="500" style="max-width: 100%; height: auto;">
+    <img src="img/ampliado2.png" alt="Especialización exclusiva total" width="600" style="max-width: 100%; height: auto;">
 </div>
 
 b) **Especialización exclusiva parcial**: Por ser exclusiva, un elemento de la superclase sólo puede estar en una subclase. Por ser parcial, no tienen por qué estar todos los elementos de la superclase en alguna de las subclases.  
 
 <div style="text-align: center;">
-    <img src="img/ampliado3.png" alt="Especialización exclusiva parcial" width="500" style="max-width: 100%; height: auto;">
+    <img src="img/ampliado3.png" alt="Especialización exclusiva parcial" width="600" style="max-width: 100%; height: auto;">
 </div>
 
 c) **Especialización solapada total**: Por ser solapada, un elemento de la superclase podría pertenecer a varias subclases. Por ser total, todos los elementos de la superclase están en alguna de las subclases.  
 
 <div style="text-align: center;">
-    <img src="img/ampliado4.png" alt="Especialización solapada total" width="500" style="max-width: 100%; height: auto;">
+    <img src="img/ampliado4.png" alt="Especialización solapada total" width="600" style="max-width: 100%; height: auto;">
 </div>
 
 d) **Especialización solapada parcial**: Por ser solapada, un elemento de la superclase podría pertenecer a varias subclases. Por ser parcial, no tienen por qué estar todos los elementos de la superclase en alguna de las subclases.  
 
 <div style="text-align: center;">
-    <img src="img/ampliado5.png" alt="Especialización solapada parcial" width="500" style="max-width: 100%; height: auto;">
+    <img src="img/ampliado5.png" alt="Especialización solapada parcial" width="600" style="max-width: 100%; height: auto;">
 </div>  
 
 #### 📝 Problemas
