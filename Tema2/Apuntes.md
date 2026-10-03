@@ -3,29 +3,27 @@ unit_title: "Unidad 2. Diseño lógico de la base de datos."
 ---
 [Volver a Inicio](../README.md)
 
-[1. MODELO DE DATOS](#1---modelo-de-datos)
-    - [1.1. MODELOS DE DATOS MÁS UTILIZADOS](#-modelos-de-datos-más-utilizados)
-    - [1.2. CLASIFICACIÓN DE LOS MODELOS DE DATOS](#11---clasificación-de-los-modelos-de-datos)
-[2. DIAGRAMAS E/R](#2--️-diagramas-er)
-    - [2.1. ENTIDADES](#21---entidades)
-    - [2.2. ATRIBUTOS Y TIPOS](#22---atributos-y-tipos)
-    - [2.3. RELACIONES](#23---relaciones)
-    - [2.4. CARDINALIDAD](#24---cardinalidad)
-    - [2.5. TIPO DE CORRESPONDENCIA](#25---tipo-de-correspondencia)
-    - [2.6. DEBILIDAD](#26--️-debilidad)
-[3. EL MODELO E/R AMPLIADO](#3--️-el-modelo-er-ampliado)
-[4. CONSTRUCCIÓN DE UN DIAGRAMA E/R](#4--️-construcción-de-un-diagrama-er)
-[5. MODELO RELACIONAL](#5--️-modelo-relacional)
-    - [5.1. ELEMENTOS DE UNA RELACIÓN](#51---elementos-de-una-relación)
-    - [5.2. RESTRICCIONES DEL MODELO RELACIONAL](#52--️-restricciones-del-modelo-relacional)
-    - [5.3. CLAVES PRIMARIAS Y CLAVES AJENAS](#53---claves-primarias-y-claves-ajenas)
-    - [5.4. INTEGRIDAD REFERENCIAL](#54--️-integridad-referencial)
-    - [5.5. REPRESENTACIÓN DEL MODELO RELACIONAL](#55--️-representación-del-modelo-relacional)
-    - [5.6. PASO DEL MODELO E/R AL MODELO RELACIONAL](#56---paso-del-modelo-er-al-modelo-relacional)
-[6. NORMALIZACIÓN](#6---normalización)
-    - [6.1. 1FN (PRIMERA FORMA NORMAL)](#61--1fn-primera-forma-normal)
-    - [6.2. 2FN (SEGUNDA FORMA NORMAL)](#62--2fn-segunda-forma-normal)
-    - [6.3. 3FN (TERCERA FORMA NORMAL)](#63--3fn-tercera-forma-normal)
+1. [MODELO DE DATOS](#1-modelo-de-datos)
+2. [DIAGRAMAS E/R](#2-diagramas-er)
+    - [ENTIDADES](#21-entidades)
+    - [ATRIBUTOS Y TIPOS](#22-atributos)
+    - [RELACIONES](#23-relaciones)
+    - [CARDINALIDAD](#24-cardinalidad)
+    - [TIPO DE CORRESPONDENCIA](#25-tipo-de-correspondencia)
+    - [DEBILIDAD](#26-debilidad)
+3. [EL MODELO E/R AMPLIADO](#3-el-modelo-er-ampliado)
+4. [CONSTRUCCIÓN DE UN DIAGRAMA E/R](#4-construcción-de-un-diagrama-er)
+5. [MODELO RELACIONAL](#5-modelo-relacional)
+    - [ELEMENTOS DE UNA RELACIÓN](#51-elementos-de-una-relación)
+    - [RESTRICCIONES DEL MODELO RELACIONAL](#52-restricciones-del-modelo-relacional)
+    - [CLAVES PRIMARIAS Y CLAVES AJENAS](#53-claves-primarias-y-claves-ajenas)
+    - [INTEGRIDAD REFERENCIAL](#54-integridad-referencial)
+    - [REPRESENTACIÓN DEL MODELO RELACIONAL](#55-️representación-del-modelo-relacional)
+    - [PASO DEL MODELO E/R AL MODELO RELACIONAL](#56-paso-del-modelo-er-al-modelo-relacional)
+6. [NORMALIZACIÓN](#6-normalización)
+    - [1FN (PRIMERA FORMA NORMAL)](#61-1fn-primera-forma-normal)
+    - [2FN (SEGUNDA FORMA NORMAL)](#62-2fn-segunda-forma-normal)
+    - [3FN (TERCERA FORMA NORMAL)](#63-3fn-tercera-forma-normal)
 
 
 ## 1. MODELO DE DATOS
@@ -329,7 +327,7 @@ Por ejemplo, cada línea de pedido se identificaría con **numPed** y **numLinea
 > - Cuaderno de problemas de Diagramas E-R: Problema 3
 
 
-## 3. EL MODELO E-R AMPLIADO
+## 3. EL MODELO ER AMPLIADO
 
 El **Modelo E-R Ampliado** recoge todos los conceptos y especificaciones del modelo E/R y añade otros para mejorar el diseño de las BD. Se definen los siguientes conceptos dentro de este modelo:
 
