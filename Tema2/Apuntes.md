@@ -2,7 +2,7 @@
 unit_title: "Unidad 2. Diseño lógico de la base de datos."
 ---
 [Volver a Inicio](../README.md)
-
+---
 1. [MODELO DE DATOS](#1-modelo-de-datos)
 2. [DIAGRAMAS E/R](#2-diagramas-er)
     - [ENTIDADES](#21-entidades)
@@ -24,8 +24,7 @@ unit_title: "Unidad 2. Diseño lógico de la base de datos."
     - [1FN (PRIMERA FORMA NORMAL)](#61-1fn-primera-forma-normal)
     - [2FN (SEGUNDA FORMA NORMAL)](#62-2fn-segunda-forma-normal)
     - [3FN (TERCERA FORMA NORMAL)](#63-3fn-tercera-forma-normal)
-
-
+---
 ## 1. MODELO DE DATOS
 
 Un modelo pretende crear una simplificación de la realidad para poder comprenderla mejor.
@@ -300,7 +299,7 @@ Veamos un ejemplo de cómo se diferencian las entidades fuertes y débiles:
 
 Una entidad débil solo se da en una relación de 1:N.  
 
-Las entidades débiles se representan en los diagramas E/R rodeadas por una *línea doble**:  
+Las entidades débiles se representan en los diagramas E/R rodeadas por una *línea doble*:  
 
 <div style="text-align: center;">
   <img src="img/debil1.png" alt="Entidad débil" width="500" style="max-width: 100%; height: auto;">
@@ -315,7 +314,7 @@ a) **Dependencia en existencia**: Las ocurrencias de una entidad débil no tiene
 </div>
 
 b) **Dependencia en identificación**: Además de la dependencia en existencia, la entidad débil necesita a la fuerte para poder crear una clave a partir de la clave que tiene la entidad fuerte.  
-Por ejemplo, cada línea de pedido se identificaría con **numPed** y **numLinea**.  
+Por ejemplo, cada línea de pedido se identificaría con numPed y numLinea.  
 
 <div style="text-align: center;">
   <img src="img/debil3.png" alt="Dependencia en identificación" width="500" style="max-width: 100%; height: auto;">
@@ -372,14 +371,6 @@ d) **Especialización solapada parcial**: Por ser solapada, un elemento de la su
 <div style="text-align: center;">
     <img src="img/ampliado5.png" alt="Especialización solapada parcial" width="500" style="max-width: 100%; height: auto;">
 </div>  
-
-> Las cardinalidades de la especialización para los cuatro casos que hemos visto son de la siguiente manera:  
-> 
-> ```html
-<div style="text-align: center;">
-  <img src="img/ampliado6.png" alt="Cardinalidades de especialización" width="500" style="max-width: 100%; height: auto;">
-</div>
-```
 
 #### 📝 Problemas
 
