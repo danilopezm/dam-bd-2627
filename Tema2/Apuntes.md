@@ -246,8 +246,7 @@ Ejemplo de atributos y dominios de una entidad Empleado:
 | categoria | Valor perteneciente a un conjunto de categorías |
 | jornada_completa | Verdadero o falso |
 
-> #### 📝 Actividad 1
-> Indica cuál podría ser el dominio de cada uno de los siguientes atributos de una entidad PERSONA:
+> 📝 **Actividad 1**. Indica cuál podría ser el dominio de cada uno de los siguientes atributos de una entidad PERSONA:
 >
 > - fecha_nacimiento;
 > - localidad_nacimiento;
@@ -257,8 +256,8 @@ Ejemplo de atributos y dominios de una entidad Empleado:
 > - telefonos;
 > - nombre;
 > - apellidos.
-
-Considera que una persona puede tener varios teléfonos.
+>
+> Considera que una persona puede tener varios teléfonos.
 
 #### 2.2.2. TIPOS DE ATRIBUTOS
 
@@ -336,8 +335,7 @@ Para elegir una clave primaria deben tenerse en cuenta la simplicidad, la longit
   <img src="img/atributo5.png" alt="Representación de los tipos de atributos" width="500">
 </div>
 
-> #### 📝 Actividad 2
-> Observa la imagen y clasifica cada atributo según los siguientes criterios:
+> 📝 **Actividad 2**. Observa la imagen y clasifica cada atributo según los siguientes criterios:
 > 
 > - obligatorio u opcional;
 > - compuesto o simple;
@@ -355,7 +353,6 @@ Una **relación** es una asociación o correspondencia entre dos o más entidade
 En los enunciados de los ejercicios, las relaciones suelen expresarse mediante verbos o formas verbales.
 
 Por ejemplo:
-
 - un alumno se matricula en un módulo;
 - un profesor imparte un módulo;
 - un cliente realiza un pedido.
@@ -442,13 +439,20 @@ En una relación entre ALUMNO y MATERIA:
 #### Preguntas para obtener mínimos y máximos
 
 Pensando en la imagen anterior:
-- ¿Cada alumno, como mínimo, cuántas materias puede cursar?<br>
+- ¿Cada alumno, como mínimo, cuántas materias puede cursar?
+
   **1**, ya que si no cursa ninguna materia no estaría matriculado.
-- ¿Cada alumno, como máximo, cuántas materias puede cursar?<br>
+
+- ¿Cada alumno, como máximo, cuántas materias puede cursar?
+
   **N**, ya que puede cursar más de una.
-- ¿Cada materia puede ser cursada, como mínimo, por cuántos alumnos?<br>
+
+- ¿Cada materia puede ser cursada, como mínimo, por cuántos alumnos?
+
   **0**, ya que podría existir una materia sin alumnos matriculados.
-- ¿Cada materia puede ser cursada, como máximo, por cuántos alumnos?<br>
+
+- ¿Cada materia puede ser cursada, como máximo, por cuántos alumnos?
+
   **N**, ya que puede haber varios alumnos matriculados.
 
 ### 2.5. TIPO DE CORRESPONDENCIA
