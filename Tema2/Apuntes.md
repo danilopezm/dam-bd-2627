@@ -217,11 +217,11 @@ Una **ocurrencia** de una entidad es un elemento concreto perteneciente a ese co
 
 Un **atributo** es una propiedad o característica de una entidad.
 
-Por ejemplo, la entidad 'ALUMNO' puede tener los siguientes atributos:
+Por ejemplo, la entidad ALUMNO puede tener los siguientes atributos:
 - NumExpediente;
 - Nombre;
 - Apellidos;
-- FechaNacimiento.
+- FechaNac.
 
 > **Importante:** las relaciones también pueden tener atributos. Por ejemplo, una relación MATRICULA puede tener los atributos fecha_matricula y convocatoria.
 
@@ -246,7 +246,7 @@ Ejemplo de atributos y dominios de una entidad Empleado:
 | categoria | Valor perteneciente a un conjunto de categorías |
 | jornada_completa | Verdadero o falso |
 
-#### 📝 Actividad 1
+> #### 📝 Actividad 1
 > Indica cuál podría ser el dominio de cada uno de los siguientes atributos de una entidad PERSONA:
 >
 > - fecha_nacimiento;
@@ -336,17 +336,17 @@ Para elegir una clave primaria deben tenerse en cuenta la simplicidad, la longit
   <img src="img/atributo5.png" alt="Representación de los tipos de atributos" width="500">
 </div>
 
-#### 📝 Actividad 2
+> #### 📝 Actividad 2
 > Observa la imagen y clasifica cada atributo según los siguientes criterios:
 > 
 > - obligatorio u opcional;
 > - compuesto o simple;
 > - derivado o no derivado;
 > - monovaluado o multivaluado.
-
-<div style="text-align: center;">
-  <img src="img/atributo6.png" alt="Ejemplo de atributos" width="500">
-</div>
+>
+> <div style="text-align: center;">
+>    <img src="img/atributo6.png" alt="Ejemplo de atributos" width="500">
+> </div>
 
 ### 2.3. RELACIONES
 
@@ -356,9 +356,9 @@ En los enunciados de los ejercicios, las relaciones suelen expresarse mediante v
 
 Por ejemplo:
 
-- un alumno **se matricula en** un módulo;
-- un profesor **imparte** un módulo;
-- un cliente **realiza** un pedido.
+- un alumno se matricula en un módulo;
+- un profesor imparte un módulo;
+- un cliente realiza un pedido.
 
 Cada relación se representa mediante un rombo, que se une mediante líneas a las entidades participantes.
 
@@ -442,13 +442,13 @@ En una relación entre ALUMNO y MATERIA:
 #### Preguntas para obtener mínimos y máximos
 
 Pensando en la imagen anterior:
-- ¿Cada alumno, como mínimo, cuántas materias puede cursar?
+- ¿Cada alumno, como mínimo, cuántas materias puede cursar?<br>
   **1**, ya que si no cursa ninguna materia no estaría matriculado.
-- ¿Cada alumno, como máximo, cuántas materias puede cursar?
+- ¿Cada alumno, como máximo, cuántas materias puede cursar?<br>
   **N**, ya que puede cursar más de una.
-- ¿Cada materia puede ser cursada, como mínimo, por cuántos alumnos?
+- ¿Cada materia puede ser cursada, como mínimo, por cuántos alumnos?<br>
   **0**, ya que podría existir una materia sin alumnos matriculados.
-- ¿Cada materia puede ser cursada, como máximo, por cuántos alumnos?
+- ¿Cada materia puede ser cursada, como máximo, por cuántos alumnos?<br>
   **N**, ya que puede haber varios alumnos matriculados.
 
 ### 2.5. TIPO DE CORRESPONDENCIA
@@ -488,11 +488,6 @@ Relación unaria:
   <img src="img/correspondencia1.png" alt="Correspondencia en una relación unaria" width="500">
 </div>
 
-Relación binaria:
-<div style="text-align: center;">
-  <img src="img/correspondencia2.png" alt="Correspondencia en una relación binaria" width="500">
-</div>
-
 #### 🖥️Problemas
 > - Cuaderno de problemas de Diagramas E-R: Problema 1, actividades 4 y 5.
 
@@ -510,10 +505,7 @@ Ejemplo:
 
 Una factura puede tener varias líneas, pero cada línea pertenece a una única factura. Por ello, la relación entre FACTURA y DETALLE_FACTURA suele ser de tipo `1:N`.
 
-Las entidades débiles se representan mediante un rectángulo doble:
-<div style="text-align: center;">
-  <img src="img/debil1.png" alt="Entidad débil" width="500">
-</div>
+Las entidades débiles se representan mediante un *rectángulo doble*.
 
 #### Tipos de dependencia
 
