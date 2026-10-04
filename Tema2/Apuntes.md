@@ -2,7 +2,7 @@
 unit_title: "Unidad 2. Diseño lógico de la base de datos."
 ---
 [Volver a Inicio](../README.md)
----
+
 1. [MODELO DE DATOS](#1-modelo-de-datos)
 2. [DIAGRAMAS E/R](#2-diagramas-er)
     - [ENTIDADES](#21-entidades)
@@ -12,19 +12,17 @@ unit_title: "Unidad 2. Diseño lógico de la base de datos."
     - [TIPO DE CORRESPONDENCIA](#25-tipo-de-correspondencia)
     - [DEBILIDAD](#26-debilidad)
 3. [EL MODELO E/R AMPLIADO](#3-el-modelo-er-ampliado)
-4. [CONSTRUCCIÓN DE UN DIAGRAMA E/R](#4-construcción-de-un-diagrama-er)
-5. [MODELO RELACIONAL](#5-modelo-relacional)
-    - [ELEMENTOS DE UNA RELACIÓN](#51-elementos-de-una-relación)
-    - [RESTRICCIONES DEL MODELO RELACIONAL](#52-restricciones-del-modelo-relacional)
-    - [CLAVES PRIMARIAS Y CLAVES AJENAS](#53-claves-primarias-y-claves-ajenas)
-    - [INTEGRIDAD REFERENCIAL](#54-integridad-referencial)
-    - [REPRESENTACIÓN DEL MODELO RELACIONAL](#55-️representación-del-modelo-relacional)
-    - [PASO DEL MODELO E/R AL MODELO RELACIONAL](#56-paso-del-modelo-er-al-modelo-relacional)
+4. [MODELO RELACIONAL](#4-modelo-relacional)
+    - [ELEMENTOS DE UNA RELACIÓN](#41-elementos-de-una-relación)
+    - [RESTRICCIONES DEL MODELO RELACIONAL](#42-restricciones-del-modelo-relacional)
+    - [CLAVES PRIMARIAS Y CLAVES AJENAS](#43-claves-primarias-y-claves-ajenas)
+    - [INTEGRIDAD REFERENCIAL](#44-integridad-referencial)
+    - [REPRESENTACIÓN DEL MODELO RELACIONAL](#45-️representación-del-modelo-relacional)
 6. [NORMALIZACIÓN](#6-normalización)
     - [1FN (PRIMERA FORMA NORMAL)](#61-1fn-primera-forma-normal)
     - [2FN (SEGUNDA FORMA NORMAL)](#62-2fn-segunda-forma-normal)
     - [3FN (TERCERA FORMA NORMAL)](#63-3fn-tercera-forma-normal)
----
+
 ## 1. MODELO DE DATOS
 
 Un modelo pretende crear una simplificación de la realidad para poder comprenderla mejor.
@@ -242,15 +240,6 @@ Pensando en la imagen anterior:
 - ¿Cada materia puede ser cursada como máximo por cuántos alumnos?  
     **N**, ya que puede haber varios alumnos matriculados en ella.  
 
-<div style="text-align: center;">
-  <img src="img/cardinalidad1.png" alt="Ejemplo cardinalidad alumno-materia" width="500" style="max-width: 100%; height: auto;">
-</div>
-
-<div style="text-align: center;">
-  <img src="img/cardinalidad2.png" alt="Otro ejemplo de cardinalidad" width="500" style="max-width: 100%; height: auto;">
-</div>
-
-📌 **Nota**: lo obtenido de las **2 primeras preguntas** se coloca al otro lado de la relación en Materia, y las **2 últimas** en Alumno.  
 
 #### Tipos de cardinalidad en relaciones
 
@@ -376,45 +365,16 @@ d) **Especialización solapada parcial**: Por ser solapada, un elemento de la su
 
 > - Cuaderno de problemas de Diagramas E-R: Problema 4
 > - Cuaderno de problemas de Diagramas E-R: Problema 5
-
-## 4. CONSTRUCCIÓN DE UN DIAGRAMA E/R
-
-Los pasos a seguir serán:
-
-1. Leer el documento varias veces hasta entender bien el problema y tener clara toda la información de que disponemos.  
-
-2. Obtener una lista de candidatos a entidades, relaciones y atributos:  
-    - Identificar las entidades: los sujetos básicos en el sistema.  
-    - Buscar los atributos de cada entidad. Proponer la clave principal de cada uno. Establecer los tipos de atributos (compuestos, multivaluados, opcionales, derivados). Establecer sus dominios (Fecha, número real con dos decimales, cadena de caracteres de longitud 9, V/F…).  
-    - Identificar las generalizaciones y especializaciones (tipos de especializaciones: exclusiva total, solapada parcial…).  
-    - Identificar las relaciones de debilidad, entidades fuertes y débiles. Dependencias de existencia o de identificación.  
-
-3. Averiguar las cardinalidades y los tipos de correspondencia en cada relación.  
-
-4. Revisar lo obtenido para:  
-    - Eliminar entidades derivadas.  
-    - Ver si es necesario añadir entidades a alguna relación.  
-    - Ver si algunos atributos de una entidad se deben agrupar como atributos de una nueva entidad.  
-
-5. Realizar una distribución de las entidades y representar sus relaciones en el diagrama, así como los atributos.  
-
-6. Volver a leer el problema para ver si nos hemos dejado algo. Revisar que toda la información está representada en el esquema y refinarlo si es necesario.  
-
-#### 📝 HOJAS DE EJERCICIOS
-
-💻 Hoja de ejercicios 7.  
-💻 Hoja de ejercicios 7 bis. 
+> - Cuaderno de problemas de Diagramas E-R: Problema 6
 
 
-## 5. MODELO RELACIONAL
+## 4. MODELO RELACIONAL
 
 El **modelo relacional** organiza la información en tablas con filas y columnas, lo que facilita su comprensión y manejo. Permite relacionar datos de diferentes tablas, evitar duplicidades y mantener la integridad y consistencia de la información. Además, el uso de SQL hace que las consultas, actualizaciones y análisis sean rápidos y eficientes, adaptándose a entornos desde pequeños sistemas hasta grandes empresas.
 
-### 5.1. ELEMENTOS DE UNA RELACIÓN
+### 4.1. ELEMENTOS DE UNA RELACIÓN
 
 El elemento principal del modelo relacional es la **RELACIÓN**. Una relación es una **tabla**. Cada elemento de la relación es una **fila**, denominada **tupla o registro**. Cada propiedad, atributo o característica de los elementos es una **columna**.  
-
-<img src="img/relacional1.png" alt="Modelo relacional - tabla" width="400px"/>  
 
 > ⚠️ **NOTA IMPORTANTE**  
 > No debes confundir el concepto de **relación en el modelo relacional** con el concepto de **relación en el modelo E/R**.
@@ -431,21 +391,18 @@ El elemento principal del modelo relacional es la **RELACIÓN**. Una relación e
 
 ---
 
-
 Al conjunto de valores que puede tomar una columna se le denomina **dominio**, y estos pueden ser de dos tipos:  
 
 - **General**: si los valores pueden ser todos los existentes dentro del tipo de dato correspondiente a la columna.  
 - **Restringido**: si sólo puede tomar valores dentro de un rango de un dominio general, por ejemplo, números reales comprendidos entre 0 y 10.  
 
-<img src="img/relacional2.png" alt="Dominios de columnas" width="200px"/>  
-
-### 5.2. RESTRICCIONES DEL MODELO RELACIONAL
+### 4.2. RESTRICCIONES DEL MODELO RELACIONAL
 
 Los datos que almacenan las BD tienen como objetivo fundamental representar situaciones del mundo real. En ocasiones esto no es así.  
 
 Supongamos, por ejemplo, el caso de una relación **empleados** en la que su sueldo es negativo (-1000 euros). Esto hace necesaria la creación de **restricciones** que nos permitan representar de manera coherente dicha información.  
 
-Existen dos tipos de restricciones:  
+Existen **dos tipos de restricciones**:  
 
 - **Propias o inherentes al modelo relacional**: son condiciones más generales, propias de un modelo de datos, y se deben cumplir en toda BD que siga dicho modelo.  
     - No puede haber dos tuplas o filas que tengan el mismo contenido en todas sus columnas.  
@@ -463,37 +420,11 @@ Existen dos tipos de restricciones:
     - **Aserciones o asertos** (ASSERTION)  
     - **Disparadores** (TRIGGER)  
 
-  
-### 5.3.  CLAVES PRIMARIAS Y CLAVES AJENAS
-
-La **Clave primaria o principal (PRIMARY KEY)** es un conjunto de atributos o columnas que identifican de forma única a cada tupla de una relación (a cada fila de una tabla).  
-
-Se debe declarar clave primaria en cualquier tabla, aunque no es obligatorio hacerlo.  
-
-Sólo puede definirse una clave primaria en una tabla y debe ser, dentro de las columnas que puedan servir para identificar a cada tupla, la columna o el conjunto de columnas que se considere mejor para identificar de forma única a cada tupla o elemento de la tabla.  
-
-Sobre las claves primarias quedan establecidas las restricciones inherentes comentadas anteriormente (que no puede estar vacía y que no se puede repetir).  
-
-<img src="img/clave1.png" alt="Clave primaria" width="400px"/>  
-
-**Nota:** En este esquema, la línea continua representa una relación identificada. La clave ajena forma parte de la clave primaria de la tabla donde está. La línea discontinua representa una relación no identificada. La clave ajena no forma parte de la clave primaria de la tabla donde está.  
-
-La **clave ajena (FOREIGN KEY)** sirve para indicar que uno o más atributos que forman clave ajena en una tabla (tabla secundaria en la relación, referenciante) están relacionados con uno o más atributos de otra tabla (principal en la relación, referenciada) que forman clave primaria o clave alternativa en esa otra tabla.  
-
-Por ejemplo, si tenemos una tabla **COUNTRY** que contiene datos de todos los países del mundo y una tabla **CITY** que contiene datos de ciudades del mundo, para controlar el país al que pertenece cada ciudad, podrá haber una relación de clave ajena entre:  
-
-- **CITY** (tabla secundaria)  
-- **COUNTRY** (tabla principal)  
-
-<img src="img/clave2.png" alt="Clave ajena" width="400px"/>  
-
-### 5.4. INTEGRIDAD REFERENCIAL
+### 4.4. INTEGRIDAD REFERENCIAL
 
 Las **restricciones de integridad referencial** permiten que el SGBD controle incoherencias entre los datos cargados en la clave ajena y los datos existentes en la clave primaria de la tabla principal. 
 
-Vamos a ver como actua la restricción de integridad referencial con un **ejemplo** entre dos tablas. El esquema está formado por dos tablas, una de paises y otra de ciudades. Una ciudad pertenece a un país, y cada país puede tener varias ciudades.
-
-<img src="img/integridad1.png" alt="Integridad al insertar" width="200px"/>  
+Vamos a ver como actua la restricción de integridad referencial con un ejemplo entre dos tablas. El esquema está formado por dos tablas, una de paises y otra de ciudades. Una ciudad pertenece a un país, y cada país puede tener varias ciudades.
 
 Las restricciones actúan cuando:  
 
@@ -519,94 +450,31 @@ Al modificar el contenido de una **CITY**, se comprueba que el nuevo valor carga
   - **Modificación con puesta a nulos (MN)**: Si se trata de modificar el código de un país y hay ciudades de ese país en la tabla CITY, se carga NULL en la columna clave ajena (**countrycode**) de CITY de todas las ciudades de ese país.  
  
 
-### 5.5. REPRESENTACIÓN DEL MODELO RELACIONAL
+### 4.5. REPRESENTACIÓN DEL MODELO RELACIONAL
 
 Existen diversas formas de representar el modelo relacional. Veamos ejemplos de algunas de ellas:
 
 - **Esquema relacional conectado a columnas**: 
-  <img src="img/esquema1.png" alt="Esquema relacional columnas" width="400px"/>  
+<div style="text-align: center;">
+    <img src="img/esquema1.png" alt="Esquema relacional columnas" width="500" style="max-width: 100%; height: auto;">
+</div> 
 
 - **Esquema relacional crow's foot o pata de cuervo**: La parte de la pata va en la tabla donde está la clave ajena.  
-
-<img src="img/esquema2.png" alt="Esquema crow's foot" width="400px"/>  
+<div style="text-align: center;">
+    <img src="img/esquema2.png" alt="Esquema crow's foot" width="500" style="max-width: 100%; height: auto;">
+</div>
 
 - **Grafo relacional**  
+<div style="text-align: center;">
+    <img src="img/esquema3.png" alt="Grafo relacional" width="500" style="max-width: 100%; height: auto;">
+</div>
 
-<img src="img/esquema3.png" alt="Grafo relacional" width="400px"/>  
+#### 📝 Problemas
 
-### 5.6. PASO DEL MODELOO E/R AL MODELO RELACIONAL
-
-Para convertir un modelo E/R a relacional, todo se reduce a **relaciones representadas por tablas**.  
-
-- Para cada conjunto de **entidades fuertes A** → tabla con el mismo nombre y atributos del conjunto.  
-- Para cada conjunto de **entidades débiles B** → tabla con los atributos de B + atributos de clave primaria de la entidad fuerte correspondiente.  
-- Para cada conjunto de **relaciones** → tabla con claves primarias de todas las entidades relacionadas + atributos propios de la relación.  
-
-**Pasos detallados:**  
-
-* Toda entidad se transforma en una tabla con los mismos atributos, excepto los multivaluados.  
-
-<img src="img/paso1.png" alt="Paso entidad a tabla" width="200px"/>  
-
-* Relación 1:N → Propagar clave primaria de la entidad con participación 1 como clave ajena en la tabla con N.  
-
-<img src="img/paso2.png" alt="Paso 1:N" width="400px"/>  
-
-* Relación N:M → Tabla con clave primaria concatenada de las tablas A y B + atributos de la relación.  
-
-<img src="img/paso3.png" alt="Paso N:M" width="400px"/>  
-
-* Relación 1:1 → Tres casos:  
-  - A (0,1) y B (1,1) → clave primaria de B como clave ajena en A.  
-
-<img src="img/paso4.png" alt="Paso 1:1 caso 1" width="400px"/>  
-
-  - A (1,1) y B (1,1) → propagar clave primaria de cualquiera de las dos tablas como clave ajena de la otra.  
-  - A y B (0,1) → tratar como N:M.  
-
-* Atributo multivaluado → Tabla con dos atributos: clave de la entidad + atributo correspondiente. Clave primaria concatenada o un identificador nuevo.  
-
-<img src="img/paso5.png" alt="Atributo multivaluado" width="400px"/>  
-
-* Dependencia en existencia → Propagar clave primaria de entidad fuerte como clave ajena en la entidad débil.  
-
-<img src="img/paso6.png" alt="Dependencia en existencia" width="400px"/>  
-
-* Dependencia en identificación → Propagar clave primaria de entidad fuerte como clave ajena en entidad débil. Clave primaria = concatenación de la clave ajena y el identificador de la entidad débil.  
-
-<img src="img/paso7.png" alt="Dependencia en identificación" width="400px"/>  
-
-* Especialización → Tres modos:  
-  - **Modo 1:** tabla superentidad + tabla por cada subentidad con referencia a superentidad. Funciona siempre.  
-
-<img src="img/paso8.png" alt="Especialización modo 1" width="400px"/>  
-
-  - **Modo 2:** tabla por cada subentidad con referencia a superentidad. Funciona si especialización total.  
-
-<img src="img/paso9.png" alt="Especialización modo 2" width="400px"/>  
-
-  - **Modo 3:** una tabla con todos los atributos de superentidad y subentidades + atributo tipo. Puede generar nulos. No recomendada.  
-
-<img src="img/paso10.png" alt="Especialización modo 3" width="400px"/>  
-
-
-> **Ejercicio: ** Representa el esquema relacional correspondiente a una BD sobre la red de albergues del Camino de Santiago del Norte.  
->- De cada albergue se registrará su nombre, dirección, localidad y km que faltan para el destino final (Santiago de Compostela).  
->- Existen albergues con el mismo nombre genérico (Albergue de peregrino, por ejemplo).  
->- Los albergues son de propiedad municipal y pertenecen a Ayuntamientos. Un determinado Ayuntamiento puede disponer de varios albergues.  
->- De cada Ayuntamiento debemos conocer su nombre, dirección, teléfono y URL de su web.  
->- En los albergues pernoctan peregrinos, de los que se registra un número de tarjeta (único), su nombre y nacionalidad.  
->- Se debe registrar la fecha de entrada de cada peregrino en el albergue correspondiente.  
-
-#### HOJAS DE EJERCICIOS
-
-💻 Hoja de ejercicios 8.  
-💻 Hoja de ejercicios 9.  
-💻 Hoja de ejercicios 10.  
-💻 Hoja de ejercicios 11.  
-💻 Hoja de ejercicios 12.  
-💻 Hoja de ejercicios 13.  
-💻 Hoja de ejercicios 14 y 14 bis.  
+> - Cuaderno de problemas de Diagramas E-R: Problema 7
+> - Cuaderno de problemas de Diagramas E-R: Problema 8
+> - Cuaderno de problemas de Diagramas E-R: Problema 9
+> - Cuaderno de problemas de Diagramas E-R: Problema 10
 
 ## 6. NORMALIZACIÓN
 
