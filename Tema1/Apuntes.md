@@ -55,14 +55,14 @@ Según su finalidad dentro de un sistema de información, los ficheros pueden cl
 
 - **Históricos**: almacenan datos antiguos que ya no se usan en los procesos cotidianos, pero que se conservan para consultas, auditorías, estadísticas o motivos legales.
 
-#### 📝 Actividades
-
-> **Actividad 1. Abrir un fichero**.
+> 📝 **Actividad 1. Abrir un fichero**.
+> 
 > 1. Busca en tu ordenador un fichero con extensión '.docx'.
 > 2. Ábrelo con el Bloc de notas.
 > 3. Responde: ¿por qué no se ve bien el contenido del fichero?
 
-> **Actividad 2. Tabla de códigos ASCII**. 
+> 📝 **Actividad 2. Tabla de códigos ASCII**. 
+>
 > La tabla ASCII es un conjunto estandarizado de códigos numéricos que representan caracteres que una computadora puede entender.
 > - Caracteres de control (0–31 y 127): No se imprimen; se usaban para controlar dispositivos, como el retorno de carro CR o salto de línea LF.
 > - Símbolos y signos de puntuación: Por ejemplo !, @, #, $, %.
@@ -73,7 +73,8 @@ Según su finalidad dentro de un sistema de información, los ficheros pueden cl
 > 
 > Conéctate a Internet y busca una tabla de códigos ASCII de 8 bits. Traduce el texto "Bases de Datos" a binario.
 
-> **Actividad 3. Identificación de ficheros**. 
+> 📝 **Actividad 3. Identificación de ficheros**.
+> 
 > Observa la siguiente captura de una carpeta en Windows:
 > ![Lista de ficheros](img/Lista.png)
 > Indica para cada fichero su tipo y qué contiene o para qué se usa.
@@ -101,7 +102,6 @@ Antes de utilizar bases de datos, era habitual almacenar la información mediant
   - Facilitan la consulta, actualización, seguridad, recuperación y control del acceso a la información.  
   - Separan, en cierta medida, los datos de las aplicaciones que los utilizan.
 
-> ⚠️ Atención:  
 > En un sistema tradicional de ficheros, la información puede estar dispersa en varios archivos. Las relaciones entre esos archivos y la recuperación conjunta de los datos deben ser programadas y controladas por cada aplicación. En una base de datos, el SGBD centraliza la gestión, el acceso y las reglas de integridad de la información.
 
 ### 2.1. TIPOS DE BASES DE DATOS
@@ -194,13 +194,11 @@ En una base de datos distribuida, los datos se almacenan o replican en varios no
 * Este modelo puede aumentar la disponibilidad, la tolerancia a fallos y la cercanía de los datos a los usuarios, pero también hace más compleja la sincronización y el mantenimiento de la consistencia.
 * Ejemplos: **Google Cloud Spanner**, **CockroachDB**, **Apache Cassandra** y algunos servicios de bases de datos distribuidas en la nube.
 
-#### 📝 Actividades
-
-> **Actividad 4. Comparativa de sistemas**.
+> 📝 **Actividad 4. Comparativa de sistemas**.
 > 
 > Elabora un esquema o mapa conceptual sobre los tipos de bases de datos estudiados.
 
-> **Actividad 5. Tipos de datos en BD**.
+> 📝 **Actividad 5. Tipos de datos en BD**.
 > 
 > Investiga sobre los tipos de datos más comunes en las bases de datos relacionales. Puedes utilizar PostgreSQL como referencia, ya que será el sistema gestor de bases de datos que emplearemos. Incluye una breve descripción y un ejemplo de uso para cada tipo de dato. En próximas sesiones profundizaremos en estos conceptos.
 
@@ -215,28 +213,28 @@ En una base de datos distribuida, los datos se almacenan o replican en varios no
    - Ejemplos: texto, número, fecha, valor lógico o decimal.
 
 - **Entidad:** todo aquello sobre lo que interesa almacenar información.  
-   - Ejemplos: 'Persona', 'Producto', 'Animal', 'Cliente' o 'Vehiculo'.
+   - Ejemplos: Persona, Producto, Animal, Cliente o Vehiculo.
 
 - **Atributo o campo:** característica o propiedad de una entidad. En una tabla relacional, se representa mediante una columna.  
-   - Ejemplo: para la entidad 'CLIENTE', algunos atributos pueden ser 'nif', 'nombre', 'apellidos', 'direccion' y 'telefono'.  
+   - Ejemplo: para la entidad CLIENTE, algunos atributos pueden ser nif, nombre, apellidos, direccion y telefono.  
 
 - **Tabla o relación:** conjunto de datos organizados en filas y columnas, identificado mediante un nombre. Normalmente representa una entidad.
-   - Ejemplo: la información de todos los clientes de una BD se puede guardar en la tabla 'CLIENTES'.
+   - Ejemplo: la información de todos los clientes de una BD se puede guardar en la tabla CLIENTES.
 
 - **Registro, fila o tupla:** cada una de las filas de una tabla. Contiene los valores de todos los campos correspondientes a un elemento concreto.  
-   - Ejemplo: en la tabla 'CLIENTES', un registro puede contener la información de una persona, como Pedro Picapiedra.
+   - Ejemplo: en la tabla CLIENTES, un registro puede contener la información de una persona, como Pedro Picapiedra.
 
 - **Clave primaria:** campo, o conjunto de campos, que identifica de forma única cada registro de una tabla. No puede repetirse ni tener un valor nulo.  
-   - Ejemplo: el 'nif' puede ser la clave primaria de la tabla 'CLIENTES', ya que es único para cada persona.
+   - Ejemplo: el nif puede ser la clave primaria de la tabla CLIENTES, ya que es único para cada persona.
 
 - **Clave foránea o clave ajena:** campo de una tabla que contiene valores de la clave primaria de otra tabla. Permite establecer relaciones entre ambas tablas.  
-   - Ejemplo: el campo 'codCliente' de la tabla 'VEHICULOS' puede ser una clave foránea que hace referencia a la clave primaria 'codCliente' de la tabla 'CLIENTES'.
+   - Ejemplo: el campo cod_cliente' de la tabla VEHICULOS puede ser una clave foránea que hace referencia a la clave primaria cod_cliente' de la tabla CLIENTES.
 
 - **Relación:** vínculo establecido entre dos tablas mediante una clave primaria y una clave foránea.  
-   - Ejemplo: un cliente puede tener varios vehículos. Las tablas 'CLIENTES' y 'VEHICULOS' se relacionan mediante el campo 'codCliente'.
+   - Ejemplo: un cliente puede tener varios vehículos. Las tablas CLIENTES y VEHICULOS se relacionan mediante el campo cod_cliente.
 
 - **Integridad referencial:** regla que garantiza que toda clave foránea tenga un valor válido en la clave primaria de la tabla relacionada. Evita referencias a registros inexistentes.  
-   - Ejemplo: no se puede registrar un vehículo con un 'codCliente' que no exista previamente en la tabla 'CLIENTES'. La integridad referencial sirve precisamente para que las referencias entre tablas sean consistentes.
+   - Ejemplo: no se puede registrar un vehículo con un cod_cliente que no exista previamente en la tabla CLIENTES. La integridad referencial sirve precisamente para que las referencias entre tablas sean consistentes.
 
 - **Metadatos:** son datos que describen otros datos y la estructura de la BD.  
 
