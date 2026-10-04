@@ -235,46 +235,38 @@ Una **entidad** es un objeto, sujeto, lugar, acontecimiento o concepto sobre el 
 
 En el esquema anterior pueden identificarse las siguientes entidades:
 
-- `ALUMNO`;
-- `MÓDULO`;
-- `PROFESOR`.
+- 'ALUMNO';
+- 'MÓDULO';
+- 'PROFESOR'.
 
-Una entidad representa un conjunto de elementos del mismo tipo. Por ejemplo, la entidad `ALUMNO` representa al conjunto de alumnos del centro educativo.
+Una entidad representa un conjunto de elementos del mismo tipo. Por ejemplo, la entidad 'ALUMNO' representa al conjunto de alumnos del centro educativo.
 
-Cada entidad se representa mediante un rectángulo:
+Cada entidad se representa mediante un *rectángulo*.
 
-<div style="text-align: center;">
-  <img src="img/entidades.png" alt="Representación de entidades" width="500">
-</div>
-
-Una **ocurrencia** de una entidad es un elemento concreto perteneciente a ese conjunto. Por ejemplo, Juan Pérez sería una ocurrencia de la entidad `ALUMNO`.
+Una **ocurrencia** de una entidad es un elemento concreto perteneciente a ese conjunto. Por ejemplo, Juan Pérez sería una ocurrencia de la entidad 'ALUMNO'.
 
 ### 2.2. Atributos
 
 Un **atributo** es una propiedad o característica de una entidad.
 
-Por ejemplo, la entidad `ALUMNO` puede tener los siguientes atributos:
+Por ejemplo, la entidad 'ALUMNO' puede tener los siguientes atributos:
 
-- `NumExpediente`;
-- `Nombre`;
-- `Apellidos`;
-- `FechaNacimiento`.
+- 'NumExpediente';
+- 'Nombre';
+- 'Apellidos';
+- 'FechaNacimiento'.
 
-> **Importante:** las relaciones también pueden tener atributos. Por ejemplo, una relación `MATRÍCULA` puede tener los atributos `FechaMatricula` y `Convocatoria`.
+> **Importante:** las relaciones también pueden tener atributos. Por ejemplo, una relación 'MATRÍCULA' puede tener los atributos 'FechaMatricula' y 'Convocatoria'.
 
 En la notación utilizada en estos apuntes, los atributos se representan mediante pequeños círculos unidos a la entidad por una línea. Junto a cada círculo se escribe el nombre del atributo:
-
-<div style="text-align: center;">
-  <img src="img/atributo2.png" alt="Representación de atributos" width="500">
-</div>
 
 #### 2.2.1. Dominio de un atributo
 
 El **dominio** de un atributo es el conjunto de valores que puede tomar ese atributo.
 
-Por ejemplo, el dominio del atributo `Nombre` podría ser el conjunto de cadenas de caracteres de una longitud máxima determinada.
+Por ejemplo, el dominio del atributo 'Nombre' podría ser el conjunto de cadenas de caracteres de una longitud máxima determinada.
 
-Ejemplo de atributos y dominios de una entidad `EMPLEADO`:
+Ejemplo de atributos y dominios de una entidad 'EMPLEADO':
 
 | Atributo | Dominio |
 |---|---|
@@ -289,16 +281,16 @@ Ejemplo de atributos y dominios de una entidad `EMPLEADO`:
 
 #### Actividad 1
 
-Indica cuál podría ser el dominio de cada uno de los siguientes atributos de una entidad `PERSONA`:
-
-- `FechaNacimiento`;
-- `LocalidadNacimiento`;
-- `Edad`;
-- `EsMayorDeEdad`;
-- `DNI`;
-- `Teléfonos`;
-- `Nombre`;
-- `Apellidos`.
+> Indica cuál podría ser el dominio de cada uno de los siguientes atributos de una entidad `PERSONA`:
+>
+> - 'FechaNacimiento';
+> - 'LocalidadNacimiento';
+> - 'Edad';
+> - 'EsMayorDeEdad';
+> - 'DNI';
+> - 'Teléfonos';
+> - 'Nombre';
+> - 'Apellidos'.
 
 Considera que una persona puede tener varios teléfonos.
 
@@ -310,22 +302,18 @@ Un atributo es **simple** cuando no se considera dividido en partes.
 
 Por ejemplo:
 
-- `Nombre`;
-- `DNI`;
-- `Salario`.
+- 'Nombre';
+- 'DNI';
+- 'Salario'.
 
 Un atributo es **compuesto** cuando puede dividirse en varios componentes.
 
-Por ejemplo, el atributo `Direccion` podría dividirse en:
+Por ejemplo, el atributo 'Direccion' podría dividirse en:
 
-- `Calle`;
-- `Numero`;
-- `CodigoPostal`;
-- `Localidad`.
-
-<div style="text-align: center;">
-  <img src="img/atributo2.png" alt="Atributos simples y compuestos" width="500">
-</div>
+- 'Calle';
+- 'Numero';
+- 'CodigoPostal';
+- 'Localidad'.
 
 Aunque una fecha puede dividirse conceptualmente en día, mes y año, en una implementación concreta suele almacenarse como un único valor de tipo fecha.
 
@@ -343,26 +331,22 @@ Por ejemplo, una persona puede tener varios teléfonos:
 - teléfono de trabajo;
 - teléfono de contacto alternativo.
 
-<div style="text-align: center;">
-  <img src="img/atributo3.png" alt="Atributos monovaluados y multivaluados" width="500">
-</div>
-
 ##### Atributos obligatorios y opcionales
 
 Un atributo es **obligatorio** cuando todas las ocurrencias de una entidad deben tener un valor para ese atributo.
 
 Un atributo es **opcional** cuando algunas ocurrencias pueden no tener ningún valor.
 
-Por ejemplo, `FechaNacimiento` podría ser obligatorio en una entidad `PERSONA`, mientras que `Aficiones` podría ser opcional.
+Por ejemplo, 'FechaNacimiento' podría ser obligatorio en una entidad 'PERSONA', mientras que 'Aficiones' podría ser opcional.
 
 ##### Atributos derivados y no derivados
 
 Un atributo es **derivado** cuando su valor puede obtenerse a partir de otros datos.
 
-Por ejemplo, `ImporteVenta` puede calcularse a partir de:
+Por ejemplo, 'ImporteVenta' puede calcularse a partir de:
 
-- `UnidadesVendidas`;
-- `PrecioUnidad`.
+- 'UnidadesVendidas';
+- 'PrecioUnidad'.
 
 Un atributo es **no derivado** cuando su valor se almacena directamente y no se obtiene a partir de otros atributos.
 
@@ -394,12 +378,12 @@ Para elegir una clave primaria deben tenerse en cuenta la simplicidad, la longit
 
 #### Actividad 2
 
-Observa la imagen y clasifica cada atributo según los siguientes criterios:
-
-- obligatorio u opcional;
-- compuesto o simple;
-- derivado o no derivado;
-- monovaluado o multivaluado.
+> Observa la imagen y clasifica cada atributo según los siguientes criterios:
+> 
+> - obligatorio u opcional;
+> - compuesto o simple;
+> - derivado o no derivado;
+> - monovaluado o multivaluado.
 
 <div style="text-align: center;">
   <img src="img/atributo6.png" alt="Ejemplo de atributos" width="500">
@@ -427,7 +411,7 @@ Una relación es **binaria** o de grado 2 cuando participan dos entidades.
   <img src="img/relacion1.png" alt="Relación binaria" width="500">
 </div>
 
-Las relaciones también pueden tener atributos. Por ejemplo, la relación `MATRÍCULA` podría tener los atributos `FechaMatricula` y `NotaFinal`.
+Las relaciones también pueden tener atributos. Por ejemplo, la relación 'MATRICULA' podría tener los atributos 'FechaMatricula' y 'NotaFinal'.
 
 #### 2.3.2. Relación unaria o reflexiva
 
@@ -445,9 +429,9 @@ Una relación es **ternaria** o de grado 3 cuando participan tres entidades.
 
 Por ejemplo, un profesor puede impartir una asignatura a un grupo concreto:
 
-- `PROFESOR`;
-- `ASIGNATURA`;
-- `GRUPO`.
+- 'PROFESOR';
+- 'ASIGNATURA';
+- 'GRUPO'.
 
 Una relación ternaria puede transformarse en varias relaciones binarias en algunos casos, pero no siempre. Una transformación incorrecta puede perder información sobre la asociación simultánea de las tres entidades.
 
@@ -494,10 +478,10 @@ Por ejemplo:
 
 Para interpretar correctamente una cardinalidad hay que indicar desde qué entidad se está leyendo.
 
-En una relación entre `ALUMNO` y `MÓDULO`:
+En una relación entre 'ALUMNO' y 'MODULO':
 
-- la cardinalidad situada junto a `ALUMNO` indica con cuántos módulos puede relacionarse un alumno;
-- la cardinalidad situada junto a `MÓDULO` indica con cuántos alumnos puede relacionarse un módulo.
+- la cardinalidad situada junto a 'ALUMNO' indica con cuántos módulos puede relacionarse un alumno;
+- la cardinalidad situada junto a 'MODULO' indica con cuántos alumnos puede relacionarse un módulo.
 
 #### Preguntas para obtener mínimos y máximos
 
@@ -581,10 +565,10 @@ Los atributos propios de una entidad débil no son suficientes para identificar 
 
 Ejemplo:
 
-- **Entidad fuerte:** `FACTURA`, identificada mediante `IDFactura`.
-- **Entidad débil:** `DETALLE_FACTURA`, identificada mediante `IDFactura` y `NumLinea`.
+- **Entidad fuerte:** 'FACTURA', identificada mediante 'IDFactura'.
+- **Entidad débil:** 'DETALLE_FACTURA', identificada mediante 'IDFactura' y 'NumLinea'.
 
-Una factura puede tener varias líneas, pero cada línea pertenece a una única factura. Por ello, la relación entre `FACTURA` y `DETALLE_FACTURA` suele ser de tipo `1:N`.
+Una factura puede tener varias líneas, pero cada línea pertenece a una única factura. Por ello, la relación entre 'FACTURA' y 'DETALLE_FACTURA' suele ser de tipo `1:N`.
 
 Las entidades débiles se representan mediante un rectángulo doble:
 
@@ -616,8 +600,8 @@ Por ejemplo, una línea de pedido puede identificarse mediante:
 
 En este caso:
 
-- `numPedido` procede de la entidad fuerte `PEDIDO`;
-- `numLinea` es la clave parcial de la entidad débil `LINEA_PEDIDO`.
+- 'numPedido' procede de la entidad fuerte 'PEDIDO';
+- 'numLinea' es la clave parcial de la entidad débil 'LINEA_PEDIDO'.
 
 <div style="text-align: center;">
   <img src="img/debil3.png" alt="Dependencia en identificación" width="500">
