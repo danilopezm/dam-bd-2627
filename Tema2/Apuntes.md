@@ -20,7 +20,7 @@ Los modelos se utilizan en diferentes áreas de la informática. Algunos ejemplo
 - El modelo Entidad-Relación, utilizado en el diseño de bases de datos.
 - Los diagramas de arquitectura, utilizados para representar sistemas informáticos.
 
-En esta unidad nos centraremos principalmente en el **modelo Entidad-Relación**, utilizado para el diseño conceptual, y en el **modelo relacional**, utilizado para representar lógicamente la base de datos.
+En esta unidad nos centraremos principalmente en el **modelo Entidad-Relación**, utilizado para el diseño conceptual, y en el **modelo relacional**, utilizado para el diseño lógico.
 
 ### 1.1. DEFINICIÓN DE MODELO DE DATOS
 
@@ -30,7 +30,7 @@ Un modelo de datos es un conjunto de conceptos, estructuras, operaciones y regla
 - las operaciones que pueden realizarse;
 - las restricciones que deben cumplirse.
 
-Por ejemplo, en una base de datos de un centro educativo se pueden representar los alumnos, los grupos, los módulos y las matrículas. También se pueden definir relaciones entre estos elementos y restricciones, como que un alumno no pueda matricularse dos veces en el mismo módulo.
+Por ejemplo, en una BD de un centro educativo se pueden representar los alumnos, los grupos, los módulos y las matrículas. También se pueden definir relaciones entre estos elementos y restricciones, como que un alumno no pueda matricularse dos veces en el mismo módulo.
 
 ### 1.2. CLASIFICACIÓN SEGÚN EL NIVEL DE ABSTRACCIÓN
 
@@ -82,76 +82,29 @@ Por lo tanto, el modelo físico **depende** del SGBD que se utilice. Algunos eje
 - Microsoft SQL Server;
 - Oracle Database.
 
-> **Importante:** estos productos no son modelos físicos, sino SGBD en los que se puede implementar un modelo físico.
+> **Importante:** Estos productos no son modelos físicos, sino SGBD en los que se puede implementar un modelo físico.
 
 ### 1.3. PROCESO GENERAL DE DISEÑO
 
-El diseño de una base de datos suele realizarse siguiendo varias fases:
+El diseño de una BD suele realizarse siguiendo varias fases:
 
 1. **Análisis de requisitos:** se estudia qué información necesita la organización.
 2. **Diseño conceptual:** se identifican las entidades, los atributos y las relaciones.
 3. **Diseño lógico:** se transforma el modelo conceptual en tablas, claves y restricciones.
 4. **Diseño físico:** se implementa el modelo lógico en un SGBD concreto.
-5. **Creación y pruebas:** se crean las tablas, se introducen datos y se comprueba el funcionamiento.
+5. **Creación y pruebas:** se introducen datos y comprueba el funcionamiento.
 
-En este tema se trabajarán principalmente las fases conceptual y lógica:
-- el modelo Entidad-Relación;
-- la transformación al modelo relacional.
+## 2. DIAGRAMA ENTIDAD-RELACIÓN
 
-> ## Ejemplo completo
->
-> Supongamos que un centro educativo necesita gestionar su alumnado y sus módulos.
->
-> ### Modelo conceptual
->
-> Se identifican las siguientes entidades:
->
-> - Alumno
-> - Módulo
-> - Matrícula
->
-> También se identifican las relaciones:
->
-> - Un alumno puede realizar varias matrículas.
-> - Un módulo puede tener muchos alumnos matriculados.
-> - Cada matrícula relaciona a un alumno con un módulo.
->
-> ### Modelo lógico
->
-> El modelo conceptual puede transformarse en las siguientes tablas:
->
-> - `ALUMNO(id_alumno, nombre, apellidos)`
-> - `MODULO(id_modulo, nombre)`
-> - `MATRICULA(id_alumno, id_modulo, fecha)`
->
-> En este caso:
->
-> - `id_alumno` es la clave primaria de `ALUMNO`.
-> - `id_modulo` es la clave primaria de `MODULO`.
-> - En `MATRICULA`, `id_alumno` e `id_modulo` actúan como claves foráneas.
-> - La combinación de `id_alumno` e `id_modulo` puede formar la clave primaria de `MATRICULA`.
->
-> ### Modelo físico
->
-> Finalmente, estas tablas se implementan en un SGBD concreto, como PostgreSQL o MySQL. En esta fase se pueden definir:
->
-> - Los tipos de datos concretos.
-> - Los índices.
-> - Las restricciones.
-> - Los permisos de los usuarios.
-> - La ubicación y organización del almacenamiento.
-
-## 2. DIAGRAMA ENTIDAD-RELACIÓN (DER)
-
-El **Modelo Entidad-Relación (MER)** es un modelo conceptual que describe la estructura de los datos de un sistema. Permite representar:
+El **Modelo Entidad-Relación** (MER) es un modelo conceptual que describe la estructura de los datos de un sistema. Permite representar:
 - los conjuntos de entidades;
 - los atributos de las entidades;
 - las relaciones entre ellas;
 - las restricciones que deben cumplirse.
 
-El **Diagrama Entidad-Relación (DER)** es la representación gráfica concreta de un modelo Entidad-Relación. El DER es independiente del SGBD que se utilice posteriormente.
+El **Diagrama Entidad-Relación** (DER) es la representación gráfica concreta de un modelo Entidad-Relación. El DER es independiente del SGBD que se utilice posteriormente.
 
-En un DER se representa gráficamente cómo se organiza la información de una base de datos. Sus elementos básicos son:
+En un DER se representa gráficamente cómo se organiza la información de una BD. Sus elementos básicos son:
 - entidades;
 - atributos;
 - relaciones.
@@ -182,59 +135,40 @@ En los siguientes apartados se explican los elementos que componen un DER y el p
 
 Una **entidad** es un objeto, sujeto, lugar, acontecimiento o concepto sobre el que se desea almacenar información.
 
-En el esquema anterior pueden identificarse las siguientes entidades Alumno, Módulo y Profesor..
+En el esquema anterior pueden identificarse las siguientes entidades Alumno, Modulo y Profesor.
 
 Una entidad representa un conjunto de elementos del mismo tipo. Por ejemplo, la entidad Alumno representa al conjunto de alumnos del centro educativo.
 
 Cada entidad se representa mediante un *rectángulo*.
 
-Una **ocurrencia** de una entidad es un elemento concreto perteneciente a ese conjunto. Por ejemplo, Juan Pérez sería una ocurrencia de la entidad Alumno.
+Una **ocurrencia** de una entidad es un elemento concreto perteneciente a ese conjunto. Por ejemplo, Javier Ruiz sería una ocurrencia de la entidad Alumno.
 
 ### 2.2. ATRIBUTOS
 
 Un **atributo** es una propiedad o característica de una entidad.
 
-Por ejemplo, la entidad ALUMNO puede tener los siguientes atributos:
+En el ejemplo, la entidad Alumno tiene los siguientes atributos:
 - NumExpediente;
 - Nombre;
 - Apellidos;
 - FechaNac.
 
-> **Importante:** las relaciones también pueden tener atributos. Por ejemplo, una relación MATRICULA puede tener los atributos fecha_matricula y convocatoria.
+> **Importante:** Las relaciones también pueden tener atributos.
 
-En la notación utilizada en estos apuntes, los atributos se representan mediante pequeños círculos unidos a la entidad por una línea. Junto a cada círculo se escribe el nombre del atributo:
+En la notación utilizada en estos apuntes, los atributos se representan mediante pequeños círculos unidos a la entidad por una línea. Junto a cada círculo se escribe el nombre del atributo.
 
 #### 2.2.1. DOMINIO DE UN ATRIBUTO
 
 El **dominio** de un atributo es el conjunto de valores que puede tomar ese atributo.
 
-Por ejemplo, el dominio del atributo 'nombre' podría ser el conjunto de cadenas de caracteres de una longitud máxima determinada.
-
-Ejemplo de atributos y dominios de una entidad Empleado:
+Ejemplo de dominios de la entidad Alumno:
 
 | Atributo | Dominio |
 |---|---|
-| dni | Cadena de caracteres de longitud 9 |
-| nombre | Cadena de caracteres de longitud máxima 20 |
-| apellidos | Cadena de caracteres de longitud máxima 30 |
-| fecha_incorporacion | Fecha válida |
-| antiguedad | Número entero no negativo o intervalo de tiempo |
-| salario | Número real con dos decimales |
-| categoria | Valor perteneciente a un conjunto de categorías |
-| jornada_completa | Verdadero o falso |
-
-> 📝 **Actividad 1**. Indica cuál podría ser el dominio de cada uno de los siguientes atributos de una entidad PERSONA:
->
-> - fecha_nacimiento;
-> - localidad_nacimiento;
-> - edad;
-> - es_mayor_de_edad;
-> - dni;
-> - telefonos;
-> - nombre;
-> - apellidos.
->
-> Considera que una persona puede tener varios teléfonos.
+| NumExpediente | Cadena de caracteres de longitud 9 |
+| Nombre | Cadena de caracteres de longitud máxima 20 |
+| Apellidos | Cadena de caracteres de longitud máxima 30 |
+| FechaNac | Fecha válida |
 
 #### 2.2.2. TIPOS DE ATRIBUTOS
 
@@ -306,22 +240,9 @@ Entre las claves candidatas se distinguen:
 - **Clave primaria:** clave candidata elegida como identificador principal de la entidad.
 - **Clave alternativa:** cualquier otra clave candidata que también permite identificar de forma única una ocurrencia.
 
-Para elegir una clave primaria deben tenerse en cuenta la simplicidad, la longitud, la estabilidad y la capacidad de identificar de forma única cada ocurrencia.
-
 <div style="text-align: center;">
   <img src="img/atributo5.png" alt="Representación de los tipos de atributos" width="500">
 </div>
-
-> 📝 **Actividad 2**. Observa la imagen y clasifica cada atributo según los siguientes criterios:
-> 
-> - obligatorio u opcional;
-> - compuesto o simple;
-> - derivado o no derivado;
-> - monovaluado o multivaluado.
->
-> <div style="text-align: center;">
->    <img src="img/atributo6.png" alt="Ejemplo de atributos" width="500">
-> </div>
 
 ### 2.3. RELACIONES
 
@@ -334,23 +255,21 @@ Por ejemplo:
 - un profesor imparte un módulo;
 - un cliente realiza un pedido.
 
-Cada relación se representa mediante un rombo, que se une mediante líneas a las entidades participantes.
+Cada relación se representa mediante un *rombo*, que se une mediante líneas a las entidades participantes.
 
 #### 2.3.1. RELACIÓN BINARIA
 
-Una relación es **binaria** o de grado 2 cuando participan dos entidades.
+Una relación es binaria o de grado 2 cuando participan dos entidades.
 
 <div style="text-align: center;">
   <img src="img/relacion1.png" alt="Relación binaria" width="500">
 </div>
 
-Las relaciones también pueden tener atributos. Por ejemplo, la relación MATRICULA podría tener los atributos fecha_matricula y nota_final.
-
 #### 2.3.2. RELACIÓN UNARIA O REFLEXIVA
 
-Una relación es **unaria**, reflexiva o de grado 1 cuando relaciona ocurrencias de una misma entidad.
+Una relación es unaria, reflexiva o de grado 1 cuando relaciona ocurrencias de una misma entidad.
 
-Por ejemplo, una persona puede supervisar a otras personas, o un empleado puede depender jerárquicamente de otro empleado.
+Por ejemplo, un empleado es jefe de otro empleado.
 
 <div style="text-align: center;">
   <img src="img/relacion2.png" alt="Relación unaria o reflexiva" width="500">
@@ -358,12 +277,9 @@ Por ejemplo, una persona puede supervisar a otras personas, o un empleado puede 
 
 #### 2.3.3. RELACIÓN TERNARIA
 
-Una relación es **ternaria** o de grado 3 cuando participan tres entidades.
+Una relación es ternaria o de grado 3 cuando participan tres entidades.
 
-Por ejemplo, un profesor puede impartir una asignatura a un grupo concreto:
-- PROFESOR;
-- ASIGNATURA;
-- GRUPO.
+Por ejemplo, un cliente compra un producto a un vendedor.
 
 Una relación ternaria puede transformarse en varias relaciones binarias en algunos casos, pero no siempre. Una transformación incorrecta puede perder información sobre la asociación simultánea de las tres entidades.
 
@@ -371,10 +287,8 @@ Una relación ternaria puede transformarse en varias relaciones binarias en algu
   <img src="img/relacion3.png" alt="Relación ternaria" width="500">
 </div>
 
-Antes de continuar con los siguientes conceptos, se realizarán algunos ejercicios básicos para practicar lo aprendido.
-
 #### 🖥️ Problemas
-> - Cuaderno de problemas de Diagramas E-R: Problema 1, actividades 1, 2 y 3.
+> - Cuaderno de problemas de Diagramas E-R: Problema 1 (actividades 1, 2 y 3).
 
 ### 2.4. CARDINALIDAD
 
@@ -384,17 +298,6 @@ Se expresa mediante un valor mínimo y un valor máximo:
 
 - el primer número indica la participación mínima;
 - el segundo número indica la participación máxima.
-
-Los valores habituales son:
-
-- mínimo: `0` o `1`;
-- máximo: `1` o `N`.
-
-La notación se expresa mediante una pareja de números:
-
-```text
-(mínimo, máximo)
-```
 
 Por ejemplo:
 
@@ -406,8 +309,6 @@ Por ejemplo:
 <div style="text-align: center;">
   <img src="img/cardinalidad1.png" alt="Ejemplo de cardinalidad" width="500">
 </div>
-
-Para interpretar correctamente una cardinalidad hay que indicar desde qué entidad se está leyendo.
 
 En una relación entre ALUMNO y MATERIA:
 - la cardinalidad situada junto a ALUMNO indica con cuántas materias puede relacionarse un alumno;
@@ -434,15 +335,14 @@ Pensando en la imagen anterior:
 
 ### 2.5. TIPO DE CORRESPONDENCIA
 
-El tipo de correspondencia resume el número máximo de ocurrencias que pueden relacionarse entre dos entidades.
+El **tipo de correspondencia** resume el **número máximo de ocurrencias** que pueden relacionarse entre dos entidades.
 
 #### Relación uno a uno `1:1`
 
 Cada ocurrencia de una entidad se relaciona como máximo con una ocurrencia de la otra entidad, y viceversa.
 
 Ejemplo:
-- una persona puede estar casada con otra persona;
-- una persona puede tener como máximo una pareja en el modelo simplificado.
+- una persona puede estar casada con otra persona.
 
 #### Relación uno a muchos `1:N`
 
@@ -460,31 +360,14 @@ Ejemplo:
 - un cliente puede comprar varios productos;
 - un producto puede ser comprado por varios clientes.
 
-**Nota:** el tipo de correspondencia resume la cardinalidad máxima, mientras que la pareja `(mínimo, máximo)` proporciona además información sobre si la participación es obligatoria u opcional.
-
-#### Representación de la cardinalidad y del tipo de correspondencia
-
-Relación unaria:
-<div style="text-align: center;">
-  <img src="img/correspondencia1.png" alt="Correspondencia en una relación unaria" width="500">
-</div>
+> **Diferencia:** El **tipo de correspondencia** resume la cardinalidad máxima, mientras que la **cardinalidad** proporciona además información sobre si la participación es obligatoria u opcional.
 
 #### 🖥️Problemas
-> - Cuaderno de problemas de Diagramas E-R: Problema 1, actividades 4 y 5.
+> - Cuaderno de problemas de Diagramas E-R: Problema 1 (actividades 4 y 5).
 
-### 2.6. ENTIDADES DÉBILES
+### 2.6. ENTIDAD DÉBIL Y FUERTE
 
-Una **entidad débil** es una entidad cuya existencia o identificación depende de otra entidad, denominada **entidad fuerte**.
-
-Los atributos propios de una entidad débil no son suficientes para identificar completamente sus ocurrencias. Por ello, su identificación suele construirse combinando:
-- la clave de la entidad fuerte;
-- una clave parcial o discriminante de la entidad débil.
-
-Ejemplo:
-- **Entidad fuerte:** FACTURA, identificada mediante id_factura.
-- **Entidad débil:** DETALLE_FACTURA, identificada mediante id_factura y num_linea.
-
-Una factura puede tener varias líneas, pero cada línea pertenece a una única factura. Por ello, la relación entre FACTURA y DETALLE_FACTURA suele ser de tipo `1:N`.
+Una **entidad débil** es una entidad cuya **existencia o identificación** depende de otra entidad, denominada **entidad fuerte**.
 
 Las entidades débiles se representan mediante un *rectángulo doble*.
 
@@ -494,29 +377,15 @@ Las entidades débiles se representan mediante un *rectángulo doble*.
 
 Existe dependencia en existencia cuando las ocurrencias de una entidad débil no tienen sentido sin una ocurrencia de la entidad fuerte.
 
-Por ejemplo, una línea de factura no puede existir si no existe la factura a la que pertenece.
-
-<div style="text-align: center;">
-  <img src="img/debil2.png" alt="Dependencia en existencia" width="500">
-</div>
+Por ejemplo, una línea de pedido no puede existir si no existe el pedido al que pertenece.
 
 ##### Dependencia en identificación
 
-Existe dependencia en identificación cuando, además de depender de la entidad fuerte para existir, la entidad débil necesita la clave de la entidad fuerte para poder identificarse.
+Existe dependencia en identificación cuando, **además de depender de la entidad fuerte para existir**, la entidad débil necesita la clave de la entidad fuerte para poder identificarse.
 
-Por ejemplo, una línea de pedido puede identificarse mediante:
+Por ejemplo, una línea de pedido puede identificarse mediante la combinación del identificador del pedido y el número de la propia línea.
 
-```text
-(numPedido, numLinea)
-```
-
-En este caso:
-- numPed procede de la entidad fuerte PEDIDO;
-- numLinea es la clave parcial de la entidad débil LINEA_PEDIDO.
-
-<div style="text-align: center;">
-  <img src="img/debil3.png" alt="Dependencia en identificación" width="500">
-</div>
+> **Nota**: Toda dependencia en identificación implica dependencia en existencia, pero no toda dependencia en existencia implica dependencia en identificación.
 
 #### 🖥️ Problemas
 > - Cuaderno de problemas de Diagramas E-R: Problema 2
@@ -584,9 +453,7 @@ El **modelo relacional** organiza la información en tablas con filas y columnas
 
 El elemento principal del modelo relacional es la **RELACIÓN**. Una relación es una **tabla**. Cada elemento de la relación es una **fila**, denominada **tupla o registro**. Cada propiedad, atributo o característica de los elementos es una **columna**.  
 
-> ⚠️ **NOTA IMPORTANTE**  
-> No debes confundir el concepto de **relación en el modelo relacional** con el concepto de **relación en el modelo E/R**.
-
+> ⚠️ **Importante**: no debes confundir el concepto de **relación en el modelo relacional** con el concepto de **relación en el modelo E-R**.
 ---
 
 #### Relación en el modelo Entidad-Relación (ER)
