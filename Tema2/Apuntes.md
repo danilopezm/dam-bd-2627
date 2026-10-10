@@ -360,8 +360,6 @@ Ejemplo:
 - un cliente puede comprar varios productos;
 - un producto puede ser comprado por varios clientes.
 
-> **Diferencia:** El **tipo de correspondencia** resume la cardinalidad máxima, mientras que la **cardinalidad** proporciona además información sobre si la participación es obligatoria u opcional.
-
 #### 🖥️Problemas
 > - Cuaderno de problemas de Diagramas E-R: Problema 1 (actividades 4 y 5).
 
@@ -385,8 +383,6 @@ Existe dependencia en identificación cuando, **además de depender de la entida
 
 Por ejemplo, una línea de pedido puede identificarse mediante la combinación del identificador del pedido y el número de la propia línea.
 
-> **Nota**: Toda dependencia en identificación implica dependencia en existencia, pero no toda dependencia en existencia implica dependencia en identificación.
-
 #### 🖥️ Problemas
 > - Cuaderno de problemas de Diagramas E-R: Problema 2
 > - Cuaderno de problemas de Diagramas E-R: Problema 3
@@ -394,45 +390,73 @@ Por ejemplo, una línea de pedido puede identificarse mediante la combinación d
 
 ## 3. MODELO ER AMPLIADO
 
-El **Modelo E-R Ampliado** recoge todos los conceptos y especificaciones del modelo E/R y añade otros para mejorar el diseño de las BD. Se definen los siguientes conceptos dentro de este modelo:
+El **Modelo E-R ampliado** recoge los conceptos y especificaciones del modelo E/R y añade otros que permiten representar con mayor precisión determinadas situaciones del mundo real, mejorando el diseño de las bases de datos.
 
-- **Superclase**: Es una entidad genérica de la que derivan otras entidades. La superclase tiene unos atributos que van a tener también las entidades que derivan de ella.  
+Dentro de este modelo se definen los siguientes conceptos:
 
-- **Subclase**: Es una entidad que deriva de una entidad genérica o superclase. La subclase va a tener los atributos de la superclase más unos atributos específicos. Los elementos que hay en la subclase también estarán en la superclase, aunque esta contendrá normalmente muchos más elementos.  
+### Superclase
 
-  Por ejemplo, 'EMPLEADO' sería una superclase y 'OPERARIO' y 'ENCARGADO' serían subclases de ésta. Otro ejemplo, en un centro de estudios, 'PERSONA' podría ser una superclase mientras 'ALUMNO' y 'PROFESOR' serían subclases.
+Una **superclase** es una entidad genérica que agrupa las características comunes de un conjunto de entidades.
 
-- **Generalización**: es el proceso de construir una superclase a partir de las características comunes o que comparten varias subclases del sistema de información.  
+Sus atributos son compartidos por las entidades que pertenecen a las subclases asociadas a ella.
 
-  Una generalización se representa mediante un *triángulo invertido* que une la superclase y las subclases.  
+Por ejemplo, la entidad Empleado puede ser una superclase que contenga atributos comunes como dni, nombre, apellidos y fecha_alta.
 
-    <div style="text-align: center;">
-      <img src="img/ampliado1.png" alt="Generalización" width="300" style="max-width: 100%; height: auto;">
-    </div>
+### Subclase
 
-- **Especialización**: es el proceso inverso a la generalización. En la especialización se trata de buscar los **atributos específicos de las subclases** y las **restricciones de existencia** de elementos de las entidades.  
+Una **subclase** es una entidad que forma parte de una superclase y que añade atributos o relaciones específicas.
 
-Conforme a las restricciones de existencia de elementos de las entidades, nos podemos encontrar con los siguientes **tipos de especialización o generalización**:
+Cada ocurrencia de una subclase es también una ocurrencia de su superclase. Por ello, hereda los atributos de esta, además de poder tener atributos propios.
 
-a) **Especialización exclusiva total**: Por ser exclusiva, un elemento de la superclase sólo puede estar en una subclase. Por ser total, todos los elementos de la superclase están en alguna de las subclases.  
+Por ejemplo, Operario y Encargado pueden ser subclases de Empleado:
+
+- Operario además puede tener el atributo especialidad.
+- Encargado además puede tener el atributo num_equipos_a_su_cargo.
+
+Otro ejemplo, en un centro de estudios, Persona podría ser una superclase, mientras que Alumno y Profesor serían subclases.
+
+### Generalización
+
+La **generalización** es el proceso de definir una superclase a partir de las características comunes de varias subclases.
+
+Por ejemplo, si Alumno y Profesor comparten dni, nombre y apellidos, se puede crear la superclase Persona con esos atributos comunes.
+
+Una generalización se representa mediante un *triángulo invertido* que une la superclase con sus subclases.
+
+### Especialización
+
+La **especialización** es el proceso inverso a la generalización. Consiste en identificar subclases dentro de una superclase, atendiendo a atributos, relaciones o restricciones específicas.
+
+Por ejemplo, a partir de la superclase Empleado, se pueden especializar las subclases Operario y Encargado según las características propias de cada tipo de empleado.
+
+Conforme a las restricciones de existencia de las ocurrencias de las entidades, una **especialización** —o, vista en sentido inverso, una **generalización**— puede ser:
+
+- **Exclusiva**, si una ocurrencia de la superclase solo puede pertenecer a una subclase.
+- **Solapada**, si una ocurrencia de la superclase puede pertenecer a varias subclases.
+- **Total**, si todas las ocurrencias de la superclase deben pertenecer a alguna subclase.
+- **Parcial**, si no todas las ocurrencias de la superclase tienen por qué pertenecer a alguna subclase.
+
+Estas restricciones pueden combinarse, dando lugar a los siguientes tipos:
+
+a) **Eclusiva total**
 
 <div style="text-align: center;">
     <img src="img/ampliado2.png" alt="Especialización exclusiva total" width="600" style="max-width: 100%; height: auto;">
 </div>
 
-b) **Especialización exclusiva parcial**: Por ser exclusiva, un elemento de la superclase sólo puede estar en una subclase. Por ser parcial, no tienen por qué estar todos los elementos de la superclase en alguna de las subclases.  
+b) **Exclusiva parcial**
 
 <div style="text-align: center;">
     <img src="img/ampliado3.png" alt="Especialización exclusiva parcial" width="600" style="max-width: 100%; height: auto;">
 </div>
 
-c) **Especialización solapada total**: Por ser solapada, un elemento de la superclase podría pertenecer a varias subclases. Por ser total, todos los elementos de la superclase están en alguna de las subclases.  
+c) **Solapada total**
 
 <div style="text-align: center;">
     <img src="img/ampliado4.png" alt="Especialización solapada total" width="600" style="max-width: 100%; height: auto;">
 </div>
 
-d) **Especialización solapada parcial**: Por ser solapada, un elemento de la superclase podría pertenecer a varias subclases. Por ser parcial, no tienen por qué estar todos los elementos de la superclase en alguna de las subclases.  
+d) **Solapada parcial**
 
 <div style="text-align: center;">
     <img src="img/ampliado5.png" alt="Especialización solapada parcial" width="600" style="max-width: 100%; height: auto;">
@@ -551,7 +575,7 @@ Existen diversas formas de representar el modelo relacional. Veamos ejemplos de 
 > - Cuaderno de problemas de Diagramas E-R: Problema 9
 > - Cuaderno de problemas de Diagramas E-R: Problema 10
 
-## 6. NORMALIZACIÓN
+## 5. NORMALIZACIÓN
 
 Al diseñar una BD se ha de evaluar la calidad del diseño. Para ello, uno de los parámetros que se utiliza son las **formas normales** en las que se encuentra dicho diseño.  
 Se llama **normalización** al proceso de obligar a los atributos incluidos en el diseño a cumplir varias formas normales.
@@ -597,7 +621,7 @@ En BD relacionales, las **formas normales (FN)** indican el grado de vulnerabili
 - Determinante funcional: atributo del que depende otro.  
 - Dependencia multivaluada: A →→ B. Un valor de A implica varios valores de B.
 
-### 6.1. 1FN (PRIMERA FORMA NORMAL)
+### 1FN (PRIMERA FORMA NORMAL)
 
 Una relación está en 1FN si cada atributo es atómico, es decir, cada celda contiene un solo valor.  
 
@@ -611,7 +635,7 @@ Solución: crear una nueva tabla con estos campos y su clave primaria, dejando l
 
 <img src="img/formas3.png" alt="Tabla normalizada 1FN" width="400px"/>  
 
-### 6.2. 2FN (SEGUNDA FORMA NORMAL)
+### 2FN (SEGUNDA FORMA NORMAL)
 
 Una relación está en 2FN si está en 1FN y todos los atributos no clave dependen funcionalmente de la **clave completa**.  
 
@@ -638,8 +662,7 @@ Tablas en 2FN:
 - Articulos_Ordenes (clave principal Id_orden, Num_art)  
 - Articulos (clave principal Num_art)  
 
-
-### 6.3. 3FN (TERCERA FORMA NORMAL)
+### 3FN (TERCERA FORMA NORMAL)
 
 Una relación está en 3FN si y solo si está en 2FN y no existen **dependencias transitivas**.  
 Todas las dependencias funcionales deben ser respecto a la clave principal.  
