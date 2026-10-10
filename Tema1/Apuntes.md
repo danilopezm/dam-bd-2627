@@ -4,12 +4,8 @@ unit_title: "Unidad 1. Sistemas de información."
 [Volver a Inicio](../README.md)
 
 1. [FICHEROS](#1-ficheros)
-   - [TIPOS DE FICHEROS Y FORMATOS](#11-tipos-de-ficheros-y-formatos)
 2. [BASES DE DATOS](#2-bases-de-datos)
-   - [TIPOS DE BASES DE DATOS](#21-tipos-de-bases-de-datos)
 3. [BASES DE DATOS RELACIONALES](#3-bases-de-datos-relacionales)
-   - [CONCEPTOS](#31-conceptos)
-   - [SISTEMAS GESTORES DE BASES DE DATOS](#32-sistemas-gestores-de-bases-de-datos)
 
 ## 1. FICHEROS
 
