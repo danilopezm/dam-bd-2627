@@ -5,23 +5,9 @@ unit_title: "Unidad 2. Diseño lógico de la base de datos."
 
 1. [MODELO DE DATOS](#1-modelo-de-datos)
 2. [DIAGRAMAS E/R](#2-diagramas-er)
-    - [ENTIDADES](#21-entidades)
-    - [ATRIBUTOS Y TIPOS](#22-atributos)
-    - [RELACIONES](#23-relaciones)
-    - [CARDINALIDAD](#24-cardinalidad)
-    - [TIPO DE CORRESPONDENCIA](#25-tipo-de-correspondencia)
-    - [DEBILIDAD](#26-debilidad)
 3. [MODELO E/R AMPLIADO](#3-modelo-er-ampliado)
 4. [MODELO RELACIONAL](#4-modelo-relacional)
-    - [ELEMENTOS DE UNA RELACIÓN](#41-elementos-de-una-relación)
-    - [RESTRICCIONES DEL MODELO RELACIONAL](#42-restricciones-del-modelo-relacional)
-    - [CLAVES PRIMARIAS Y CLAVES AJENAS](#43-claves-primarias-y-claves-ajenas)
-    - [INTEGRIDAD REFERENCIAL](#44-integridad-referencial)
-    - [REPRESENTACIÓN DEL MODELO RELACIONAL](#45-️representación-del-modelo-relacional)
-6. [NORMALIZACIÓN](#6-normalización)
-    - [1FN (PRIMERA FORMA NORMAL)](#61-1fn-primera-forma-normal)
-    - [2FN (SEGUNDA FORMA NORMAL)](#62-2fn-segunda-forma-normal)
-    - [3FN (TERCERA FORMA NORMAL)](#63-3fn-tercera-forma-normal)
+5. [NORMALIZACIÓN](#6-normalización)
 
 ## 1. MODELO DE DATOS
 
@@ -34,6 +20,8 @@ Los modelos se utilizan en diferentes áreas de la informática. Algunos ejemplo
 - El modelo Entidad-Relación, utilizado en el diseño de bases de datos.
 - Los diagramas de arquitectura, utilizados para representar sistemas informáticos.
 
+En esta unidad nos centraremos principalmente en el **modelo Entidad-Relación**, utilizado para el diseño conceptual, y en el **modelo relacional**, utilizado para representar lógicamente la base de datos.
+
 ### 1.1. DEFINICIÓN DE MODELO DE DATOS
 
 Un modelo de datos es un conjunto de conceptos, estructuras, operaciones y reglas que permiten representar:
@@ -44,23 +32,11 @@ Un modelo de datos es un conjunto de conceptos, estructuras, operaciones y regla
 
 Por ejemplo, en una base de datos de un centro educativo se pueden representar los alumnos, los grupos, los módulos y las matrículas. También se pueden definir relaciones entre estos elementos y restricciones, como que un alumno no pueda matricularse dos veces en el mismo módulo.
 
-### 1.2. PRINCIPALES MODELOS DE DATOS
-
-Los principales modelos de datos son:
-- **Modelo jerárquico:** organiza los datos en una estructura de árbol formada por relaciones padre-hijo.
-- **Modelo en red:** permite que un registro esté relacionado con varios registros de otros conjuntos, por lo que puede representar relaciones más complejas que el modelo jerárquico.
-- **Modelo relacional:** organiza los datos en tablas formadas por filas y columnas. Es el modelo más utilizado en las bases de datos tradicionales.
-- **Modelo orientado a objetos:** representa la información mediante objetos con atributos y, en algunos casos, operaciones o métodos.
-- **Modelo objeto-relacional:** combina las características principales del modelo relacional con algunas características propias de la orientación a objetos.
-- **Modelos NoSQL:** incluyen modelos documentales, clave-valor, de columnas y de grafos, entre otros.
-
-En esta unidad nos centraremos principalmente en el **modelo Entidad-Relación**, utilizado para el diseño conceptual, y en el **modelo relacional**, utilizado para representar lógicamente la base de datos.
-
-### 1.3. CLASIFICACIÓN SEGÚN EL NIVEL DE ABSTRACCIÓN
+### 1.2. CLASIFICACIÓN SEGÚN EL NIVEL DE ABSTRACCIÓN
 
 Los modelos de datos también pueden clasificarse según el nivel de detalle o abstracción que presentan.
 
-#### 1.3.1. MODELO CONCEPTUAL
+#### 1.2.1. MODELO CONCEPTUAL
 
 El modelo conceptual representa la información de una organización de forma general, sin depender de un SGBD concreto.
 
@@ -72,7 +48,7 @@ Se utiliza durante la fase de análisis y permite identificar:
 
 El modelo Entidad-Relación es uno de los modelos más utilizados para representar esta fase. Permite describir, por ejemplo, que un alumno puede matricularse en varios módulos y que un módulo puede tener varios alumnos.
 
-#### 1.3.2. MODELO LÓGICO
+#### 1.2.2. MODELO LÓGICO
 
 El modelo lógico transforma el modelo conceptual en una estructura que puede ser interpretada por un tipo de SGBD.
 
@@ -84,9 +60,9 @@ En el caso del modelo relacional, el modelo lógico define:
 - las relaciones entre tablas;
 - las restricciones de integridad.
 
-Por ejemplo, una entidad 'Alumno' del modelo Entidad-Relación puede transformarse en una tabla llamada 'ALUMNO', con columnas como 'id_alumno', 'nombre' y 'apellidos'.
+Por ejemplo, una entidad Alumno del modelo Entidad-Relación puede transformarse en una tabla llamada ALUMNO, con columnas como id_alumno, nombre y apellidos.
 
-#### 1.3.3. MODELO FÍSICO
+#### 1.2.3. MODELO FÍSICO
 
 El modelo físico describe cómo se implementa el modelo lógico en un SGBD concreto.
 
@@ -99,16 +75,16 @@ Puede incluir:
 - las estrategias para mejorar el rendimiento;
 - las medidas de seguridad y acceso.
 
-El modelo físico depende del SGBD que se utilice. Algunos ejemplos de SGBD son:
+Por lo tanto, el modelo físico **depende** del SGBD que se utilice. Algunos ejemplos de SGBD son:
 - Microsoft Access;
 - MySQL;
 - PostgreSQL;
 - Microsoft SQL Server;
 - Oracle Database.
 
-> **Importante:** estos productos no son modelos físicos, sino sistemas gestores de bases de datos en los que se puede implementar un modelo físico.
+> **Importante:** estos productos no son modelos físicos, sino SGBD en los que se puede implementar un modelo físico.
 
-### 1.4. PROCESO GENERAL DE DISEÑO
+### 1.3. PROCESO GENERAL DE DISEÑO
 
 El diseño de una base de datos suele realizarse siguiendo varias fases:
 
@@ -122,47 +98,48 @@ En este tema se trabajarán principalmente las fases conceptual y lógica:
 - el modelo Entidad-Relación;
 - la transformación al modelo relacional.
 
----
-
-## Ejemplo completo
-
-Supongamos que un centro educativo necesita gestionar su alumnado y sus módulos.
-
-### Modelo conceptual
-
-Se identifican las siguientes entidades:
-- Alumno
-- Módulo
-- Matrícula
-
-También se identifican las relaciones:
-- Un alumno puede realizar varias matrículas.
-- Un módulo puede tener muchos alumnos matriculados.
-- Cada matrícula relaciona a un alumno con un módulo.
-
-### Modelo lógico
-
-El modelo conceptual puede transformarse en las siguientes tablas:
-
-- `ALUMNO(id_alumno, nombre, apellidos)`
-- `MODULO(id_modulo, nombre)`
-- `MATRICULA(id_alumno, id_modulo, fecha)`
-
-En este caso:
-- id_alumno es la clave primaria de ALUMNO.
-- id_modulo es la clave primaria de MODULO.
-- En MATRICULA, id_alumno y id_modulo actúan como claves foráneas.
-- La combinación de id_alumno e id_modulo puede formar la clave primaria de MATRICULA.
-
-### Modelo físico
-
-Finalmente, estas tablas se implementan en un SGBD concreto, como PostgreSQL o MySQL. En esta fase se pueden definir:
-- los tipos de datos concretos;
-- los índices;
-- las restricciones;
-- los permisos de los usuarios;
-- la ubicación y organización del almacenamiento.
-
+> ## Ejemplo completo
+>
+> Supongamos que un centro educativo necesita gestionar su alumnado y sus módulos.
+>
+> ### Modelo conceptual
+>
+> Se identifican las siguientes entidades:
+>
+> - Alumno
+> - Módulo
+> - Matrícula
+>
+> También se identifican las relaciones:
+>
+> - Un alumno puede realizar varias matrículas.
+> - Un módulo puede tener muchos alumnos matriculados.
+> - Cada matrícula relaciona a un alumno con un módulo.
+>
+> ### Modelo lógico
+>
+> El modelo conceptual puede transformarse en las siguientes tablas:
+>
+> - `ALUMNO(id_alumno, nombre, apellidos)`
+> - `MODULO(id_modulo, nombre)`
+> - `MATRICULA(id_alumno, id_modulo, fecha)`
+>
+> En este caso:
+>
+> - `id_alumno` es la clave primaria de `ALUMNO`.
+> - `id_modulo` es la clave primaria de `MODULO`.
+> - En `MATRICULA`, `id_alumno` e `id_modulo` actúan como claves foráneas.
+> - La combinación de `id_alumno` e `id_modulo` puede formar la clave primaria de `MATRICULA`.
+>
+> ### Modelo físico
+>
+> Finalmente, estas tablas se implementan en un SGBD concreto, como PostgreSQL o MySQL. En esta fase se pueden definir:
+>
+> - Los tipos de datos concretos.
+> - Los índices.
+> - Las restricciones.
+> - Los permisos de los usuarios.
+> - La ubicación y organización del almacenamiento.
 
 ## 2. DIAGRAMA ENTIDAD-RELACIÓN (DER)
 
