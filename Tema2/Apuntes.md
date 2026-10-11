@@ -553,7 +553,7 @@ Las restricciones de **integridad referencial** permiten que el SGBD controle la
 
 Cada ciudad pertenece a un único país, mientras que un país puede tener varias ciudades.
 
-Tabla PAIS
+Tabla PAIS:
 
 | id_pais | nombre | continente |
 |---:|---|---|
@@ -561,7 +561,7 @@ Tabla PAIS
 | 2 | Francia | Europa |
 | 3 | Japón | Asia |
 
-Tabla CIUDAD
+Tabla CIUDAD:
 
 | id_ciudad | nombre | poblacion | id_pais |
 |---:|---|---:|---:|
@@ -573,13 +573,11 @@ Tabla CIUDAD
 
 Los valores almacenados en `CIUDAD.id_pais` deben existir previamente en `PAIS.id_pais`.
 
-Por ejemplo, la ciudad Santander tiene `id_pais = 1`, por lo que pertenece a España.
-
 #### Inserción en la tabla referenciante
 
-Al insertar una nueva fila en CIUDAD, el SGBD comprueba que el valor de `id_pais` exista en la columna `id_pais` de alguna fila de PAIS.
+Al insertar una nueva fila en CIUDAD, el SGBD comprueba que el valor de id_pais exista en la columna id_pais de alguna fila de PAIS.
 
-Por tanto, la siguiente inserción sería válida, ya que existe el país con `id_pais = 1`:
+Por tanto, la siguiente inserción sería válida:
 
 | id_ciudad | nombre | poblacion | id_pais |
 |---:|---|---:|---:|
@@ -593,33 +591,33 @@ Sin embargo, la siguiente inserción sería rechazada:
 
 #### Modificación de la clave ajena
 
-Al modificar el valor de `id_pais` en una fila de CIUDAD, el SGBD comprueba que el nuevo valor exista en la tabla PAIS.
+Al modificar el valor de id_pais en una fila de CIUDAD, el SGBD comprueba que el nuevo valor exista en la tabla PAIS.
 
-Por ejemplo, sería válido cambiar el país de `Bilbao` de `1` a `2`, ya que existe un país con `id_pais = 2`:
+Por ejemplo, sería válido cambiar el país de Bilbao de 1 a 2:
 
 | id_ciudad | nombre | poblacion | id_pais |
 |---:|---|---:|---:|
 | 6 | Bilbao | 345000 | 2 |
 
-Sin embargo, no sería válido modificar su `id_pais` por el valor `4`, ya que no existe ningún país con ese identificador. En ese caso, el SGBD rechazaría la modificación y la fila conservaría su valor anterior.
+Sin embargo, no sería válido modificar su id_pais por el valor 4, ya que no existe ningún país con ese identificador. En ese caso, el SGBD rechazaría la modificación y la fila conservaría su valor anterior.
 
 #### Borrado en la tabla referenciada
 
-Al intentar eliminar una fila de la tabla `PAIS`, pueden definirse diferentes comportamientos.
+Al intentar eliminar una fila de la tabla PAIS, pueden definirse diferentes comportamientos.
 
-Supongamos que se desea eliminar el país con `id_pais = 2`, es decir, `Francia`. Las ciudades `París` y `Lyon` tienen ese valor en su clave ajena.
+Supongamos que se desea eliminar el país con `id_pais = 2`, es decir, Francia. Las ciudades París y Lyon tienen ese valor en su clave ajena.
 
-- **Borrado en cascada (`ON DELETE CASCADE`):** se elimina el país `Francia` y se eliminan también las ciudades `París` y `Lyon`.
+- **Borrado en cascada (`ON DELETE CASCADE`):** se elimina el país Francia y se eliminan también las ciudades París y Lyon.
 
-- **Borrado restringido (`ON DELETE RESTRICT`):** no se permite eliminar `Francia` mientras existan ciudades que tengan `id_pais = 2`.
+- **Borrado restringido (`ON DELETE RESTRICT`):** no se permite eliminar Francia mientras existan ciudades que tengan `id_pais = 2`.
 
-- **Borrado con puesta a nulos (`ON DELETE SET NULL`):** se elimina `Francia` y el valor de `id_pais` de `París` y `Lyon` pasa a ser `NULL`.
+- **Borrado con puesta a nulos (`ON DELETE SET NULL`):** se elimina Francia y el valor de id_pais de París y Lyon pasa a ser `NULL`.
 
   Esta opción solo puede utilizarse si la columna `CIUDAD.id_pais` admite valores nulos.
 
-- **Borrado con valor por defecto (`ON DELETE SET DEFAULT`):** se elimina `Francia` y el valor de `id_pais` de sus ciudades se sustituye por un valor por defecto.
+- **Borrado con valor por defecto (`ON DELETE SET DEFAULT`):** se elimina Francia y el valor de id_pais de sus ciudades se sustituye por un valor por defecto.
 
-  El valor por defecto debe existir previamente en la tabla `PAIS`. Por ejemplo, podría utilizarse un país especial denominado `Sin asignar`.
+  El valor por defecto debe existir previamente en la tabla PAIS. Por ejemplo, podría utilizarse un país especial denominado 'Sin asignar'.
 
 #### Modificación de la clave primaria
 
