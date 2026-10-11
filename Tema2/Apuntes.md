@@ -477,8 +477,6 @@ El **modelo relacional** organiza la información en tablas formadas por filas y
 
 Permite relacionar datos de diferentes tablas mediante claves y reducir la redundancia mediante un diseño adecuado. Además, incorpora restricciones que ayudan a mantener la integridad y la consistencia de la información.
 
-Las bases de datos relacionales se gestionan habitualmente mediante el lenguaje **SQL**, que permite definir la estructura de los datos y realizar consultas, actualizaciones y análisis.
-
 ### 4.1. Elementos de una relación
 
 El elemento principal del modelo relacional es la **relación**.
@@ -491,7 +489,7 @@ Una relación es una tabla. Cada ocurrencia de la relación es una fila, denomin
 
 Es un concepto lógico que representa una asociación entre entidades.
 
-**Ejemplo:** “Un cliente realiza un pedido” representa una relación entre las entidades `CLIENTE` y `PEDIDO`.
+**Ejemplo:** “Un cliente realiza un pedido” representa una relación entre las entidades Cliente y Pedido.
 
 #### Relación en el modelo relacional
 
@@ -499,7 +497,7 @@ Es una estructura lógica representada mediante una tabla.
 
 Contiene tuplas o filas y atributos o columnas, que almacenan los datos de las entidades o de las asociaciones entre ellas.
 
-Por ejemplo, la relación `PEDIDO` puede contener una fila por cada pedido realizado.
+Por ejemplo, la relación Pedido puede contener una fila por cada pedido realizado.
 
 #### Dominio
 
@@ -510,149 +508,127 @@ Los dominios pueden clasificarse en:
 - **General:** cuando los valores pueden ser todos los posibles dentro del tipo de dato asociado a la columna.
 - **Restringido:** cuando solo se admiten los valores comprendidos dentro de un subconjunto del dominio general.
 
-Por ejemplo, una columna `nota` de tipo numérico podría tener como dominio restringido los valores comprendidos entre 0 y 10.
-Detalle que añadiría
-Después de definir relación, tupla, atributo y dominio, convendría añadir una pequeña tabla de ejemplo. Ayuda mucho a fijar la terminología:
+Por ejemplo, una columna 'nota' de tipo numérico podría tener como dominio restringido los valores comprendidos entre 0 y 10.
 
-text
-| numPedido | fecha | dniCliente |
-|---|---|---|
-| 100 | 2026-10-01 | 12345678A |
-| 101 | 2026-10-03 | 87654321B |
+### 4.2. Restricciones del modelo relacional
 
-- `PEDIDO` es la **relación** o tabla.
-- Cada fila es una **tupla** o registro.
-- `numPedido`, `fecha` y `dniCliente` son **atributos** o columnas.
-- El dominio de `fecha` podría ser el conjunto de fechas válidas.
-Esta distinción es especialmente útil porque, en el modelo relacional, una tabla puede representar tanto una entidad como una relación del modelo E-R; por ejemplo, REALIZA entre CLIENTE y PEDIDO puede convertirse en una tabla con las claves de ambas.
+Los datos almacenados en una base de datos tienen como objetivo representar situaciones del mundo real de forma coherente.
 
-ok, pues dame el resultado final de como lo plantearias
+Por ejemplo, en una relación `EMPLEADO` no tendría sentido almacenar un sueldo negativo, como `-1000` euros. Para evitar este tipo de situaciones, es necesario establecer restricciones que garanticen la coherencia de la información.
 
-text
-## 4. MODELO RELACIONAL
+Existen dos tipos de restricciones:
 
-El **modelo relacional** organiza la información en tablas formadas por filas y columnas, lo que facilita su comprensión y manejo.
+#### Restricciones propias o inherentes al modelo relacional
 
-Permite relacionar datos de diferentes tablas mediante claves y reducir la redundancia mediante un diseño adecuado. Además, incorpora restricciones que ayudan a mantener la integridad y la consistencia de la información.
+Son condiciones generales que deben cumplirse en toda base de datos que siga el modelo relacional.
 
-Las bases de datos relacionales se gestionan habitualmente mediante el lenguaje **SQL**, que permite definir la estructura de los datos y realizar consultas, actualizaciones y análisis.
+- No pueden existir dos tuplas o filas con exactamente el mismo contenido en todas sus columnas.
+- La clave primaria no puede contener valores nulos.
+- La clave primaria no puede contener valores repetidos.
+- Una clave alternativa no puede contener valores repetidos.
 
-### 4.1. Elementos de una relación
+El usuario decide qué atributo o conjunto de atributos actúa como clave primaria, pero, una vez definida, el modelo relacional exige que cumpla las restricciones anteriores.
 
-El elemento principal del modelo relacional es la **relación**.
+#### Restricciones propias del usuario
 
-Una relación es una tabla. Cada ocurrencia de la relación es una fila, denominada **tupla** o **registro**. Cada propiedad o característica de las ocurrencias es una **columna**, denominada **atributo**.
+Son condiciones específicas de una base de datos concreta. Dependen de las necesidades de los usuarios y de las reglas del sistema de información que se quiere representar.
 
-> ⚠️ **Importante:** no debes confundir el concepto de relación en el modelo relacional con el concepto de relación en el modelo E-R.
+Por ejemplo, en una empresa puede establecerse que el sueldo de un empleado deba ser positivo. En otra base de datos puede no existir el atributo `sueldo` o pueden aplicarse reglas diferentes.
 
-#### Relación en el modelo E-R
+El usuario puede definir, entre otras, las siguientes restricciones:
 
-Es un concepto lógico que representa una asociación entre entidades.
+- Clave primaria (`PRIMARY KEY`).
+- Unicidad o clave alternativa (`UNIQUE`).
+- Obligatoriedad (`NOT NULL`).
+- Clave ajena (`FOREIGN KEY`).
+- Verificación o comprobación (`CHECK`).
+- Aserciones o asertos (`ASSERTION`).
+- Disparadores (`TRIGGER`).
 
-**Ejemplo:** “Un cliente realiza un pedido” representa una relación entre las entidades `CLIENTE` y `PEDIDO`.
+### 4.3. Integridad referencial
 
-#### Relación en el modelo relacional
+Las restricciones de **integridad referencial** permiten que el SGBD controle la coherencia entre los valores almacenados en una clave ajena y los valores existentes en la clave primaria de la tabla referenciada.
 
-Es una estructura lógica representada mediante una tabla.
+Por ejemplo, si una ciudad pertenece a un país, el código de país almacenado en la tabla `CITY` debe existir previamente en la tabla `COUNTRY`.
 
-Contiene tuplas o filas y atributos o columnas, que almacenan los datos de las entidades o de las asociaciones entre ellas.
+En este ejemplo:
 
-Por ejemplo, la relación `PEDIDO` puede contener una fila por cada pedido realizado.
+- `COUNTRY` es la **tabla referenciada**.
+- `CITY` es la **tabla referenciante**.
+- `Code` es la clave primaria de `COUNTRY`.
+- `CountryCode` es la clave ajena de `CITY`, que referencia a `Code`.
 
-#### Dominio
+#### Inserción en la tabla referenciante
 
-El **dominio** de un atributo es el conjunto de valores válidos que puede tomar dicho atributo.
+Al insertar una nueva fila en `CITY`, el SGBD comprueba que el valor de `CountryCode` exista en la columna `Code` de alguna fila de `COUNTRY`.
 
-Los dominios pueden clasificarse en:
+Si no existe, se rechaza la inserción.
 
-- **General:** cuando los valores pueden ser todos los posibles dentro del tipo de dato asociado a la columna.
-- **Restringido:** cuando solo se admiten los valores comprendidos dentro de un subconjunto del dominio general.
+#### Modificación de la clave ajena
 
-Por ejemplo, una columna `nota` de tipo numérico podría tener como dominio restringido los valores comprendidos entre 0 y 10.
+Al modificar el valor de `CountryCode` en una fila de `CITY`, el SGBD comprueba que el nuevo valor exista en la columna `Code` de `COUNTRY`.
 
-#### Ejemplo
+Si no existe, se rechaza la modificación y la fila mantiene el valor anterior.
 
-| numPedido | fecha | dniCliente |
-|---|---|---|
-| 100 | 2026-10-01 | 12345678A |
-| 101 | 2026-10-03 | 87654321B |
+#### Borrado en la tabla referenciada
 
-- `PEDIDO` es la **relación** o tabla.
-- Cada fila es una **tupla** o registro.
-- `numPedido`, `fecha` y `dniCliente` son **atributos** o columnas.
-- El dominio de `fecha` podría ser el conjunto de fechas válidas.
+Al intentar eliminar una fila de `COUNTRY`, pueden definirse diferentes comportamientos:
 
-### 4.2. RESTRICCIONES DEL MODELO RELACIONAL
+- **Borrado en cascada (`ON DELETE CASCADE`):** si se elimina un país, se eliminan también todas las ciudades asociadas a ese país.
+- **Borrado restringido (`ON DELETE RESTRICT`):** si existen ciudades asociadas al país, no se permite eliminarlo.
+- **Borrado con puesta a nulos (`ON DELETE SET NULL`):** si se elimina un país, el valor de `CountryCode` de las ciudades asociadas pasa a ser `NULL`.
+- **Borrado con valor por defecto (`ON DELETE SET DEFAULT`):** si se elimina un país, el valor de `CountryCode` de las ciudades asociadas se sustituye por un valor por defecto.
 
-Los datos que almacenan las BD tienen como objetivo fundamental representar situaciones del mundo real. En ocasiones esto no es así.  
+#### Modificación de la clave primaria
 
-Supongamos, por ejemplo, el caso de una relación **empleados** en la que su sueldo es negativo (-1000 euros). Esto hace necesaria la creación de **restricciones** que nos permitan representar de manera coherente dicha información.  
+Al intentar modificar el valor de `Code` en una fila de `COUNTRY`, también pueden definirse diferentes comportamientos:
 
-Existen **dos tipos de restricciones**:  
-
-- **Propias o inherentes al modelo relacional**: son condiciones más generales, propias de un modelo de datos, y se deben cumplir en toda BD que siga dicho modelo.  
-    - No puede haber dos tuplas o filas que tengan el mismo contenido en todas sus columnas.  
-    - Ninguna columna que sea clave primaria (restricción de usuario) admite nulos.  
-    - Ninguna columna que sea clave primaria admite valores repetidos en las tuplas.  
-    - Ninguna columna que sea clave alternativa admite valores repetidos en las tuplas.  
-
-- **Propias del usuario**: son condiciones específicas de una BD concreta, es decir, son las que se deben cumplir en una BD particular con unos usuarios concretos, pero que no son necesariamente relevantes en otra BD. Por ejemplo, tener empleados con sueldo negativo. En otra BD, puede que no haya sueldo, o que sea siempre positivo.  
-  El modelo permite que el usuario establezca:  
-    - **Clave primaria** (Primary Key)  
-    - **Unicidad o clave alternativa** (UNIQUE)  
-    - **Obligatoriedad** (NOT NULL)  
-    - **Clave ajena** (FOREIGN KEY)  
-    - **Verificación o chequeo** (CHECK)  
-    - **Aserciones o asertos** (ASSERTION)  
-    - **Disparadores** (TRIGGER)  
-
-### 4.4. INTEGRIDAD REFERENCIAL
-
-Las **restricciones de integridad referencial** permiten que el SGBD controle incoherencias entre los datos cargados en la clave ajena y los datos existentes en la clave primaria de la tabla principal. 
-
-Vamos a ver como actua la restricción de integridad referencial con un ejemplo entre dos tablas. El esquema está formado por dos tablas, una de paises y otra de ciudades. Una ciudad pertenece a un país, y cada país puede tener varias ciudades.
-
-Las restricciones actúan cuando:  
-
-- Se **inserta una nueva fila** en la tabla secundaria 
-
-Al insertar una nueva **CITY**, se comprobaría que el **CountryCode** de la nueva ciudad esté cargado en **Code** de algún **COUNTRY**. Si no lo está, se rechaza la inserción.  
-
-- Se **modifica el valor de la clave ajena** en la tabla secundaria  
-
-Al modificar el contenido de una **CITY**, se comprueba que el nuevo valor cargado en la clave ajena **CountryCode** exista en la clave primaria **Code** de la tabla principal **COUNTRY**. Si no existe, se rechaza la modificación y queda la fila con el valor anterior.  
-
-- Se **borra una fila en la tabla principal**. En este caso, podemos definir diferentes restricciones de integridad referencial.  
-
-  - **Borrado en cascada (BC)**: Si se elimina un país, se eliminan todas las ciudades del país.  
-  - **Borrado restringido (BR)**: Si se trata de eliminar un país y hay ciudades de ese país en la tabla CITY, no se permite la eliminación.  
-  - **Borrado con puesta a nulos (BN)**: Si se trata de eliminar un país y hay ciudades de ese país en la tabla CITY, se elimina el país y en la columna clave ajena (**countrycode**) de CITY de todas las ciudades de ese país, se carga NULL.  
-  - **Borrado con puesta a valor por defecto (BD)**: Si se trata de eliminar un país y hay ciudades de ese país en la tabla CITY, se elimina el país y en la columna clave ajena (**countrycode**) de CITY de todas las ciudades de ese país, se carga un valor por defecto.  
-
-- Se **modifica la clave primaria en la tabla principal**. Al igual que en el caso anterior, también se pueden definir diferentes restricciones de integridad referencial.  
-
-  - **Modificación en cascada (MC)**: Si se modifica el código de un país, se modifica **countrycode** de todas las ciudades del país.  
-  - **Modificación restringida (MR)**: Si se trata de modificar el código de un país y hay ciudades de ese país en la tabla CITY, no se permite la modificación.  
-  - **Modificación con puesta a nulos (MN)**: Si se trata de modificar el código de un país y hay ciudades de ese país en la tabla CITY, se carga NULL en la columna clave ajena (**countrycode**) de CITY de todas las ciudades de ese país.  
+- **Modificación en cascada (`ON UPDATE CASCADE`):** si se modifica el código de un país, se modifica automáticamente el valor de `CountryCode` en todas sus ciudades.
+- **Modificación restringida (`ON UPDATE RESTRICT`):** si existen ciudades asociadas al país, no se permite modificar su código.
+- **Modificación con puesta a nulos (`ON UPDATE SET NULL`):** si se modifica el código de un país, el valor de `CountryCode` de las ciudades asociadas pasa a ser `NULL`.
+- **Modificación con valor por defecto (`ON UPDATE SET DEFAULT`):** si se modifica el código de un país, el valor de `CountryCode` de las ciudades asociadas se sustituye por un valor por defecto.
  
 
-### 4.5. REPRESENTACIÓN DEL MODELO RELACIONAL
+### 4.5. Representación del modelo relacional
 
-Existen diversas formas de representar el modelo relacional. Veamos ejemplos de algunas de ellas:
+Un **esquema relacional** representa la estructura lógica de una base de datos relacional. Muestra las relaciones o tablas que la componen, sus atributos, sus claves y las relaciones existentes entre ellas.
 
-- **Esquema relacional conectado a columnas**: 
+Existen distintas formas de representar un esquema relacional. Las siguientes muestran la misma idea con diferentes niveles de detalle y notaciones.
+
+#### Esquema relacional conectado a columnas
+
+En esta representación, cada tabla muestra sus atributos o columnas. Las líneas unen las tablas relacionadas mediante claves ajenas y pueden incluir la cardinalidad de la relación.
+
+En el ejemplo, una reserva corresponde a un único automóvil y a un único cliente, mientras que un automóvil o un cliente pueden aparecer en varias reservas.
+
 <div style="text-align: center;">
-    <img src="img/esquema1.png" alt="Esquema relacional columnas" width="500" style="max-width: 100%; height: auto;">
-</div> 
-
-- **Esquema relacional crow's foot o pata de cuervo**: La parte de la pata va en la tabla donde está la clave ajena.  
-<div style="text-align: center;">
-    <img src="img/esquema2.png" alt="Esquema crow's foot" width="500" style="max-width: 100%; height: auto;">
+    <img src="img/esquema1.png" alt="Esquema relacional conectado a columnas" width="500" style="max-width: 100%; height: auto;">
 </div>
 
-- **Grafo relacional**  
+#### Esquema relacional con notación *crow's foot* o pata de cuervo
+
+La notación *crow's foot*, o **pata de cuervo**, representa las relaciones entre tablas mediante símbolos situados en los extremos de las líneas.
+
+La pata de cuervo indica la parte “muchos” de una relación. En relaciones de tipo uno a muchos, suele situarse junto a la tabla que contiene la clave ajena.
+
+En el ejemplo, una familia puede tener varios ciclos, pero cada ciclo pertenece a una única familia. La tabla `ciclos` contiene la clave ajena `familia`, que referencia la clave primaria `CODFAM` de la tabla `familias`.
+
+También se observa que `oferta` contiene claves ajenas que la relacionan con `centros` y con `ciclos`.
+
 <div style="text-align: center;">
-    <img src="img/esquema3.png" alt="Grafo relacional" width="500" style="max-width: 100%; height: auto;">
+    <img src="img/esquema2.png" alt="Esquema relacional con notación pata de cuervo" width="500" style="max-width: 100%; height: auto;">
+</div>
+
+#### Esquema relacional textual
+
+En esta notación, cada relación se expresa mediante su nombre seguido de una lista de atributos entre paréntesis.
+
+Los atributos subrayados representan claves. Las flechas indican que un atributo, o un conjunto de atributos, es una clave ajena que referencia la clave de otra relación.
+
+En el ejemplo, `Country` es la tabla referenciada y `City` contiene el atributo `CountryCode`, que referencia a `Country(Code)`. Asimismo, `CountryLanguage` incluye `CountryCode`, que referencia a la tabla `Country`.
+
+<div style="text-align: center;">
+    <img src="img/esquema3.png" alt="Esquema relacional textual" width="500" style="max-width: 100%; height: auto;">
 </div>
 
 #### 📝 Problemas
