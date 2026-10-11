@@ -545,45 +545,15 @@ El usuario puede definir, entre otras, las siguientes restricciones:
 
 > ℹ️ Entre paréntesis se indican las palabras clave de SQL con las que estas restricciones se implementan en el modelo físico de la base de datos. Se estudiarán con detalle en temas posteriores.
 
-### 4.3. Integridad referencial
+### 4.3. INTEGRIDAD REFERENCIAL
 
 Las restricciones de **integridad referencial** permiten que el SGBD controle la coherencia entre los valores almacenados en una clave ajena y los valores existentes en la clave primaria —o en una clave alternativa— de la tabla referenciada.
 
-Por ejemplo, si una ciudad pertenece a un país, el identificador del país almacenado en la tabla `CIUDAD` debe existir previamente en la tabla `PAIS`.
-
 #### Ejemplo
-
-En este ejemplo:
-
-- `PAIS` es la **tabla referenciada**.
-- `CIUDAD` es la **tabla referenciante**.
-- `id_pais` es la clave primaria de `PAIS`.
-- `id_pais` es la clave ajena de `CIUDAD`, que referencia a `PAIS.id_pais`.
 
 Cada ciudad pertenece a un único país, mientras que un país puede tener varias ciudades.
 
-#### Esquema relacional
-
-```text
-PAIS(
-    _id_pais_,
-    nombre,
-    continente
-)
-
-CIUDAD(
-    _id_ciudad_,
-    nombre,
-    poblacion,
-    id_pais → PAIS(id_pais)
-)
-```
-
-En esta representación, los atributos entre guiones bajos son claves primarias y la flecha `→` indica una clave ajena.
-
-#### Datos iniciales
-
-##### Tabla `PAIS`
+Tabla PAIS
 
 | id_pais | nombre | continente |
 |---:|---|---|
@@ -591,7 +561,7 @@ En esta representación, los atributos entre guiones bajos son claves primarias 
 | 2 | Francia | Europa |
 | 3 | Japón | Asia |
 
-##### Tabla `CIUDAD`
+Tabla CIUDAD
 
 | id_ciudad | nombre | poblacion | id_pais |
 |---:|---|---:|---:|
@@ -603,11 +573,11 @@ En esta representación, los atributos entre guiones bajos son claves primarias 
 
 Los valores almacenados en `CIUDAD.id_pais` deben existir previamente en `PAIS.id_pais`.
 
-Por ejemplo, la ciudad `Santander` tiene `id_pais = 1`, por lo que pertenece a `España`.
+Por ejemplo, la ciudad Santander tiene `id_pais = 1`, por lo que pertenece a España.
 
 #### Inserción en la tabla referenciante
 
-Al insertar una nueva fila en `CIUDAD`, el SGBD comprueba que el valor de `id_pais` exista en la columna `id_pais` de alguna fila de `PAIS`.
+Al insertar una nueva fila en CIUDAD, el SGBD comprueba que el valor de `id_pais` exista en la columna `id_pais` de alguna fila de PAIS.
 
 Por tanto, la siguiente inserción sería válida, ya que existe el país con `id_pais = 1`:
 
@@ -615,7 +585,7 @@ Por tanto, la siguiente inserción sería válida, ya que existe el país con `i
 |---:|---|---:|---:|
 | 6 | Bilbao | 345000 | 1 |
 
-Sin embargo, la siguiente inserción sería rechazada, porque no existe ningún país con `id_pais = 4`:
+Sin embargo, la siguiente inserción sería rechazada:
 
 | id_ciudad | nombre | poblacion | id_pais |
 |---:|---|---:|---:|
@@ -623,7 +593,7 @@ Sin embargo, la siguiente inserción sería rechazada, porque no existe ningún 
 
 #### Modificación de la clave ajena
 
-Al modificar el valor de `id_pais` en una fila de `CIUDAD`, el SGBD comprueba que el nuevo valor exista en la tabla `PAIS`.
+Al modificar el valor de `id_pais` en una fila de CIUDAD, el SGBD comprueba que el nuevo valor exista en la tabla PAIS.
 
 Por ejemplo, sería válido cambiar el país de `Bilbao` de `1` a `2`, ya que existe un país con `id_pais = 2`:
 
