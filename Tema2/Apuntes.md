@@ -429,6 +429,8 @@ La **especialización** es el proceso inverso a la generalización. Consiste en 
 
 Por ejemplo, a partir de la superclase Empleado, se pueden especializar las subclases Operario y Encargado según las características propias de cada tipo de empleado.
 
+---
+
 Conforme a las restricciones de existencia de las ocurrencias de las entidades, una **especialización** —o, vista en sentido inverso, una **generalización**— puede ser:
 
 - **Exclusiva**, si una ocurrencia de la superclase solo puede pertenecer a una subclase.
@@ -471,29 +473,114 @@ d) **Solapada parcial**
 
 ## 4. MODELO RELACIONAL
 
-El **modelo relacional** organiza la información en tablas con filas y columnas, lo que facilita su comprensión y manejo. Permite relacionar datos de diferentes tablas, evitar duplicidades y mantener la integridad y consistencia de la información. Además, el uso de SQL hace que las consultas, actualizaciones y análisis sean rápidos y eficientes, adaptándose a entornos desde pequeños sistemas hasta grandes empresas.
+El **modelo relacional** organiza la información en tablas formadas por filas y columnas, lo que facilita su comprensión y manejo.
 
-### 4.1. ELEMENTOS DE UNA RELACIÓN
+Permite relacionar datos de diferentes tablas mediante claves y reducir la redundancia mediante un diseño adecuado. Además, incorpora restricciones que ayudan a mantener la integridad y la consistencia de la información.
 
-El elemento principal del modelo relacional es la **RELACIÓN**. Una relación es una **tabla**. Cada elemento de la relación es una **fila**, denominada **tupla o registro**. Cada propiedad, atributo o característica de los elementos es una **columna**.  
+Las bases de datos relacionales se gestionan habitualmente mediante el lenguaje **SQL**, que permite definir la estructura de los datos y realizar consultas, actualizaciones y análisis.
 
-> ⚠️ **Importante**: no debes confundir el concepto de **relación en el modelo relacional** con el concepto de **relación en el modelo E-R**.
----
+### 4.1. Elementos de una relación
 
-#### Relación en el modelo Entidad-Relación (ER)
-- **Concepto lógico** que representa una **asociación entre entidades**.  
-- Ejemplo: “Un cliente realiza un pedido” → relación entre *Cliente* y *Pedido*.
+El elemento principal del modelo relacional es la **relación**.
+
+Una relación es una tabla. Cada ocurrencia de la relación es una fila, denominada **tupla** o **registro**. Cada propiedad o característica de las ocurrencias es una **columna**, denominada **atributo**.
+
+> ⚠️ **Importante:** no debes confundir el concepto de relación en el modelo relacional con el concepto de relación en el modelo E-R.
+
+#### Relación en el modelo E-R
+
+Es un concepto lógico que representa una asociación entre entidades.
+
+**Ejemplo:** “Un cliente realiza un pedido” representa una relación entre las entidades `CLIENTE` y `PEDIDO`.
 
 #### Relación en el modelo relacional
-- **Estructura física o lógica** implementada como **tabla** en la BD.  
-- Contiene **tuplas (filas)** y **atributos (columnas)** que representan los datos de la asociación.
 
----
+Es una estructura lógica representada mediante una tabla.
 
-Al conjunto de valores que puede tomar una columna se le denomina **dominio**, y estos pueden ser de dos tipos:  
+Contiene tuplas o filas y atributos o columnas, que almacenan los datos de las entidades o de las asociaciones entre ellas.
 
-- **General**: si los valores pueden ser todos los existentes dentro del tipo de dato correspondiente a la columna.  
-- **Restringido**: si sólo puede tomar valores dentro de un rango de un dominio general, por ejemplo, números reales comprendidos entre 0 y 10.  
+Por ejemplo, la relación `PEDIDO` puede contener una fila por cada pedido realizado.
+
+#### Dominio
+
+El **dominio** de un atributo es el conjunto de valores válidos que puede tomar dicho atributo.
+
+Los dominios pueden clasificarse en:
+
+- **General:** cuando los valores pueden ser todos los posibles dentro del tipo de dato asociado a la columna.
+- **Restringido:** cuando solo se admiten los valores comprendidos dentro de un subconjunto del dominio general.
+
+Por ejemplo, una columna `nota` de tipo numérico podría tener como dominio restringido los valores comprendidos entre 0 y 10.
+Detalle que añadiría
+Después de definir relación, tupla, atributo y dominio, convendría añadir una pequeña tabla de ejemplo. Ayuda mucho a fijar la terminología:
+
+text
+| numPedido | fecha | dniCliente |
+|---|---|---|
+| 100 | 2026-10-01 | 12345678A |
+| 101 | 2026-10-03 | 87654321B |
+
+- `PEDIDO` es la **relación** o tabla.
+- Cada fila es una **tupla** o registro.
+- `numPedido`, `fecha` y `dniCliente` son **atributos** o columnas.
+- El dominio de `fecha` podría ser el conjunto de fechas válidas.
+Esta distinción es especialmente útil porque, en el modelo relacional, una tabla puede representar tanto una entidad como una relación del modelo E-R; por ejemplo, REALIZA entre CLIENTE y PEDIDO puede convertirse en una tabla con las claves de ambas.
+
+ok, pues dame el resultado final de como lo plantearias
+
+text
+## 4. MODELO RELACIONAL
+
+El **modelo relacional** organiza la información en tablas formadas por filas y columnas, lo que facilita su comprensión y manejo.
+
+Permite relacionar datos de diferentes tablas mediante claves y reducir la redundancia mediante un diseño adecuado. Además, incorpora restricciones que ayudan a mantener la integridad y la consistencia de la información.
+
+Las bases de datos relacionales se gestionan habitualmente mediante el lenguaje **SQL**, que permite definir la estructura de los datos y realizar consultas, actualizaciones y análisis.
+
+### 4.1. Elementos de una relación
+
+El elemento principal del modelo relacional es la **relación**.
+
+Una relación es una tabla. Cada ocurrencia de la relación es una fila, denominada **tupla** o **registro**. Cada propiedad o característica de las ocurrencias es una **columna**, denominada **atributo**.
+
+> ⚠️ **Importante:** no debes confundir el concepto de relación en el modelo relacional con el concepto de relación en el modelo E-R.
+
+#### Relación en el modelo E-R
+
+Es un concepto lógico que representa una asociación entre entidades.
+
+**Ejemplo:** “Un cliente realiza un pedido” representa una relación entre las entidades `CLIENTE` y `PEDIDO`.
+
+#### Relación en el modelo relacional
+
+Es una estructura lógica representada mediante una tabla.
+
+Contiene tuplas o filas y atributos o columnas, que almacenan los datos de las entidades o de las asociaciones entre ellas.
+
+Por ejemplo, la relación `PEDIDO` puede contener una fila por cada pedido realizado.
+
+#### Dominio
+
+El **dominio** de un atributo es el conjunto de valores válidos que puede tomar dicho atributo.
+
+Los dominios pueden clasificarse en:
+
+- **General:** cuando los valores pueden ser todos los posibles dentro del tipo de dato asociado a la columna.
+- **Restringido:** cuando solo se admiten los valores comprendidos dentro de un subconjunto del dominio general.
+
+Por ejemplo, una columna `nota` de tipo numérico podría tener como dominio restringido los valores comprendidos entre 0 y 10.
+
+#### Ejemplo
+
+| numPedido | fecha | dniCliente |
+|---|---|---|
+| 100 | 2026-10-01 | 12345678A |
+| 101 | 2026-10-03 | 87654321B |
+
+- `PEDIDO` es la **relación** o tabla.
+- Cada fila es una **tupla** o registro.
+- `numPedido`, `fecha` y `dniCliente` son **atributos** o columnas.
+- El dominio de `fecha` podría ser el conjunto de fechas válidas.
 
 ### 4.2. RESTRICCIONES DEL MODELO RELACIONAL
 
