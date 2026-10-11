@@ -644,13 +644,11 @@ Supongamos que se desea cambiar el identificador de España de 1 a 10. Las ciuda
 
 Un **esquema relacional** representa la estructura lógica de una base de datos relacional. Muestra las relaciones o tablas que la componen, sus atributos, sus claves y las relaciones existentes entre ellas.
 
-Existen distintas formas de representar un esquema relacional. Las siguientes muestran la misma idea con diferentes niveles de detalle y notaciones.
+Existen distintas formas de representar un esquema relacional:
 
 #### Esquema relacional conectado a columnas
 
-En esta representación, cada tabla muestra sus atributos o columnas. Las líneas unen las tablas relacionadas mediante claves ajenas y pueden incluir la cardinalidad de la relación.
-
-En el ejemplo, una reserva corresponde a un único automóvil y a un único cliente, mientras que un automóvil o un cliente pueden aparecer en varias reservas.
+En esta notación, cada tabla muestra sus atributos o columnas. Las líneas unen las tablas relacionadas mediante claves ajenas y pueden incluir la cardinalidad de la relación.
 
 <div style="text-align: center;">
     <img src="img/esquema1.png" alt="Esquema relacional conectado a columnas" width="500" style="max-width: 100%; height: auto;">
@@ -658,13 +656,9 @@ En el ejemplo, una reserva corresponde a un único automóvil y a un único clie
 
 #### Esquema relacional con notación *crow's foot* o pata de cuervo
 
-La notación *crow's foot*, o **pata de cuervo**, representa las relaciones entre tablas mediante símbolos situados en los extremos de las líneas.
+Esta notación representa las relaciones entre tablas mediante símbolos situados en los extremos de las líneas.
 
 La pata de cuervo indica la parte “muchos” de una relación. En relaciones de tipo uno a muchos, suele situarse junto a la tabla que contiene la clave ajena.
-
-En el ejemplo, una familia puede tener varios ciclos, pero cada ciclo pertenece a una única familia. La tabla `ciclos` contiene la clave ajena `familia`, que referencia la clave primaria `CODFAM` de la tabla `familias`.
-
-También se observa que `oferta` contiene claves ajenas que la relacionan con `centros` y con `ciclos`.
 
 <div style="text-align: center;">
     <img src="img/esquema2.png" alt="Esquema relacional con notación pata de cuervo" width="500" style="max-width: 100%; height: auto;">
@@ -675,8 +669,6 @@ También se observa que `oferta` contiene claves ajenas que la relacionan con `c
 En esta notación, cada relación se expresa mediante su nombre seguido de una lista de atributos entre paréntesis.
 
 Los atributos subrayados representan claves. Las flechas indican que un atributo, o un conjunto de atributos, es una clave ajena que referencia la clave de otra relación.
-
-En el ejemplo, `Country` es la tabla referenciada y `City` contiene el atributo `CountryCode`, que referencia a `Country(Code)`. Asimismo, `CountryLanguage` incluye `CountryCode`, que referencia a la tabla `Country`.
 
 <div style="text-align: center;">
     <img src="img/esquema3.png" alt="Esquema relacional textual" width="500" style="max-width: 100%; height: auto;">
