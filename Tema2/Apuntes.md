@@ -683,123 +683,316 @@ Los atributos subrayados representan claves. Las flechas indican que un atributo
 
 ## 5. NORMALIZACIÓN
 
-Al diseñar una BD se ha de evaluar la calidad del diseño. Para ello, uno de los parámetros que se utiliza son las **formas normales** en las que se encuentra dicho diseño.  
-Se llama **normalización** al proceso de obligar a los atributos incluidos en el diseño a cumplir varias formas normales.
+Al diseñar una base de datos relacional es necesario evaluar la calidad del diseño. Uno de los criterios utilizados son las **formas normales**.
 
-Las formas normales son reglas que aseguran que el esquema tenga buen comportamiento respecto a:
+La **normalización** es el proceso de organizar y, cuando sea necesario, descomponer las relaciones de una base de datos para reducir la redundancia y evitar anomalías.
 
-- Redundancia de información  
-- Pérdida de información  
-- Presentación de la información  
+Un diseño normalizado busca:
 
-**Ejemplo:** tabla Suministros
+- Reducir la duplicación innecesaria de información.
+- Evitar anomalías de inserción, modificación y borrado.
+- Mantener la coherencia e integridad de los datos.
+- Realizar descomposiciones sin pérdida de información.
 
-| CodProv | CodArticulo | Cantidad | CiudadProv |
-|---------|------------|---------|------------|
-| P1      | C1         | 12      | Cantabria  |
-| P1      | C2         | 25      | Cantabria  |
-| P1      | C3         | 11      | Cantabria  |
-| P2      | C1         | 52      | Valencia   |
-| P2      | C2         | 35      | Valencia   |
-| P3      | C5         | 22      | Valladolid |
+Las formas normales indican el grado de protección de una relación frente a redundancias e inconsistencias. Son acumulativas: para que una tabla esté en una forma normal determinada, debe cumplir también las formas normales anteriores.
 
-Esta tabla presenta redundancia y posibles anomalías:
+> Un diseño conceptual adecuado mediante el modelo Entidad-Relación facilita la normalización, pero no evita la necesidad de comprobar las relaciones obtenidas al transformarlo al modelo relacional.
 
-1. **Anomalías de modificación:** si un proveedor cambia de ciudad, hay que modificar todas las tuplas que lo contengan.  
+### Ejemplo inicial: tabla `SUMINISTROS`
 
-2. **Anomalías de borrado:** si un proveedor deja de suministrar artículos, se pierden sus datos.  
+Supongamos la siguiente relación:
 
-3. **Anomalías de inserción:** si queremos añadir un proveedor sin artículos, tendríamos que poner NULL en columnas de clave primaria, rompiendo la integridad referencial.
+```text
+SUMINISTROS(cod_prov, cod_articulo, cantidad, ciudad_prov)
+```
 
-El origen de estas anomalías: la tabla Suministros describe dos hechos diferentes: los artículos que suministra cada proveedor y el proveedor en sí, que son independientes, aunque se relacionen indirectamente.
+| cod_prov | cod_articulo | cantidad | ciudad_prov |
+|---|---|---:|---|
+| P1 | C1 | 12 | Cantabria |
+| P1 | C2 | 25 | Cantabria |
+| P1 | C3 | 11 | Cantabria |
+| P2 | C1 | 52 | Valencia |
+| P2 | C2 | 35 | Valencia |
+| P3 | C5 | 22 | Valladolid |
 
-Si la BD se diseña usando un modelo semántico (E/R), la normalización suele ser menos necesaria.  
+En esta tabla, la clave primaria es compuesta:
 
-En BD relacionales, las **formas normales (FN)** indican el grado de vulnerabilidad de una tabla a inconsistencias y anomalías. Cada FN incluye a las anteriores.
+```text
+(cod_prov, cod_articulo)
+```
 
-<img src="img/formas1.png" alt="Formas normales" width="400px"/>  
+Sin embargo, `ciudad_prov` depende únicamente de `cod_prov`, ya que un proveedor tiene una única ciudad. Por tanto, la ciudad se repite en todas las filas correspondientes al mismo proveedor.
 
-**Definiciones previas:**
+Esta situación produce redundancia y puede originar anomalías:
 
-- Dependencia funcional: A → B. Para cada valor de A hay un único valor de B.  
-- Dependencia funcional completa: B depende de toda la clave A.  
-- Dependencia transitiva: A → B → C. C depende transitivamente de A.  
-- Determinante funcional: atributo del que depende otro.  
-- Dependencia multivaluada: A →→ B. Un valor de A implica varios valores de B.
+- **Anomalía de modificación:** si el proveedor `P1` cambia de ciudad, se deben modificar todas las filas en las que aparece.
+- **Anomalía de borrado:** si se elimina el último artículo suministrado por un proveedor, también se pierde la información sobre su ciudad.
+- **Anomalía de inserción:** no se puede registrar un proveedor y su ciudad si todavía no suministra ningún artículo, ya que faltaría el valor de `cod_articulo`, que forma parte de la clave primaria.
 
-### 1FN (PRIMERA FORMA NORMAL)
+El origen del problema es que la relación `SUMINISTROS` almacena dos hechos diferentes:
 
-Una relación está en 1FN si cada atributo es atómico, es decir, cada celda contiene un solo valor.  
+- Qué artículos suministra cada proveedor y en qué cantidad.
+- En qué ciudad se encuentra cada proveedor.
 
-**Ejemplo:** tabla de pedidos de clientes
+Estos hechos deben almacenarse en relaciones diferentes.
 
-<img src="img/formas2.png" alt="Ejemplo pedidos 1FN" width="400px"/>  
+### Definiciones previas
 
-Se observa que la tabla no está en 1FN, ya que hay campos repetidos: Num_art, Nom_art, Cant y Precio.  
+#### Dependencia funcional
 
-Solución: crear una nueva tabla con estos campos y su clave primaria, dejando la tabla original con la clave primaria de la orden:
+Existe una **dependencia funcional** entre dos conjuntos de atributos cuando un valor de un atributo o conjunto de atributos determina un único valor de otro atributo.
 
-<img src="img/formas3.png" alt="Tabla normalizada 1FN" width="400px"/>  
+Se representa mediante una flecha:
 
-### 2FN (SEGUNDA FORMA NORMAL)
+```text
+A → B
+```
 
-Una relación está en 2FN si está en 1FN y todos los atributos no clave dependen funcionalmente de la **clave completa**.  
+Se lee: “A determina funcionalmente a B”.
 
-Ejemplo: seguimos con la tabla en 1FN:
+Por ejemplo:
 
-- Identificar columnas que dependen solo de parte de la clave primaria.  
-- Crear una nueva tabla con estas columnas, usando como clave primaria la de la que dependen.  
+```text
+cod_prov → ciudad_prov
+```
 
-Si la clave primaria solo tiene un campo, la tabla ya está en 2FN.  
+Cada proveedor tiene asociada una única ciudad.
 
-En nuestro ejemplo:  
+El atributo o conjunto de atributos situado a la izquierda de la flecha se denomina **determinante**.
 
-- Tabla **Ordenes** → clave principal Id_orden (ya está en 2FN).  
-- Tabla **Articulos_Ordenes** → Nom_art y Precio dependen solo de Num_art → se crean tabla **Articulos** con estas columnas + Num_art como clave primaria.
+#### Dependencia funcional completa
 
-Resultado final:
+Una dependencia funcional es **completa** cuando un atributo depende de toda una clave compuesta y no solo de una parte de ella.
 
-<img src="img/formas4.png" alt="Tablas 2FN 1" width="400px"/>  
-<img src="img/formas5.png" alt="Tablas 2FN 2" width="400px"/>  
+Por ejemplo:
 
-Tablas en 2FN:
+```text
+(cod_prov, cod_articulo) → cantidad
+```
 
-- Ordenes (clave principal Id_orden)  
-- Articulos_Ordenes (clave principal Id_orden, Num_art)  
-- Articulos (clave principal Num_art)  
+La cantidad suministrada depende del proveedor y del artículo. Conocer solo el proveedor o solo el artículo no permite determinar la cantidad.
 
-### 3FN (TERCERA FORMA NORMAL)
+#### Dependencia funcional parcial
 
-Una relación está en 3FN si y solo si está en 2FN y no existen **dependencias transitivas**.  
-Todas las dependencias funcionales deben ser respecto a la clave principal.  
+Existe una **dependencia funcional parcial** cuando un atributo no clave depende únicamente de una parte de una clave primaria compuesta.
 
-Es decir, debemos identificar atributos que dependen de otros atributos que **no** son clave principal.  
+Por ejemplo:
 
-**Ejemplo:** seguimos con las tres tablas obtenidas en 2FN. Los pasos son:
+```text
+(cod_prov, cod_articulo) → ciudad_prov
+cod_prov → ciudad_prov
+```
 
-- Determinar columnas dependientes de atributos que no son clave.  
-- Eliminar esas columnas de la tabla base.  
-- Crear una nueva tabla con esas columnas y la columna no clave de la cual dependen.
+`ciudad_prov` depende solo de `cod_prov`, no de la clave completa. Esta situación incumple la segunda forma normal.
 
-En nuestro ejemplo:  
+#### Dependencia funcional transitiva
 
-- Tabla **Articulos** → ya está en 3FN.  
-- Tabla **Articulos_Ordenes** → ya está en 3FN.  
-- Tabla **Ordenes** → **no está** en 3FN, porque `nom_cliente` y `estado` dependen de `Id_cliente`, que no es clave primaria.
+Existe una **dependencia funcional transitiva** cuando un atributo no clave depende de otro atributo no clave, que a su vez depende de la clave primaria.
 
-<img src="img/formas6.png" alt="Normalización a 3FN" width="400px"/>  
+Se representa de la siguiente forma:
 
-Para normalizar: mover columnas no clave y la columna dependiente a otra tabla llamada **Clientes**. Resultado:
+```text
+A → B → C
+```
 
-<img src="img/formas7.png" alt="Tablas Clientes y Ordenes" width="400px"/>  
+Por ejemplo:
 
-El resultado final es:
+```text
+id_orden → id_cliente → nom_cliente, ciudad_cliente
+```
 
-<img src="img/formas8.png" alt="Resultado final 3FN" width="400px"/>  
+En este caso, `nom_cliente` y `ciudad_cliente` dependen de `id_cliente`, no directamente de `id_orden`. Esta situación incumple la tercera forma normal.
+
+### 5.1. Primera forma normal
+
+Una relación está en **primera forma normal (1FN)** cuando cada atributo contiene valores atómicos; es decir, cada celda contiene un único valor y no existen grupos repetitivos de atributos.
+
+#### Ejemplo: pedidos con grupos repetitivos
+
+La siguiente relación no está en 1FN:
+
+```text
+ORDENES(
+    id_orden,
+    fecha,
+    id_cliente,
+    nom_cliente,
+    ciudad,
+    num_art_1,
+    nom_art_1,
+    cant_1,
+    precio_1,
+    num_art_2,
+    nom_art_2,
+    cant_2,
+    precio_2,
+    ...
+)
+```
+
+Los grupos `num_art`, `nom_art`, `cant` y `precio` se repiten porque un pedido puede contener varios artículos.
+
+Para alcanzar 1FN, los datos de los artículos se separan en una nueva relación:
+
+```text
+ORDENES(id_orden, fecha, id_cliente, nom_cliente, ciudad)
+
+ARTICULOS_ORDENES(id_orden, num_art, nom_art, cant, precio)
+```
+
+La clave primaria de `ORDENES` es:
+
+```text
+id_orden
+```
+
+La clave primaria de `ARTICULOS_ORDENES` es compuesta:
+
+```text
+(id_orden, num_art)
+```
+
+Cada fila de `ARTICULOS_ORDENES` representa un único artículo incluido en un pedido.
+
+<div style="text-align: center;">
+    <img src="img/formas3.png" alt="Descomposición de una tabla de pedidos para alcanzar la primera forma normal" width="700" style="max-width: 100%; height: auto;">
+</div>
+
+### 5.2. Segunda forma normal
+
+Una relación está en **segunda forma normal (2FN)** si cumple las dos condiciones siguientes:
+
+1. Está en primera forma normal.
+2. Todos los atributos no clave dependen funcionalmente de la clave primaria completa.
+
+La 2FN solo puede verse incumplida cuando la clave primaria es compuesta. Si una relación está en 1FN y su clave primaria está formada por un único atributo, cumple automáticamente la 2FN.
+
+#### Ejemplo
+
+Tras aplicar la 1FN, se obtienen las relaciones:
+
+```text
+ORDENES(id_orden, fecha, id_cliente, nom_cliente, ciudad)
+
+ARTICULOS_ORDENES(id_orden, num_art, nom_art, cant, precio)
+```
+
+La tabla `ORDENES` ya está en 2FN, porque su clave primaria es simple: `id_orden`.
+
+Sin embargo, `ARTICULOS_ORDENES` no está en 2FN. Su clave primaria es compuesta:
+
+```text
+(id_orden, num_art)
+```
+
+Pero los atributos `nom_art` y `precio` dependen únicamente de `num_art`:
+
+```text
+num_art → nom_art, precio
+```
+
+Por tanto, existe una dependencia parcial.
+
+Para alcanzar 2FN, se crea la relación `ARTICULOS`:
+
+```text
+ORDENES(id_orden, fecha, id_cliente, nom_cliente, ciudad)
+
+ARTICULOS_ORDENES(id_orden, num_art, cant)
+
+ARTICULOS(num_art, nom_art, precio)
+```
+
+Las claves primarias son:
+
+```text
+ORDENES: id_orden
+
+ARTICULOS_ORDENES: (id_orden, num_art)
+
+ARTICULOS: num_art
+```
+
+<div style="text-align: center;">
+    <img src="img/formas4.png" alt="Descomposición de las relaciones para alcanzar la segunda forma normal" width="700" style="max-width: 100%; height: auto;">
+</div>
+
+### 5.3. Tercera forma normal
+
+Una relación está en **tercera forma normal (3FN)** si cumple las dos condiciones siguientes:
+
+1. Está en segunda forma normal.
+2. No contiene dependencias funcionales transitivas entre atributos no clave.
+
+Dicho de otro modo, los atributos no clave deben depender directamente de la clave primaria y no de otros atributos no clave.
+
+#### Ejemplo
+
+Tras aplicar la 2FN, se obtienen las relaciones:
+
+```text
+ORDENES(id_orden, fecha, id_cliente, nom_cliente, ciudad)
+
+ARTICULOS_ORDENES(id_orden, num_art, cant)
+
+ARTICULOS(num_art, nom_art, precio)
+```
+
+Las relaciones `ARTICULOS` y `ARTICULOS_ORDENES` ya están en 3FN.
+
+Sin embargo, la relación `ORDENES` no está en 3FN porque los atributos `nom_cliente` y `ciudad` dependen de `id_cliente`, que no es la clave primaria de la relación:
+
+```text
+id_orden → id_cliente
+
+id_cliente → nom_cliente, ciudad
+```
+
+Existe, por tanto, una dependencia transitiva:
+
+```text
+id_orden → id_cliente → nom_cliente, ciudad
+```
+
+Para alcanzar 3FN, se crea la relación `CLIENTES`:
+
+```text
+ORDENES(id_orden, fecha, id_cliente)
+
+CLIENTES(id_cliente, nom_cliente, ciudad)
+
+ARTICULOS(num_art, nom_art, precio)
+
+ARTICULOS_ORDENES(id_orden, num_art, cant)
+```
+
+Las claves primarias son:
+
+```text
+ORDENES: id_orden
+
+CLIENTES: id_cliente
+
+ARTICULOS: num_art
+
+ARTICULOS_ORDENES: (id_orden, num_art)
+```
+
+Además:
+
+```text
+ORDENES.id_cliente → CLIENTES(id_cliente)
+
+ARTICULOS_ORDENES.id_orden → ORDENES(id_orden)
+
+ARTICULOS_ORDENES.num_art → ARTICULOS(num_art)
+```
+
+<div style="text-align: center;">
+    <img src="img/formas8.png" alt="Esquema final normalizado hasta tercera forma normal" width="700" style="max-width: 100%; height: auto;">
+</div>
+
 <img src="img/formas11.png" alt="Tablas finales normalizadas" width="400px"/>  
-
-> Nota: en clase trabajaremos hasta la 3FN.  
-Si quieres profundizar en 4FN y 5FN, puedes consultar el siguiente enlace:  
 
 #### HOJAS DE EJERCICIOS
 
