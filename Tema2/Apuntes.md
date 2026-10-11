@@ -477,7 +477,7 @@ El **modelo relacional** organiza la información en tablas formadas por filas y
 
 Permite relacionar datos de diferentes tablas mediante claves y reducir la redundancia mediante un diseño adecuado. Además, incorpora restricciones que ayudan a mantener la integridad y la consistencia de la información.
 
-### 4.1. Elementos de una relación
+### 4.1. ELEMENTOS DE UNA RELACIÓN
 
 El elemento principal del modelo relacional es la **relación**.
 
@@ -510,7 +510,8 @@ Los dominios pueden clasificarse en:
 
 Por ejemplo, una columna 'nota' de tipo numérico podría tener como dominio restringido los valores comprendidos entre 0 y 10.
 
-### 4.2. Restricciones del modelo relacional
+
+### 4.2. RESTRICCIONES DEL MODELO RELACIONAL
 
 Los datos almacenados en una base de datos tienen como objetivo representar situaciones del mundo real de forma coherente.
 
@@ -545,6 +546,7 @@ El usuario puede definir, entre otras, las siguientes restricciones:
 
 > ℹ️ Entre paréntesis se indican las palabras clave de SQL con las que estas restricciones se implementan en el modelo físico de la base de datos. Se estudiarán con detalle en temas posteriores.
 
+
 ### 4.3. INTEGRIDAD REFERENCIAL
 
 Las restricciones de **integridad referencial** permiten que el SGBD controle la coherencia entre los valores almacenados en una clave ajena y los valores existentes en la clave primaria —o en una clave alternativa— de la tabla referenciada.
@@ -571,7 +573,7 @@ Tabla CIUDAD:
 | 4 | Lyon | 520000 | 2 |
 | 5 | Tokio | 14000000 | 3 |
 
-Los valores almacenados en `CIUDAD.id_pais` deben existir previamente en `PAIS.id_pais`.
+Los valores almacenados en CIUDAD.id_pais deben existir previamente en PAIS.id_pais.
 
 #### Inserción en la tabla referenciante
 
@@ -605,15 +607,15 @@ Sin embargo, no sería válido modificar su id_pais por el valor 4, ya que no ex
 
 Al intentar eliminar una fila de la tabla PAIS, pueden definirse diferentes comportamientos.
 
-Supongamos que se desea eliminar el país con `id_pais = 2`, es decir, Francia. Las ciudades París y Lyon tienen ese valor en su clave ajena.
+Supongamos que se desea eliminar el país con id_pais = 2, es decir, Francia. Las ciudades París y Lyon tienen ese valor en su clave ajena.
 
 - **Borrado en cascada (`ON DELETE CASCADE`):** se elimina el país Francia y se eliminan también las ciudades París y Lyon.
 
-- **Borrado restringido (`ON DELETE RESTRICT`):** no se permite eliminar Francia mientras existan ciudades que tengan `id_pais = 2`.
+- **Borrado restringido (`ON DELETE RESTRICT`):** no se permite eliminar Francia mientras existan ciudades que tengan id_pais = 2.
 
-- **Borrado con puesta a nulos (`ON DELETE SET NULL`):** se elimina Francia y el valor de id_pais de París y Lyon pasa a ser `NULL`.
+- **Borrado con puesta a nulos (`ON DELETE SET NULL`):** se elimina Francia y el valor de id_pais de París y Lyon pasa a ser 'NULL'.
 
-  Esta opción solo puede utilizarse si la columna `CIUDAD.id_pais` admite valores nulos.
+  Esta opción solo puede utilizarse si la columna CIUDAD.id_pais admite valores nulos.
 
 - **Borrado con valor por defecto (`ON DELETE SET DEFAULT`):** se elimina Francia y el valor de id_pais de sus ciudades se sustituye por un valor por defecto.
 
@@ -621,21 +623,21 @@ Supongamos que se desea eliminar el país con `id_pais = 2`, es decir, Francia. 
 
 #### Modificación de la clave primaria
 
-Al intentar modificar el valor de `id_pais` en una fila de `PAIS`, también pueden definirse diferentes comportamientos.
+Al intentar modificar el valor de id_pais en una fila de PAIS, también pueden definirse diferentes comportamientos.
 
-Supongamos que se desea cambiar el identificador de `España` de `1` a `10`. Las ciudades `Santander` y `Madrid` tienen inicialmente `id_pais = 1`.
+Supongamos que se desea cambiar el identificador de España de 1 a 10. Las ciudades Santander y Madrid tienen inicialmente id_pais = 1.
 
-- **Modificación en cascada (`ON UPDATE CASCADE`):** se modifica el identificador de `España` de `1` a `10` y se actualiza automáticamente el valor de `id_pais` de `Santander` y `Madrid` a `10`.
+- **Modificación en cascada (`ON UPDATE CASCADE`):** se modifica el identificador de España de 1 a 10 y se actualiza automáticamente el valor de id_pais de Santander y Madrid a 10.
 
-- **Modificación restringida (`ON UPDATE RESTRICT`):** no se permite modificar el identificador de `España` mientras existan ciudades que tengan `id_pais = 1`.
+- **Modificación restringida (`ON UPDATE RESTRICT`):** no se permite modificar el identificador de España mientras existan ciudades que tengan id_pais = 1.
 
-- **Modificación con puesta a nulos (`ON UPDATE SET NULL`):** se modifica el identificador de `España` y el valor de `id_pais` de sus ciudades pasa a ser `NULL`.
+- **Modificación con puesta a nulos (`ON UPDATE SET NULL`):** se modifica el identificador de España y el valor de id_pais de sus ciudades pasa a ser 'NULL'.
 
-  Esta opción solo puede utilizarse si la columna `CIUDAD.id_pais` admite valores nulos.
+  Esta opción solo puede utilizarse si la columna CIUDAD.id_pais admite valores nulos.
 
-- **Modificación con valor por defecto (`ON UPDATE SET DEFAULT`):** se modifica el identificador de `España` y el valor de `id_pais` de sus ciudades se sustituye por un valor por defecto.
+- **Modificación con valor por defecto (`ON UPDATE SET DEFAULT`):** se modifica el identificador de España y el valor de id_pais de sus ciudades se sustituye por un valor por defecto.
 
-  El valor por defecto debe existir previamente en la tabla `PAIS`.
+  El valor por defecto debe existir previamente en la tabla PAIS.
  
 
 ### 4.5. Representación del modelo relacional
