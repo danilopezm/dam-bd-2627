@@ -514,8 +514,6 @@ Por ejemplo, una columna 'nota' de tipo numérico podría tener como dominio res
 
 Los datos almacenados en una base de datos tienen como objetivo representar situaciones del mundo real de forma coherente.
 
-Por ejemplo, en una relación `EMPLEADO` no tendría sentido almacenar un sueldo negativo, como `-1000` euros. Para evitar este tipo de situaciones, es necesario establecer restricciones que garanticen la coherencia de la información.
-
 Existen dos tipos de restricciones:
 
 #### Restricciones propias o inherentes al modelo relacional
@@ -533,7 +531,7 @@ El usuario decide qué atributo o conjunto de atributos actúa como clave primar
 
 Son condiciones específicas de una base de datos concreta. Dependen de las necesidades de los usuarios y de las reglas del sistema de información que se quiere representar.
 
-Por ejemplo, en una empresa puede establecerse que el sueldo de un empleado deba ser positivo. En otra base de datos puede no existir el atributo `sueldo` o pueden aplicarse reglas diferentes.
+Por ejemplo, en una empresa puede establecerse que el sueldo de un empleado deba ser positivo.
 
 El usuario puede definir, entre otras, las siguientes restricciones:
 
@@ -545,48 +543,131 @@ El usuario puede definir, entre otras, las siguientes restricciones:
 - Aserciones o asertos (`ASSERTION`).
 - Disparadores (`TRIGGER`).
 
+> ℹ️ Entre paréntesis se indican las palabras clave de SQL con las que estas restricciones se implementan en el modelo físico de la base de datos. Se estudiarán con detalle en temas posteriores.
+
 ### 4.3. Integridad referencial
 
-Las restricciones de **integridad referencial** permiten que el SGBD controle la coherencia entre los valores almacenados en una clave ajena y los valores existentes en la clave primaria de la tabla referenciada.
+Las restricciones de **integridad referencial** permiten que el SGBD controle la coherencia entre los valores almacenados en una clave ajena y los valores existentes en la clave primaria —o en una clave alternativa— de la tabla referenciada.
 
-Por ejemplo, si una ciudad pertenece a un país, el código de país almacenado en la tabla `CITY` debe existir previamente en la tabla `COUNTRY`.
+Por ejemplo, si una ciudad pertenece a un país, el identificador del país almacenado en la tabla `CIUDAD` debe existir previamente en la tabla `PAIS`.
+
+#### Ejemplo
 
 En este ejemplo:
 
-- `COUNTRY` es la **tabla referenciada**.
-- `CITY` es la **tabla referenciante**.
-- `Code` es la clave primaria de `COUNTRY`.
-- `CountryCode` es la clave ajena de `CITY`, que referencia a `Code`.
+- `PAIS` es la **tabla referenciada**.
+- `CIUDAD` es la **tabla referenciante**.
+- `id_pais` es la clave primaria de `PAIS`.
+- `id_pais` es la clave ajena de `CIUDAD`, que referencia a `PAIS.id_pais`.
+
+Cada ciudad pertenece a un único país, mientras que un país puede tener varias ciudades.
+
+#### Esquema relacional
+
+```text
+PAIS(
+    _id_pais_,
+    nombre,
+    continente
+)
+
+CIUDAD(
+    _id_ciudad_,
+    nombre,
+    poblacion,
+    id_pais → PAIS(id_pais)
+)
+```
+
+En esta representación, los atributos entre guiones bajos son claves primarias y la flecha `→` indica una clave ajena.
+
+#### Datos iniciales
+
+##### Tabla `PAIS`
+
+| id_pais | nombre | continente |
+|---:|---|---|
+| 1 | España | Europa |
+| 2 | Francia | Europa |
+| 3 | Japón | Asia |
+
+##### Tabla `CIUDAD`
+
+| id_ciudad | nombre | poblacion | id_pais |
+|---:|---|---:|---:|
+| 1 | Santander | 172000 | 1 |
+| 2 | Madrid | 3300000 | 1 |
+| 3 | París | 2100000 | 2 |
+| 4 | Lyon | 520000 | 2 |
+| 5 | Tokio | 14000000 | 3 |
+
+Los valores almacenados en `CIUDAD.id_pais` deben existir previamente en `PAIS.id_pais`.
+
+Por ejemplo, la ciudad `Santander` tiene `id_pais = 1`, por lo que pertenece a `España`.
 
 #### Inserción en la tabla referenciante
 
-Al insertar una nueva fila en `CITY`, el SGBD comprueba que el valor de `CountryCode` exista en la columna `Code` de alguna fila de `COUNTRY`.
+Al insertar una nueva fila en `CIUDAD`, el SGBD comprueba que el valor de `id_pais` exista en la columna `id_pais` de alguna fila de `PAIS`.
 
-Si no existe, se rechaza la inserción.
+Por tanto, la siguiente inserción sería válida, ya que existe el país con `id_pais = 1`:
+
+| id_ciudad | nombre | poblacion | id_pais |
+|---:|---|---:|---:|
+| 6 | Bilbao | 345000 | 1 |
+
+Sin embargo, la siguiente inserción sería rechazada, porque no existe ningún país con `id_pais = 4`:
+
+| id_ciudad | nombre | poblacion | id_pais |
+|---:|---|---:|---:|
+| 7 | Lisboa | 550000 | 4 |
 
 #### Modificación de la clave ajena
 
-Al modificar el valor de `CountryCode` en una fila de `CITY`, el SGBD comprueba que el nuevo valor exista en la columna `Code` de `COUNTRY`.
+Al modificar el valor de `id_pais` en una fila de `CIUDAD`, el SGBD comprueba que el nuevo valor exista en la tabla `PAIS`.
 
-Si no existe, se rechaza la modificación y la fila mantiene el valor anterior.
+Por ejemplo, sería válido cambiar el país de `Bilbao` de `1` a `2`, ya que existe un país con `id_pais = 2`:
+
+| id_ciudad | nombre | poblacion | id_pais |
+|---:|---|---:|---:|
+| 6 | Bilbao | 345000 | 2 |
+
+Sin embargo, no sería válido modificar su `id_pais` por el valor `4`, ya que no existe ningún país con ese identificador. En ese caso, el SGBD rechazaría la modificación y la fila conservaría su valor anterior.
 
 #### Borrado en la tabla referenciada
 
-Al intentar eliminar una fila de `COUNTRY`, pueden definirse diferentes comportamientos:
+Al intentar eliminar una fila de la tabla `PAIS`, pueden definirse diferentes comportamientos.
 
-- **Borrado en cascada (`ON DELETE CASCADE`):** si se elimina un país, se eliminan también todas las ciudades asociadas a ese país.
-- **Borrado restringido (`ON DELETE RESTRICT`):** si existen ciudades asociadas al país, no se permite eliminarlo.
-- **Borrado con puesta a nulos (`ON DELETE SET NULL`):** si se elimina un país, el valor de `CountryCode` de las ciudades asociadas pasa a ser `NULL`.
-- **Borrado con valor por defecto (`ON DELETE SET DEFAULT`):** si se elimina un país, el valor de `CountryCode` de las ciudades asociadas se sustituye por un valor por defecto.
+Supongamos que se desea eliminar el país con `id_pais = 2`, es decir, `Francia`. Las ciudades `París` y `Lyon` tienen ese valor en su clave ajena.
+
+- **Borrado en cascada (`ON DELETE CASCADE`):** se elimina el país `Francia` y se eliminan también las ciudades `París` y `Lyon`.
+
+- **Borrado restringido (`ON DELETE RESTRICT`):** no se permite eliminar `Francia` mientras existan ciudades que tengan `id_pais = 2`.
+
+- **Borrado con puesta a nulos (`ON DELETE SET NULL`):** se elimina `Francia` y el valor de `id_pais` de `París` y `Lyon` pasa a ser `NULL`.
+
+  Esta opción solo puede utilizarse si la columna `CIUDAD.id_pais` admite valores nulos.
+
+- **Borrado con valor por defecto (`ON DELETE SET DEFAULT`):** se elimina `Francia` y el valor de `id_pais` de sus ciudades se sustituye por un valor por defecto.
+
+  El valor por defecto debe existir previamente en la tabla `PAIS`. Por ejemplo, podría utilizarse un país especial denominado `Sin asignar`.
 
 #### Modificación de la clave primaria
 
-Al intentar modificar el valor de `Code` en una fila de `COUNTRY`, también pueden definirse diferentes comportamientos:
+Al intentar modificar el valor de `id_pais` en una fila de `PAIS`, también pueden definirse diferentes comportamientos.
 
-- **Modificación en cascada (`ON UPDATE CASCADE`):** si se modifica el código de un país, se modifica automáticamente el valor de `CountryCode` en todas sus ciudades.
-- **Modificación restringida (`ON UPDATE RESTRICT`):** si existen ciudades asociadas al país, no se permite modificar su código.
-- **Modificación con puesta a nulos (`ON UPDATE SET NULL`):** si se modifica el código de un país, el valor de `CountryCode` de las ciudades asociadas pasa a ser `NULL`.
-- **Modificación con valor por defecto (`ON UPDATE SET DEFAULT`):** si se modifica el código de un país, el valor de `CountryCode` de las ciudades asociadas se sustituye por un valor por defecto.
+Supongamos que se desea cambiar el identificador de `España` de `1` a `10`. Las ciudades `Santander` y `Madrid` tienen inicialmente `id_pais = 1`.
+
+- **Modificación en cascada (`ON UPDATE CASCADE`):** se modifica el identificador de `España` de `1` a `10` y se actualiza automáticamente el valor de `id_pais` de `Santander` y `Madrid` a `10`.
+
+- **Modificación restringida (`ON UPDATE RESTRICT`):** no se permite modificar el identificador de `España` mientras existan ciudades que tengan `id_pais = 1`.
+
+- **Modificación con puesta a nulos (`ON UPDATE SET NULL`):** se modifica el identificador de `España` y el valor de `id_pais` de sus ciudades pasa a ser `NULL`.
+
+  Esta opción solo puede utilizarse si la columna `CIUDAD.id_pais` admite valores nulos.
+
+- **Modificación con valor por defecto (`ON UPDATE SET DEFAULT`):** se modifica el identificador de `España` y el valor de `id_pais` de sus ciudades se sustituye por un valor por defecto.
+
+  El valor por defecto debe existir previamente en la tabla `PAIS`.
  
 
 ### 4.5. Representación del modelo relacional
