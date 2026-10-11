@@ -698,13 +698,9 @@ Las formas normales indican el grado de protección de una relación frente a re
 
 > Un diseño conceptual adecuado mediante el modelo Entidad-Relación facilita la normalización, pero no evita la necesidad de comprobar las relaciones obtenidas al transformarlo al modelo relacional.
 
-### Ejemplo inicial: tabla `SUMINISTROS`
+### Ejemplo
 
-Supongamos la siguiente relación:
-
-```text
-SUMINISTROS(cod_prov, cod_articulo, cantidad, ciudad_prov)
-```
+Relación SUMINISTROS:
 
 | cod_prov | cod_articulo | cantidad | ciudad_prov |
 |---|---|---:|---|
@@ -715,11 +711,7 @@ SUMINISTROS(cod_prov, cod_articulo, cantidad, ciudad_prov)
 | P2 | C2 | 35 | Valencia |
 | P3 | C5 | 22 | Valladolid |
 
-En esta tabla, la clave primaria es compuesta:
-
-```text
-(cod_prov, cod_articulo)
-```
+En esta tabla, la clave primaria es compuesta: `(cod_prov, cod_articulo)`
 
 Sin embargo, `ciudad_prov` depende únicamente de `cod_prov`, ya que un proveedor tiene una única ciudad. Por tanto, la ciudad se repite en todas las filas correspondientes al mismo proveedor.
 
