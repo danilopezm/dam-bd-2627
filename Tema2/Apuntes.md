@@ -288,7 +288,7 @@ Una relación ternaria puede transformarse en varias relaciones binarias en algu
 </div>
 
 #### 🖥️ Problemas
-> - Cuaderno de problemas de Diagramas E-R: Problema 1 (actividades 1, 2 y 3).
+> - Diagramas ER - Problema 1 (actividades 1, 2 y 3)
 
 ### 2.4. CARDINALIDAD
 
@@ -361,7 +361,7 @@ Ejemplo:
 - un producto puede ser comprado por varios clientes.
 
 #### 🖥️Problemas
-> - Cuaderno de problemas de Diagramas E-R: Problema 1 (actividades 4 y 5).
+> - Diagramas ER - Problema 1 (actividades 4 y 5)
 
 ### 2.6. ENTIDAD DÉBIL Y FUERTE
 
@@ -384,8 +384,8 @@ Existe dependencia en identificación cuando, **además de depender de la entida
 Por ejemplo, una línea de pedido puede identificarse mediante la combinación del identificador del pedido y el número de la propia línea.
 
 #### 🖥️ Problemas
-> - Cuaderno de problemas de Diagramas E-R: Problema 2
-> - Cuaderno de problemas de Diagramas E-R: Problema 3
+> - Diagramas ER - Problema 2
+> - Diagramas ER - Problema 3
 
 
 ## 3. MODELO ER AMPLIADO
@@ -466,9 +466,9 @@ d) **Solapada parcial**
 
 #### 📝 Problemas
 
-> - Cuaderno de problemas de Diagramas E-R: Problema 4
-> - Cuaderno de problemas de Diagramas E-R: Problema 5
-> - Cuaderno de problemas de Diagramas E-R: Problema 6
+> - Diagramas ER - Problema 4
+> - Diagramas ER - Problema 5
+> - Diagramas ER - Problema 6
 
 
 ## 4. MODELO RELACIONAL
@@ -676,10 +676,10 @@ Los atributos subrayados representan claves. Las flechas indican que un atributo
 
 #### 📝 Problemas
 
-> - Cuaderno de problemas de Diagramas E-R: Problema 7
-> - Cuaderno de problemas de Diagramas E-R: Problema 8
-> - Cuaderno de problemas de Diagramas E-R: Problema 9
-> - Cuaderno de problemas de Diagramas E-R: Problema 10
+> - Diagramas ER - Problema 7
+> - Diagramas ER - Problema 8
+> - Diagramas ER - Problema 9
+> - Diagramas ER - Problema 10
 
 ## 5. NORMALIZACIÓN
 
@@ -698,7 +698,7 @@ Las formas normales indican el grado de protección de una relación frente a re
 
 > Un diseño conceptual adecuado mediante el modelo Entidad-Relación facilita la normalización, pero no evita la necesidad de comprobar las relaciones obtenidas al transformarlo al modelo relacional.
 
-### Ejemplo
+### Ejemplo inicial
 
 Relación SUMINISTROS:
 
@@ -711,17 +711,17 @@ Relación SUMINISTROS:
 | P2 | C2 | 35 | Valencia |
 | P3 | C5 | 22 | Valladolid |
 
-En esta tabla, la clave primaria es compuesta: `(cod_prov, cod_articulo)`
+En esta tabla, la clave primaria es compuesta: (cod_prov, cod_articulo)
 
-Sin embargo, `ciudad_prov` depende únicamente de `cod_prov`, ya que un proveedor tiene una única ciudad. Por tanto, la ciudad se repite en todas las filas correspondientes al mismo proveedor.
+Sin embargo, ciudad_prov depende únicamente de cod_prov, ya que **un proveedor tiene una única ciudad**. Por tanto, la ciudad se repite en todas las filas correspondientes al mismo proveedor.
 
 Esta situación produce redundancia y puede originar anomalías:
 
-- **Anomalía de modificación:** si el proveedor `P1` cambia de ciudad, se deben modificar todas las filas en las que aparece.
+- **Anomalía de modificación:** si el proveedor P1 cambia de ciudad, se deben modificar todas las filas en las que aparece.
 - **Anomalía de borrado:** si se elimina el último artículo suministrado por un proveedor, también se pierde la información sobre su ciudad.
-- **Anomalía de inserción:** no se puede registrar un proveedor y su ciudad si todavía no suministra ningún artículo, ya que faltaría el valor de `cod_articulo`, que forma parte de la clave primaria.
+- **Anomalía de inserción:** no se puede registrar un proveedor y su ciudad si todavía no suministra ningún artículo, ya que faltaría el valor de cod_articulo, que forma parte de la clave primaria.
 
-El origen del problema es que la relación `SUMINISTROS` almacena dos hechos diferentes:
+El origen del problema es que la relación SUMINISTROS almacena dos hechos diferentes:
 
 - Qué artículos suministra cada proveedor y en qué cantidad.
 - En qué ciudad se encuentra cada proveedor.
@@ -732,70 +732,46 @@ Estos hechos deben almacenarse en relaciones diferentes.
 
 #### Dependencia funcional
 
-Existe una **dependencia funcional** entre dos conjuntos de atributos cuando un valor de un atributo o conjunto de atributos determina un único valor de otro atributo.
+Existe una dependencia funcional entre dos conjuntos de atributos cuando un valor de un atributo o conjunto de atributos determina un único valor de otro atributo.
 
 Se representa mediante una flecha:
-
-```text
 A → B
-```
 
 Se lee: “A determina funcionalmente a B”.
 
 Por ejemplo:
-
-```text
 cod_prov → ciudad_prov
-```
 
 Cada proveedor tiene asociada una única ciudad.
 
-El atributo o conjunto de atributos situado a la izquierda de la flecha se denomina **determinante**.
+El atributo o conjunto de atributos situado a la izquierda de la flecha se denomina determinante.
 
 #### Dependencia funcional completa
 
-Una dependencia funcional es **completa** cuando un atributo depende de toda una clave compuesta y no solo de una parte de ella.
+Una dependencia funcional es completa cuando un atributo depende de toda una clave compuesta y no solo de una parte de ella.
 
 Por ejemplo:
-
-```text
 (cod_prov, cod_articulo) → cantidad
-```
 
 La cantidad suministrada depende del proveedor y del artículo. Conocer solo el proveedor o solo el artículo no permite determinar la cantidad.
 
 #### Dependencia funcional parcial
 
-Existe una **dependencia funcional parcial** cuando un atributo no clave depende únicamente de una parte de una clave primaria compuesta.
+Existe una dependencia funcional parcial cuando un atributo no clave depende únicamente de una parte de una clave primaria compuesta.
 
 Por ejemplo:
-
-```text
-(cod_prov, cod_articulo) → ciudad_prov
 cod_prov → ciudad_prov
-```
 
-`ciudad_prov` depende solo de `cod_prov`, no de la clave completa. Esta situación incumple la segunda forma normal.
+ciudad_prov depende solo de cod_prov, no de la clave completa. Esta situación incumple la segunda forma normal.
 
 #### Dependencia funcional transitiva
 
-Existe una **dependencia funcional transitiva** cuando un atributo no clave depende de otro atributo no clave, que a su vez depende de la clave primaria.
+Existe una dependencia funcional transitiva cuando un atributo no clave depende de otro atributo no clave, que a su vez depende de la clave primaria.
 
 Se representa de la siguiente forma:
-
-```text
 A → B → C
-```
 
-Por ejemplo:
-
-```text
-id_orden → id_cliente → nom_cliente, ciudad_cliente
-```
-
-En este caso, `nom_cliente` y `ciudad_cliente` dependen de `id_cliente`, no directamente de `id_orden`. Esta situación incumple la tercera forma normal.
-
-### 5.1. Primera forma normal
+### 5.1. PRIMERA FORMA NORMAL
 
 Una relación está en **primera forma normal (1FN)** cuando cada atributo contiene valores atómicos; es decir, cada celda contiene un único valor y no existen grupos repetitivos de atributos.
 
