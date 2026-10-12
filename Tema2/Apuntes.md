@@ -287,7 +287,7 @@ Una relación ternaria puede transformarse en varias relaciones binarias en algu
   <img src="img/relacion3.png" alt="Relación ternaria" width="500">
 </div>
 
-#### 🖥️ Problemas
+#### 📝 Problemas
 > - Diagramas ER - Problema 1 (actividades 1, 2 y 3)
 
 ### 2.4. CARDINALIDAD
@@ -360,7 +360,7 @@ Ejemplo:
 - un cliente puede comprar varios productos;
 - un producto puede ser comprado por varios clientes.
 
-#### 🖥️Problemas
+#### 📝 Problemas
 > - Diagramas ER - Problema 1 (actividades 4 y 5)
 
 ### 2.6. ENTIDAD DÉBIL Y FUERTE
@@ -383,7 +383,7 @@ Existe dependencia en identificación cuando, **además de depender de la entida
 
 Por ejemplo, una línea de pedido puede identificarse mediante la combinación del identificador del pedido y el número de la propia línea.
 
-#### 🖥️ Problemas
+#### 📝 Problemas
 > - Diagramas ER - Problema 2
 > - Diagramas ER - Problema 3
 
@@ -792,7 +792,7 @@ Una relación está en 1FN cuando cada atributo contiene valores atómicos; es d
 
 #### Ejemplo a normalizar
 
-La siguiente relación no está en 1FN porque un pedido puede contener varios artículos y se han creado grupos de atributos repetidos para almacenarlos:
+La siguiente relación no está en 1FN porque un pedido puede contener varios artículos y se han creado grupos de atributos repetidos para almacenarlos.
 
 Por ejemplo, un pedido con dos artículos podría almacenarse de la siguiente forma:
 
@@ -808,7 +808,7 @@ Para alcanzar la 1FN, se separan los datos del pedido de los datos de los artíc
 #### Tablas resultantes 1FN
 
 Tabla ORDENES:
-> Clave primaria (id_orden) <br>
+> Clave primaria (id_orden) <br/>
 
 | id_orden | fecha | id_cliente | nom_cliente | ciudad |
 |---:|---|---:|---|---|
@@ -817,7 +817,7 @@ Tabla ORDENES:
 | 2303 | 27/02/11 | 110 | Pedro | Maracay |
 
 Tabla ARTICULOS_ORDENES:
-> Clave primaria (id_orden, num_art)
+> Clave primaria (id_orden, num_art) <br/>
 > Clave ajena ORDENES(id_orden)
 
 | id_orden | num_art | nom_art | cant | precio |
@@ -841,11 +841,11 @@ Una relación está en segunda forma normal (2FN) si cumple las dos condiciones 
 
 #### Continuación del ejemplo
 
-Tras aplicar la 1FN, la tabla ORDENES ya está en 2FN, porque su clave primaria es simple.
+Tras aplicar la 1FN, la tabla ORDENES ya está en 2FN porque su clave primaria es simple.
 
 Sin embargo, ARTICULOS_ORDENES no está en 2FN. Su clave primaria es compuesta.
 
-Pero los atributos nom_art y precio dependen únicamente de num_art:
+Los atributos nom_art y precio dependen únicamente de num_art:
 
 ```text
 num_art → nom_art, precio
@@ -858,8 +858,8 @@ Para alcanzar 2FN, se crea la relación ARTICULOS.
 #### Tablas resultantes 2FN
 
 Tabla ARTICULOS_ORDENES:
-> Clave primaria (id_orden, num_art)
-> Clave ajena ORDENES(id_orden)
+> Clave primaria (id_orden, num_art) <br/>
+> Clave ajena ORDENES(id_orden) <br/>
 > Clave ajena ARTICULOS(num_art)
 
 | id_orden | num_art | cant |
@@ -891,7 +891,7 @@ Dicho de otro modo, los atributos no clave deben depender directamente de la cla
 
 Tras aplicar la 2FN, las relaciones ARTICULOS y ARTICULOS_ORDENES ya están en 3FN.
 
-Sin embargo, la relación ORDENES no está en 3FN porque los atributos nom_cliente y ciudad dependen de id_cliente, que no es la clave primaria de la relación:
+Sin embargo, la relación ORDENES no está en 3FN porque los atributos `nom_cliente` y `ciudad` dependen de `id_cliente`, que no es la clave primaria de la relación:
 
 ```text
 id_orden → id_cliente
@@ -910,7 +910,7 @@ Para alcanzar 3FN, se crea la relación CLIENTES.
 #### Tablas finales 3FN
 
 Tabla ORDENES:
-> Clave primaria (id_orden)
+> Clave primaria (id_orden) <br/>
 > Clave ajena CLIENTES(id_cliente)
 
 | id_orden | fecha | id_cliente |
@@ -936,8 +936,8 @@ Tabla ARTICULOS:
 | 5794 | Paq-6 | 5,00 |
 
 Tabla ARTICULOS_ORDENES:
-> Clave primaria (id_orden, num_art)
-> Clave ajena ORDENES(id_orden)
+> Clave primaria (id_orden, num_art) <br/>
+> Clave ajena ORDENES(id_orden) <br/>
 > Clave ajena ARTICULOS(num_art)
 
 | id_orden | num_art | cant |
@@ -945,10 +945,6 @@ Tabla ARTICULOS_ORDENES:
 | 2301 | 3786 | 3 |
 | 2301 | 4011 | 6 |
 | 2302 | 5794 | 4 |
-
-<div style="text-align: center;">
-    <img src="img/formas11.png" alt="Tablas finales normalizadas" width="500" style="max-width: 100%; height: auto;">
-</div>
 
 #### 📝 Problemas
 
