@@ -773,11 +773,11 @@ A → B → C
 
 ### 5.1. PRIMERA FORMA NORMAL
 
-Una relación está en **primera forma normal (1FN)** cuando cada atributo contiene valores atómicos; es decir, cada celda contiene un único valor y no existen grupos repetitivos de atributos.
+Una relación está en primera forma normal (1FN) cuando cada atributo contiene valores atómicos; es decir, cada celda contiene un único valor y no existen grupos repetitivos de atributos.
 
 #### Ejemplo: pedidos con grupos repetitivos
 
-La siguiente relación no está en 1FN:
+La siguiente relación no está en **primera forma normal**, porque un pedido puede contener varios artículos y se han creado grupos de atributos repetidos para almacenarlos:
 
 ```text
 ORDENES(
@@ -798,33 +798,61 @@ ORDENES(
 )
 ```
 
-Los grupos `num_art`, `nom_art`, `cant` y `precio` se repiten porque un pedido puede contener varios artículos.
+Por ejemplo, un pedido con dos artículos podría almacenarse de la siguiente forma:
 
-Para alcanzar 1FN, los datos de los artículos se separan en una nueva relación:
+| id_orden | fecha | id_cliente | nom_cliente | ciudad | num_art_1 | nom_art_1 | cant_1 | precio_1 | num_art_2 | nom_art_2 | cant_2 | precio_2 |
+|---:|---|---:|---|---|---:|---|---:|---:|---:|---|---:|---:|
+| 2301 | 23/02/11 | 101 | Martín | Caracas | 3786 | Red | 3 | 35,00 | 4011 | Raqueta | 6 | 65,00 |
+| 2302 | 25/02/11 | 107 | Herman | Coro | 5794 | Paq-6 | 4 | 5,00 | `NULL` | `NULL` | `NULL` | `NULL` |
 
-```text
-ORDENES(id_orden, fecha, id_cliente, nom_cliente, ciudad)
+Los grupos `num_art`, `nom_art`, `cant` y `precio` se repiten porque un pedido puede contener varios artículos. Si un pedido tuviera más artículos, sería necesario crear nuevos grupos de columnas.
 
-ARTICULOS_ORDENES(id_orden, num_art, nom_art, cant, precio)
-```
-
-La clave primaria de `ORDENES` es:
-
-```text
-id_orden
-```
-
-La clave primaria de `ARTICULOS_ORDENES` es compuesta:
+Para alcanzar la 1FN, se separan los datos del pedido de los datos de los artículos. Cada fila de `ARTICULOS_ORDENES` representa un único artículo incluido en un pedido.
 
 ```text
-(id_orden, num_art)
+ORDENES(
+    _id_orden_,
+    fecha,
+    id_cliente,
+    nom_cliente,
+    ciudad
+)
+
+ARTICULOS_ORDENES(
+    _id_orden_,
+    _num_art_,
+    nom_art,
+    cant,
+    precio
+)
 ```
 
-Cada fila de `ARTICULOS_ORDENES` representa un único artículo incluido en un pedido.
+La clave primaria de `ORDENES` es `id_orden`.
 
-<div style="text-align: center;">
-    <img src="img/formas3.png" alt="Descomposición de una tabla de pedidos para alcanzar la primera forma normal" width="700" style="max-width: 100%; height: auto;">
-</div>
+La clave primaria de `ARTICULOS_ORDENES` es compuesta: `(id_orden, num_art)`.
+
+Además, `ARTICULOS_ORDENES.id_orden` es una clave ajena que referencia a `ORDENES(id_orden)`.
+
+#### Tablas resultantes
+
+##### Tabla `ORDENES`
+
+| id_orden | fecha | id_cliente | nom_cliente | ciudad |
+|---:|---|---:|---|---|
+| 2301 | 23/02/11 | 101 | Martín | Caracas |
+| 2302 | 25/02/11 | 107 | Herman | Coro |
+| 2303 | 27/02/11 | 110 | Pedro | Maracay |
+
+##### Tabla `ARTICULOS_ORDENES`
+
+| id_orden | num_art | nom_art | cant | precio |
+|---:|---:|---|---:|---:|
+| 2301 | 3786 | Red | 3 | 35,00 |
+| 2301 | 4011 | Raqueta | 6 | 65,00 |
+| 2301 | 9132 | Paq-3 | 8 | 4,75 |
+| 2302 | 5794 | Paq-6 | 4 | 5,00 |
+| 2303 | 4011 | Raqueta | 2 | 65,00 |
+| 2303 | 3141 | Funda | 2 | 10,00 |
 
 ### 5.2. Segunda forma normal
 
