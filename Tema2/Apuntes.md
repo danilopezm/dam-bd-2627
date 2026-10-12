@@ -640,7 +640,7 @@ Supongamos que se desea cambiar el identificador de España de 1 a 10. Las ciuda
   El valor por defecto debe existir previamente en la tabla PAIS.
  
 
-### 4.5. Representación del modelo relacional
+### 4.4. Representación del modelo relacional
 
 Un **esquema relacional** representa la estructura lógica de una base de datos relacional. Muestra las relaciones o tablas que la componen, sus atributos, sus claves y las relaciones existentes entre ellas.
 
@@ -711,9 +711,9 @@ Relación SUMINISTROS:
 | P2 | C2 | 35 | Valencia |
 | P3 | C5 | 22 | Valladolid |
 
-En esta tabla, la clave primaria es compuesta: (cod_prov, cod_articulo)
+En esta tabla, la clave primaria es compuesta (cod_prov, cod_articulo).
 
-Sin embargo, ciudad_prov depende únicamente de cod_prov, ya que **un proveedor tiene una única ciudad**. Por tanto, la ciudad se repite en todas las filas correspondientes al mismo proveedor.
+Sin embargo, `ciudad_prov` depende únicamente de `cod_prov`, ya que **un proveedor tiene una única ciudad**. Por tanto, la ciudad se repite en todas las filas correspondientes al mismo proveedor.
 
 Esta situación produce redundancia y puede originar anomalías:
 
@@ -786,11 +786,11 @@ Se representa de la siguiente forma:
 A → B → C
 ```
 
-### 5.1. PRIMERA FORMA NORMAL
+### 5.1. PRIMERA FORMA NORMAL (1FN)
 
-Una relación está en primera forma normal (1FN) cuando cada atributo contiene valores atómicos; es decir, cada celda contiene un único valor y no existen grupos repetitivos de atributos.
+Una relación está en 1FN cuando cada atributo contiene valores atómicos; es decir, cada celda contiene un único valor y no existen grupos repetitivos de atributos.
 
-#### Ejemplo: pedidos con grupos repetitivos
+#### Ejemplo a normalizar
 
 La siguiente relación no está en 1FN porque un pedido puede contener varios artículos y se han creado grupos de atributos repetidos para almacenarlos:
 
@@ -801,15 +801,14 @@ Por ejemplo, un pedido con dos artículos podría almacenarse de la siguiente fo
 | 2301 | 23/02/11 | 101 | Martín | Caracas | 3786 | Red | 3 | 35,00 | 4011 | Raqueta | 6 | 65,00 |
 | 2302 | 25/02/11 | 107 | Herman | Coro | 5794 | Paq-6 | 4 | 5,00 | NULL | NULL | NULL | NULL |
 
-Los grupos num_art, nom_art, cant y precio se repiten porque un pedido puede contener varios artículos. Si un pedido tuviera más artículos, sería necesario crear nuevos grupos de columnas.
+Los grupos `num_art`, `nom_art`, `cant` y `precio` se repiten porque un pedido puede contener varios artículos. Si un pedido tuviera más artículos, sería necesario crear nuevos grupos de columnas.
 
-Para alcanzar la 1FN, se separan los datos del pedido de los datos de los artículos. Cada fila de ARTICULOS_ORDENES representa un único artículo incluido en un pedido.
-
-Además, ARTICULOS_ORDENES.id_orden es una clave ajena que referencia a ORDENES.id_orden.
+Para alcanzar la 1FN, se separan los datos del pedido de los datos de los artículos.
 
 #### Tablas resultantes 1FN
 
-Tabla ORDENES con clave primaria id_orden:
+Tabla ORDENES:
+> Clave primaria (id_orden) <br>
 
 | id_orden | fecha | id_cliente | nom_cliente | ciudad |
 |---:|---|---:|---|---|
@@ -817,7 +816,9 @@ Tabla ORDENES con clave primaria id_orden:
 | 2302 | 25/02/11 | 107 | Herman | Coro |
 | 2303 | 27/02/11 | 110 | Pedro | Maracay |
 
-Tabla ARTICULOS_ORDENES con clave primaria compuesta (id_orden, num_art):
+Tabla ARTICULOS_ORDENES:
+> Clave primaria (id_orden, num_art)
+> Clave ajena ORDENES(id_orden)
 
 | id_orden | num_art | nom_art | cant | precio |
 |---:|---:|---|---:|---:|
@@ -836,13 +837,13 @@ Una relación está en segunda forma normal (2FN) si cumple las dos condiciones 
 1. Está en 1FN.
 2. Todos los atributos no clave dependen funcionalmente de la clave primaria completa.
 
-> 🚨 **ATENCIÓN**: La 2FN solo puede verse incumplida cuando la clave primaria es compuesta. Si una relación está en 1FN y su clave primaria está formada por un único atributo, cumple automáticamente la 2FN.
+> 🚨 **Atención**: La 2FN solo puede verse incumplida cuando la clave primaria es compuesta. Si una relación está en 1FN y su clave primaria está formada por un único atributo, cumple automáticamente la 2FN.
 
 #### Continuación del ejemplo
 
-Tras aplicar la 1FN, la tabla ORDENES ya está en 2FN, porque su clave primaria es simple: id_orden.
+Tras aplicar la 1FN, la tabla ORDENES ya está en 2FN, porque su clave primaria es simple.
 
-Sin embargo, ARTICULOS_ORDENES no está en 2FN. Su clave primaria es compuesta: (id_orden, num_art).
+Sin embargo, ARTICULOS_ORDENES no está en 2FN. Su clave primaria es compuesta.
 
 Pero los atributos nom_art y precio dependen únicamente de num_art:
 
@@ -852,11 +853,14 @@ num_art → nom_art, precio
 
 Por tanto, existe una dependencia parcial.
 
-Para alcanzar 2FN, se crea la relación ARTICULOS:
+Para alcanzar 2FN, se crea la relación ARTICULOS.
 
 #### Tablas resultantes 2FN
 
-Tabla ARTICULOS_ORDENES con clave primaria (id_orden, num_art):
+Tabla ARTICULOS_ORDENES:
+> Clave primaria (id_orden, num_art)
+> Clave ajena ORDENES(id_orden)
+> Clave ajena ARTICULOS(num_art)
 
 | id_orden | num_art | cant |
 |---:|---:|---:|
@@ -864,7 +868,8 @@ Tabla ARTICULOS_ORDENES con clave primaria (id_orden, num_art):
 | 2301 | 4011 | 6 |
 | 2302 | 5794 | 4 |
 
-Tabla ARTICULOS con clave primaria num_art:
+Tabla ARTICULOS:
+> Clave primaria (num_art)
 
 | num_art | nom_art | precio |
 |---:|---|---:|
@@ -873,7 +878,7 @@ Tabla ARTICULOS con clave primaria num_art:
 | 5794 | Paq-6 | 5,00 |
 
 
-### 5.3. Tercera forma normal
+### 5.3. TERCERA FORMA NORMAL
 
 Una relación está en tercera forma normal (3FN) si cumple las dos condiciones siguientes:
 
@@ -904,21 +909,25 @@ Para alcanzar 3FN, se crea la relación CLIENTES.
 
 #### Tablas finales 3FN
 
-Tabla ORDENES con clave primaria id_orden:
+Tabla ORDENES:
+> Clave primaria (id_orden)
+> Clave ajena CLIENTES(id_cliente)
 
 | id_orden | fecha | id_cliente |
 |---:|---|---:|
 | 2301 | 23/02/11 | 101 |
 | 2302 | 25/02/11 | 107 |
 
-Tabla CLIENTES con clave primaria id_cliente:
+Tabla CLIENTES:
+> Clave primaria (id_cliente)
 
 | id_cliente | nom_cliente | ciudad |
 |---:|---|---|
 | 101 | Martín | Caracas |
 | 107 | Herman | Coro |
 
-Tabla ARTICULOS con clave primaria num_art:
+Tabla ARTICULOS:
+> Clave primaria (num_art)
 
 | num_art | nom_art | precio |
 |---:|---|---:|
@@ -926,7 +935,10 @@ Tabla ARTICULOS con clave primaria num_art:
 | 4011 | Raqueta | 65,00 |
 | 5794 | Paq-6 | 5,00 |
 
-Tabla ARTICULOS_ORDENES con clave primaria (id_orden, num_art):
+Tabla ARTICULOS_ORDENES:
+> Clave primaria (id_orden, num_art)
+> Clave ajena ORDENES(id_orden)
+> Clave ajena ARTICULOS(num_art)
 
 | id_orden | num_art | cant |
 |---:|---:|---:|
