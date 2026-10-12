@@ -735,11 +735,13 @@ Estos hechos deben almacenarse en relaciones diferentes.
 Existe una dependencia funcional entre dos conjuntos de atributos cuando un valor de un atributo o conjunto de atributos determina un único valor de otro atributo.
 
 Se representa mediante una flecha:
+
 A → B
 
 Se lee: “A determina funcionalmente a B”.
 
 Por ejemplo:
+
 cod_prov → ciudad_prov
 
 Cada proveedor tiene asociada una única ciudad.
@@ -751,6 +753,7 @@ El atributo o conjunto de atributos situado a la izquierda de la flecha se denom
 Una dependencia funcional es completa cuando un atributo depende de toda una clave compuesta y no solo de una parte de ella.
 
 Por ejemplo:
+
 (cod_prov, cod_articulo) → cantidad
 
 La cantidad suministrada depende del proveedor y del artículo. Conocer solo el proveedor o solo el artículo no permite determinar la cantidad.
@@ -760,6 +763,7 @@ La cantidad suministrada depende del proveedor y del artículo. Conocer solo el 
 Existe una dependencia funcional parcial cuando un atributo no clave depende únicamente de una parte de una clave primaria compuesta.
 
 Por ejemplo:
+
 cod_prov → ciudad_prov
 
 ciudad_prov depende solo de cod_prov, no de la clave completa. Esta situación incumple la segunda forma normal.
@@ -769,6 +773,7 @@ ciudad_prov depende solo de cod_prov, no de la clave completa. Esta situación i
 Existe una dependencia funcional transitiva cuando un atributo no clave depende de otro atributo no clave, que a su vez depende de la clave primaria.
 
 Se representa de la siguiente forma:
+
 A → B → C
 
 ### 5.1. PRIMERA FORMA NORMAL
@@ -777,65 +782,24 @@ Una relación está en primera forma normal (1FN) cuando cada atributo contiene 
 
 #### Ejemplo: pedidos con grupos repetitivos
 
-La siguiente relación no está en **primera forma normal**, porque un pedido puede contener varios artículos y se han creado grupos de atributos repetidos para almacenarlos:
-
-```text
-ORDENES(
-    id_orden,
-    fecha,
-    id_cliente,
-    nom_cliente,
-    ciudad,
-    num_art_1,
-    nom_art_1,
-    cant_1,
-    precio_1,
-    num_art_2,
-    nom_art_2,
-    cant_2,
-    precio_2,
-    ...
-)
-```
+La siguiente relación no está en 1FN porque un pedido puede contener varios artículos y se han creado grupos de atributos repetidos para almacenarlos:
 
 Por ejemplo, un pedido con dos artículos podría almacenarse de la siguiente forma:
 
 | id_orden | fecha | id_cliente | nom_cliente | ciudad | num_art_1 | nom_art_1 | cant_1 | precio_1 | num_art_2 | nom_art_2 | cant_2 | precio_2 |
 |---:|---|---:|---|---|---:|---|---:|---:|---:|---|---:|---:|
 | 2301 | 23/02/11 | 101 | Martín | Caracas | 3786 | Red | 3 | 35,00 | 4011 | Raqueta | 6 | 65,00 |
-| 2302 | 25/02/11 | 107 | Herman | Coro | 5794 | Paq-6 | 4 | 5,00 | `NULL` | `NULL` | `NULL` | `NULL` |
+| 2302 | 25/02/11 | 107 | Herman | Coro | 5794 | Paq-6 | 4 | 5,00 | NULL | NULL | NULL | NULL |
 
-Los grupos `num_art`, `nom_art`, `cant` y `precio` se repiten porque un pedido puede contener varios artículos. Si un pedido tuviera más artículos, sería necesario crear nuevos grupos de columnas.
+Los grupos num_art, nom_art, cant y precio se repiten porque un pedido puede contener varios artículos. Si un pedido tuviera más artículos, sería necesario crear nuevos grupos de columnas.
 
-Para alcanzar la 1FN, se separan los datos del pedido de los datos de los artículos. Cada fila de `ARTICULOS_ORDENES` representa un único artículo incluido en un pedido.
+Para alcanzar la 1FN, se separan los datos del pedido de los datos de los artículos. Cada fila de ARTICULOS_ORDENES representa un único artículo incluido en un pedido.
 
-```text
-ORDENES(
-    _id_orden_,
-    fecha,
-    id_cliente,
-    nom_cliente,
-    ciudad
-)
-
-ARTICULOS_ORDENES(
-    _id_orden_,
-    _num_art_,
-    nom_art,
-    cant,
-    precio
-)
-```
-
-La clave primaria de `ORDENES` es `id_orden`.
-
-La clave primaria de `ARTICULOS_ORDENES` es compuesta: `(id_orden, num_art)`.
-
-Además, `ARTICULOS_ORDENES.id_orden` es una clave ajena que referencia a `ORDENES(id_orden)`.
+Además, ARTICULOS_ORDENES.id_orden es una clave ajena que referencia a ORDENES.id_orden.
 
 #### Tablas resultantes
 
-##### Tabla `ORDENES`
+Tabla ORDENES con clave primaria id_orden:
 
 | id_orden | fecha | id_cliente | nom_cliente | ciudad |
 |---:|---|---:|---|---|
@@ -843,7 +807,7 @@ Además, `ARTICULOS_ORDENES.id_orden` es una clave ajena que referencia a `ORDEN
 | 2302 | 25/02/11 | 107 | Herman | Coro |
 | 2303 | 27/02/11 | 110 | Pedro | Maracay |
 
-##### Tabla `ARTICULOS_ORDENES`
+Tabla ARTICULOS_ORDENES con clave primaria compuesta (id_orden, num_art):
 
 | id_orden | num_art | nom_art | cant | precio |
 |---:|---:|---|---:|---:|
@@ -854,89 +818,63 @@ Además, `ARTICULOS_ORDENES.id_orden` es una clave ajena que referencia a `ORDEN
 | 2303 | 4011 | Raqueta | 2 | 65,00 |
 | 2303 | 3141 | Funda | 2 | 10,00 |
 
-### 5.2. Segunda forma normal
 
-Una relación está en **segunda forma normal (2FN)** si cumple las dos condiciones siguientes:
+### 5.2. SEGUNDA FORMA NORMAL
 
-1. Está en primera forma normal.
+Una relación está en segunda forma normal (2FN) si cumple las dos condiciones siguientes:
+
+1. Está en 1FN.
 2. Todos los atributos no clave dependen funcionalmente de la clave primaria completa.
 
-La 2FN solo puede verse incumplida cuando la clave primaria es compuesta. Si una relación está en 1FN y su clave primaria está formada por un único atributo, cumple automáticamente la 2FN.
+> 🚨 **ATENCIÓN**: La 2FN solo puede verse incumplida cuando la clave primaria es compuesta. Si una relación está en 1FN y su clave primaria está formada por un único atributo, cumple automáticamente la 2FN.
 
 #### Ejemplo
 
-Tras aplicar la 1FN, se obtienen las relaciones:
+Tras aplicar la 1FN, la tabla ORDENES ya está en 2FN, porque su clave primaria es simple: id_orden.
 
-```text
-ORDENES(id_orden, fecha, id_cliente, nom_cliente, ciudad)
+Sin embargo, ARTICULOS_ORDENES no está en 2FN. Su clave primaria es compuesta: (id_orden, num_art).
 
-ARTICULOS_ORDENES(id_orden, num_art, nom_art, cant, precio)
-```
+Pero los atributos nom_art y precio dependen únicamente de num_art:
 
-La tabla `ORDENES` ya está en 2FN, porque su clave primaria es simple: `id_orden`.
-
-Sin embargo, `ARTICULOS_ORDENES` no está en 2FN. Su clave primaria es compuesta:
-
-```text
-(id_orden, num_art)
-```
-
-Pero los atributos `nom_art` y `precio` dependen únicamente de `num_art`:
-
-```text
 num_art → nom_art, precio
-```
 
 Por tanto, existe una dependencia parcial.
 
-Para alcanzar 2FN, se crea la relación `ARTICULOS`:
+Para alcanzar 2FN, se crea la relación ARTICULOS:
 
-```text
-ORDENES(id_orden, fecha, id_cliente, nom_cliente, ciudad)
+#### Tablas resultantes
 
-ARTICULOS_ORDENES(id_orden, num_art, cant)
+Tabla ARTICULOS_ORDENES con clave primaria (id_orden, num_art):
 
-ARTICULOS(num_art, nom_art, precio)
-```
+| id_orden | num_art | cant |
+|---:|---:|---:|
+| 2301 | 3786 | 3 |
+| 2301 | 4011 | 6 |
+| 2302 | 5794 | 4 |
 
-Las claves primarias son:
+Tabla ARTICULOS con clave primaria num_art:
 
-```text
-ORDENES: id_orden
+| num_art | nom_art | precio |
+|---:|---|---:|
+| 3786 | Red | 35,00 |
+| 4011 | Raqueta | 65,00 |
+| 5794 | Paq-6 | 5,00 |
 
-ARTICULOS_ORDENES: (id_orden, num_art)
-
-ARTICULOS: num_art
-```
-
-<div style="text-align: center;">
-    <img src="img/formas4.png" alt="Descomposición de las relaciones para alcanzar la segunda forma normal" width="700" style="max-width: 100%; height: auto;">
-</div>
 
 ### 5.3. Tercera forma normal
 
-Una relación está en **tercera forma normal (3FN)** si cumple las dos condiciones siguientes:
+Una relación está en tercera forma normal (3FN) si cumple las dos condiciones siguientes:
 
-1. Está en segunda forma normal.
+1. Está en 2FN.
 2. No contiene dependencias funcionales transitivas entre atributos no clave.
 
 Dicho de otro modo, los atributos no clave deben depender directamente de la clave primaria y no de otros atributos no clave.
 
 #### Ejemplo
 
-Tras aplicar la 2FN, se obtienen las relaciones:
+Tras aplicar la 2FN, las relaciones ARTICULOS y ARTICULOS_ORDENES ya están en 3FN.
 
-```text
-ORDENES(id_orden, fecha, id_cliente, nom_cliente, ciudad)
-
-ARTICULOS_ORDENES(id_orden, num_art, cant)
-
-ARTICULOS(num_art, nom_art, precio)
-```
-
-Las relaciones `ARTICULOS` y `ARTICULOS_ORDENES` ya están en 3FN.
-
-Sin embargo, la relación `ORDENES` no está en 3FN porque los atributos `nom_cliente` y `ciudad` dependen de `id_cliente`, que no es la clave primaria de la relación:
+Sin embargo, la relación ORDENES no está en 3FN porque los atributos nom_cliente y ciudad dependen de id_cliente, que no es la clave primaria de la relación:
 
 ```text
 id_orden → id_cliente
@@ -950,45 +888,43 @@ Existe, por tanto, una dependencia transitiva:
 id_orden → id_cliente → nom_cliente, ciudad
 ```
 
-Para alcanzar 3FN, se crea la relación `CLIENTES`:
+Para alcanzar 3FN, se crea la relación CLIENTES.
 
-```text
-ORDENES(id_orden, fecha, id_cliente)
+#### Tablas finales
 
-CLIENTES(id_cliente, nom_cliente, ciudad)
+Tabla ORDENES con clave primaria id_orden:
 
-ARTICULOS(num_art, nom_art, precio)
+| id_orden | fecha | id_cliente |
+|---:|---|---:|
+| 2301 | 23/02/11 | 101 |
+| 2302 | 25/02/11 | 107 |
 
-ARTICULOS_ORDENES(id_orden, num_art, cant)
-```
+Tabla CLIENTES con clave primaria id_cliente:
 
-Las claves primarias son:
+| id_cliente | nom_cliente | ciudad |
+|---:|---|---|
+| 101 | Martín | Caracas |
+| 107 | Herman | Coro |
 
-```text
-ORDENES: id_orden
+Tabla ARTICULOS con clave primaria num_art:
 
-CLIENTES: id_cliente
+| num_art | nom_art | precio |
+|---:|---|---:|
+| 3786 | Red | 35,00 |
+| 4011 | Raqueta | 65,00 |
+| 5794 | Paq-6 | 5,00 |
 
-ARTICULOS: num_art
+##### Tabla `ARTICULOS_ORDENES` con clave primaria (id_orden, num_art)
 
-ARTICULOS_ORDENES: (id_orden, num_art)
-```
-
-Además:
-
-```text
-ORDENES.id_cliente → CLIENTES(id_cliente)
-
-ARTICULOS_ORDENES.id_orden → ORDENES(id_orden)
-
-ARTICULOS_ORDENES.num_art → ARTICULOS(num_art)
-```
+| id_orden | num_art | cant |
+|---:|---:|---:|
+| 2301 | 3786 | 3 |
+| 2301 | 4011 | 6 |
+| 2302 | 5794 | 4 |
 
 <div style="text-align: center;">
-    <img src="img/formas8.png" alt="Esquema final normalizado hasta tercera forma normal" width="700" style="max-width: 100%; height: auto;">
+    <img src="img/formas11.png" alt="Tablas finales normalizadas" width="500" style="max-width: 100%; height: auto;">
 </div>
-
-<img src="img/formas11.png" alt="Tablas finales normalizadas" width="400px"/>  
 
 #### HOJAS DE EJERCICIOS
 
