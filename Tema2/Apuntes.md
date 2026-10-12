@@ -640,7 +640,7 @@ Supongamos que se desea cambiar el identificador de España de 1 a 10. Las ciuda
   El valor por defecto debe existir previamente en la tabla PAIS.
  
 
-### 4.4. Representación del modelo relacional
+### 4.4. REPRESENTACIÓN DEL MODELO RELACIONAL
 
 Un **esquema relacional** representa la estructura lógica de una base de datos relacional. Muestra las relaciones o tablas que la componen, sus atributos, sus claves y las relaciones existentes entre ellas.
 
@@ -830,9 +830,9 @@ Tabla ARTICULOS_ORDENES:
 | 2303 | 3141 | Funda | 2 | 10,00 |
 
 
-### 5.2. SEGUNDA FORMA NORMAL
+### 5.2. SEGUNDA FORMA NORMAL (2FN)
 
-Una relación está en segunda forma normal (2FN) si cumple las dos condiciones siguientes:
+Una relación está en 2FN si cumple las dos condiciones siguientes:
 
 1. Está en 1FN.
 2. Todos los atributos no clave dependen funcionalmente de la clave primaria completa.
@@ -878,9 +878,9 @@ Tabla ARTICULOS:
 | 5794 | Paq-6 | 5,00 |
 
 
-### 5.3. TERCERA FORMA NORMAL
+### 5.3. TERCERA FORMA NORMAL (3FN)
 
-Una relación está en tercera forma normal (3FN) si cumple las dos condiciones siguientes:
+Una relación está en 3FN si cumple las dos condiciones siguientes:
 
 1. Está en 2FN.
 2. No contiene dependencias funcionales transitivas entre atributos no clave.
