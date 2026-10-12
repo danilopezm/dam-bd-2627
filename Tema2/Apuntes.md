@@ -736,13 +736,17 @@ Existe una dependencia funcional entre dos conjuntos de atributos cuando un valo
 
 Se representa mediante una flecha:
 
+```text
 A → B
+```
 
 Se lee: “A determina funcionalmente a B”.
 
 Por ejemplo:
 
+```text
 cod_prov → ciudad_prov
+```
 
 Cada proveedor tiene asociada una única ciudad.
 
@@ -754,7 +758,9 @@ Una dependencia funcional es completa cuando un atributo depende de toda una cla
 
 Por ejemplo:
 
+```text
 (cod_prov, cod_articulo) → cantidad
+```
 
 La cantidad suministrada depende del proveedor y del artículo. Conocer solo el proveedor o solo el artículo no permite determinar la cantidad.
 
@@ -764,7 +770,9 @@ Existe una dependencia funcional parcial cuando un atributo no clave depende ún
 
 Por ejemplo:
 
+```text
 cod_prov → ciudad_prov
+```
 
 ciudad_prov depende solo de cod_prov, no de la clave completa. Esta situación incumple la segunda forma normal.
 
@@ -774,7 +782,9 @@ Existe una dependencia funcional transitiva cuando un atributo no clave depende 
 
 Se representa de la siguiente forma:
 
+```text
 A → B → C
+```
 
 ### 5.1. PRIMERA FORMA NORMAL
 
@@ -797,7 +807,7 @@ Para alcanzar la 1FN, se separan los datos del pedido de los datos de los artíc
 
 Además, ARTICULOS_ORDENES.id_orden es una clave ajena que referencia a ORDENES.id_orden.
 
-#### Tablas resultantes
+#### Tablas resultantes 1FN
 
 Tabla ORDENES con clave primaria id_orden:
 
@@ -828,7 +838,7 @@ Una relación está en segunda forma normal (2FN) si cumple las dos condiciones 
 
 > 🚨 **ATENCIÓN**: La 2FN solo puede verse incumplida cuando la clave primaria es compuesta. Si una relación está en 1FN y su clave primaria está formada por un único atributo, cumple automáticamente la 2FN.
 
-#### Ejemplo
+#### Continuación del ejemplo
 
 Tras aplicar la 1FN, la tabla ORDENES ya está en 2FN, porque su clave primaria es simple: id_orden.
 
@@ -836,13 +846,15 @@ Sin embargo, ARTICULOS_ORDENES no está en 2FN. Su clave primaria es compuesta: 
 
 Pero los atributos nom_art y precio dependen únicamente de num_art:
 
+```text
 num_art → nom_art, precio
+```
 
 Por tanto, existe una dependencia parcial.
 
 Para alcanzar 2FN, se crea la relación ARTICULOS:
 
-#### Tablas resultantes
+#### Tablas resultantes 2FN
 
 Tabla ARTICULOS_ORDENES con clave primaria (id_orden, num_art):
 
@@ -870,7 +882,7 @@ Una relación está en tercera forma normal (3FN) si cumple las dos condiciones 
 
 Dicho de otro modo, los atributos no clave deben depender directamente de la clave primaria y no de otros atributos no clave.
 
-#### Ejemplo
+#### Continuación del ejemplo
 
 Tras aplicar la 2FN, las relaciones ARTICULOS y ARTICULOS_ORDENES ya están en 3FN.
 
@@ -890,7 +902,7 @@ id_orden → id_cliente → nom_cliente, ciudad
 
 Para alcanzar 3FN, se crea la relación CLIENTES.
 
-#### Tablas finales
+#### Tablas finales 3FN
 
 Tabla ORDENES con clave primaria id_orden:
 
@@ -914,7 +926,7 @@ Tabla ARTICULOS con clave primaria num_art:
 | 4011 | Raqueta | 65,00 |
 | 5794 | Paq-6 | 5,00 |
 
-##### Tabla `ARTICULOS_ORDENES` con clave primaria (id_orden, num_art)
+Tabla ARTICULOS_ORDENES con clave primaria (id_orden, num_art):
 
 | id_orden | num_art | cant |
 |---:|---:|---:|
@@ -926,10 +938,10 @@ Tabla ARTICULOS con clave primaria num_art:
     <img src="img/formas11.png" alt="Tablas finales normalizadas" width="500" style="max-width: 100%; height: auto;">
 </div>
 
-#### HOJAS DE EJERCICIOS
+#### 📝 Problemas
 
-💻 Hoja de ejercicios 15.  
-💻 Hoja de ejercicios 16.  
-💻 Hoja de ejercicios 17.  
-💻 Hoja de ejercicios 18.  
-💻 Hoja de ejercicios 19. REPASO DE TODO EL TEMA.
+> - Normalización - Problema 15
+> - Normalización - Problema 16
+> - Normalización - Problema 17
+> - Normalización - Problema 18
+> - Normalización - Problema 19
