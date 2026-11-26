@@ -3,11 +3,40 @@ unit_title: "Unidad 2. Diseño lógico de la base de datos."
 ---
 [Volver a Inicio](../README.md)
 
-1. [MODELO DE DATOS](#1-modelo-de-datos)
-2. [DIAGRAMA ENTIDAD-RELACIÓN](#2-diagrama-entidad-relación)
-3. [MODELO E/R AMPLIADO](#3-modelo-er-ampliado)
-4. [MODELO RELACIONAL](#4-modelo-relacional)
-5. [NORMALIZACIÓN](#5-normalización)
+<a id="indice"></a>
+
+**Índice**
+
+- [1. MODELO DE DATOS](#1-modelo-de-datos)
+   - [1.1. DEFINICIÓN DE MODELO DE DATOS](#11-definición-de-modelo-de-datos)
+   - [1.2. CLASIFICACIÓN SEGÚN EL NIVEL DE ABSTRACCIÓN](#12-clasificación-según-el-nivel-de-abstracción)
+   - [1.3. PROCESO GENERAL DE DISEÑO](#13-proceso-general-de-diseño)
+- [2. DIAGRAMA ENTIDAD-RELACIÓN](#2-diagrama-entidad-relación)
+   - [2.1. ENTIDAD](#21-entidad)
+   - [2.2. ATRIBUTOS](#22-atributos)
+   - [2.3. RELACIONES](#23-relaciones)
+   - [2.4. CARDINALIDAD](#24-cardinalidad)
+   - [2.5. TIPO DE CORRESPONDENCIA](#25-tipo-de-correspondencia)
+   - [2.6. ENTIDAD DÉBIL Y FUERTE](#26-entidad-débil-y-fuerte)
+- [3. MODELO E/R AMPLIADO](#3-modelo-er-ampliado)
+   - [3.1. SUPERCLASE](#31-superclase)
+   - [3.2. SUBCLASE](#32-subclase)
+   - [3.3. GENERALIZACIÓN](#33-generalización)
+   - [3.4. ESPECIALIZACIÓN](#34-especialización)
+   - [3.5. JERARQUÍAS CON VARIOS NIVELES](#35-jerarquías-con-varios-niveles)
+- [4. MODELO RELACIONAL](#4-modelo-relacional)
+   - [4.1. ELEMENTOS DE UNA RELACIÓN](#41-elementos-de-una-relación)
+   - [4.2. RESTRICCIONES DEL MODELO RELACIONAL](#42-restricciones-del-modelo-relacional)
+   - [4.3. INTEGRIDAD REFERENCIAL](#43-integridad-referencial)
+   - [4.4. REPRESENTACIÓN DEL MODELO RELACIONAL](#44-representación-del-modelo-relacional)
+   - [4.5. PASO DEL MODELO E/R AL MODELO RELACIONAL](#45-paso-del-modelo-er-al-modelo-relacional)
+- [5. NORMALIZACIÓN](#5-normalización)
+   - [5.1. UNA TABLA CON PROBLEMAS](#51-una-tabla-con-problemas)
+   - [5.2. DEPENDENCIAS FUNCIONALES](#52-dependencias-funcionales)
+   - [5.3. PRIMERA FORMA NORMAL (1FN)](#53-primera-forma-normal-1fn)
+   - [5.4. SEGUNDA FORMA NORMAL (2FN)](#54-segunda-forma-normal-2fn)
+   - [5.5. TERCERA FORMA NORMAL (3FN)](#55-tercera-forma-normal-3fn)
+   - [5.6. RESUMEN: TRES PREGUNTAS](#56-resumen-tres-preguntas)
 
 ## 1. MODELO DE DATOS
 
@@ -82,7 +111,7 @@ Por lo tanto, el modelo físico **depende** del SGBD que se utilice. Algunos eje
 - Microsoft SQL Server;
 - Oracle Database.
 
-> **Importante:** Estos productos no son modelos físicos, sino SGBD en los que se puede implementar un modelo físico.
+> ⚠️ **Importante:** estos productos no son modelos físicos, sino SGBD en los que se puede implementar un modelo físico.
 
 ### 1.3. PROCESO GENERAL DE DISEÑO
 
@@ -93,6 +122,9 @@ El diseño de una BD suele realizarse siguiendo varias fases:
 3. **Diseño lógico:** se transforma el modelo conceptual en tablas, claves y restricciones.
 4. **Diseño físico:** se implementa el modelo lógico en un SGBD concreto.
 5. **Creación y pruebas:** se introducen datos y comprueba el funcionamiento.
+
+
+[↑ Volver al índice](#indice)
 
 ## 2. DIAGRAMA ENTIDAD-RELACIÓN
 
@@ -125,11 +157,11 @@ De esta forma, el diagrama permite identificar de un vistazo:
 
 En la siguiente imagen se muestra un ejemplo de Diagrama Entidad-Relación:
 
-<div style="text-align: center;">
+<div class="figura">
   <img src="img/esquemaER.png" alt="Ejemplo de Diagrama Entidad-Relación" width="500">
 </div>
 
-En los siguientes apartados se explican los elementos que componen un DER y el proceso básico para construirlo.
+En los siguientes apartados se explican los elementos que componen un DER. El proceso para construirlo paso a paso se recoge en el **Anexo 1 – Cómo construir un diagrama E/R** de los casos de diseño.
 
 ### 2.1. ENTIDAD
 
@@ -148,12 +180,12 @@ Una **ocurrencia** de una entidad es un elemento concreto perteneciente a ese co
 Un **atributo** es una propiedad o característica de una entidad.
 
 En el ejemplo, la entidad Alumno tiene los siguientes atributos:
-- NumExpediente;
-- Nombre;
-- Apellidos;
-- FechaNac.
+- num_expediente;
+- nombre;
+- apellidos;
+- fecha_nac.
 
-> **Importante:** Las relaciones también pueden tener atributos.
+> ⚠️ **Importante:** las relaciones también pueden tener atributos.
 
 En la notación utilizada en estos apuntes, los atributos se representan mediante pequeños círculos unidos a la entidad por una línea. Junto a cada círculo se escribe el nombre del atributo.
 
@@ -165,10 +197,10 @@ Ejemplo de dominios de la entidad Alumno:
 
 | Atributo | Dominio |
 |---|---|
-| NumExpediente | Cadena de caracteres de longitud 9 |
-| Nombre | Cadena de caracteres de longitud máxima 20 |
-| Apellidos | Cadena de caracteres de longitud máxima 30 |
-| FechaNac | Fecha válida |
+| num_expediente | Cadena de caracteres de longitud 9 |
+| nombre | Cadena de caracteres de longitud máxima 20 |
+| apellidos | Cadena de caracteres de longitud máxima 30 |
+| fecha_nac | Fecha válida |
 
 #### 2.2.2. TIPOS DE ATRIBUTOS
 
@@ -236,7 +268,7 @@ Una clave debe:
 
 Una clave puede estar formada por un solo atributo o por varios atributos.
 
-Una **clave candidata** es cualquier atributo, o conjunto mínimo de atributos, que cumple las condiciones anteriores. Que sea mínimo significa que, si se quita cualquiera de sus atributos, deja de identificar de forma única. Por ejemplo, en Alumno pueden ser claves candidatas NumExpediente y DNI.
+Una **clave candidata** es cualquier atributo, o conjunto mínimo de atributos, que cumple las condiciones anteriores. Que sea mínimo significa que, si se quita cualquiera de sus atributos, deja de identificar de forma única. Por ejemplo, en Alumno pueden ser claves candidatas num_expediente y dni.
 
 Entre las claves candidatas se distinguen:
 - **Clave primaria:** clave candidata elegida como identificador principal de la entidad.
@@ -244,7 +276,7 @@ Entre las claves candidatas se distinguen:
 
 En el diagrama, la clave primaria se representa con un círculo relleno y la clave alternativa, con un círculo relleno solo hasta la mitad.
 
-<div style="text-align: center;">
+<div class="figura">
   <img src="img/atributo5.png" alt="Representación de los tipos de atributos" width="500">
 </div>
 
@@ -265,7 +297,7 @@ Cada relación se representa mediante un *rombo*, que se une mediante líneas a 
 
 Una relación es binaria o de grado 2 cuando participan dos entidades.
 
-<div style="text-align: center;">
+<div class="figura">
   <img src="img/relacion1.png" alt="Relación binaria" width="500">
 </div>
 
@@ -275,7 +307,7 @@ Una relación es unaria, reflexiva o de grado 1 cuando relaciona ocurrencias de 
 
 Por ejemplo, un empleado es jefe de otro empleado.
 
-<div style="text-align: center;">
+<div class="figura">
   <img src="img/relacion2.png" alt="Relación unaria o reflexiva" width="500">
 </div>
 
@@ -287,7 +319,7 @@ Por ejemplo, un cliente compra un producto a un vendedor.
 
 Una relación ternaria puede transformarse en varias relaciones binarias en algunos casos, pero no siempre. Una transformación incorrecta puede perder información sobre la asociación simultánea de las tres entidades.
 
-<div style="text-align: center;">
+<div class="figura">
   <img src="img/relacion3.png" alt="Relación ternaria" width="500">
 </div>
 
@@ -310,7 +342,7 @@ Por ejemplo:
 - `(0,N)`: participación opcional y varias ocurrencias como máximo;
 - `(1,N)`: participación obligatoria y varias ocurrencias como máximo.
 
-<div style="text-align: center;">
+<div class="figura">
   <img src="img/cardinalidad1.png" alt="Ejemplo de cardinalidad" width="500">
 </div>
 
@@ -350,8 +382,8 @@ Para obtenerla, se fija una ocurrencia de cada una de las otras dos entidades y 
 - Para un profesor y un grupo concretos, ¿cuántas asignaturas imparte? **Una o varias**, así que junto a ASIGNATURA va `(1,N)`.
 - Para un profesor y una asignatura concretos, ¿a cuántos grupos la imparte? **A uno o a varios**, así que junto a GRUPO va `(1,N)`.
 
-<div style="text-align: center;">
-    <img src="img/ternaria7.png" alt="Relación ternaria Imparte entre Profesor, Asignatura y Grupo" width="550" style="max-width: 100%; height: auto;">
+<div class="figura">
+  <img src="img/ternaria7.png" alt="Relación ternaria Imparte entre Profesor, Asignatura y Grupo" width="550">
 </div>
 
 El tipo de correspondencia se forma con los tres máximos; en este caso, `1:N:M`.
@@ -409,8 +441,8 @@ Por ejemplo, una línea de pedido puede identificarse mediante la combinación d
 
 En el diagrama, el tipo de dependencia se indica en el rombo de la relación: **E** para la dependencia en existencia e **I** para la dependencia en identificación.
 
-<div style="text-align: center;">
-    <img src="img/debil3.png" alt="Entidad débil con dependencia en identificación" width="500" style="max-width: 100%; height: auto;">
+<div class="figura">
+  <img src="img/debil3.png" alt="Entidad débil con dependencia en identificación" width="500">
 </div>
 
 #### 📝 Problemas
@@ -418,13 +450,16 @@ En el diagrama, el tipo de dependencia se indica en el rombo de la relación: **
 > - Caso de diseño 3
 
 
-## 3. MODELO ER AMPLIADO
 
-El **Modelo E-R ampliado** recoge los conceptos y especificaciones del modelo E/R y añade otros que permiten representar con mayor precisión determinadas situaciones del mundo real, mejorando el diseño de las bases de datos.
+[↑ Volver al índice](#indice)
+
+## 3. MODELO E/R AMPLIADO
+
+El **modelo E/R ampliado** recoge los conceptos y especificaciones del modelo E/R y añade otros que permiten representar con mayor precisión determinadas situaciones del mundo real, mejorando el diseño de las bases de datos.
 
 Dentro de este modelo se definen los siguientes conceptos:
 
-### Superclase
+### 3.1. SUPERCLASE
 
 Una **superclase** es una entidad genérica que agrupa las características comunes de un conjunto de entidades.
 
@@ -432,7 +467,7 @@ Sus atributos son compartidos por las entidades que pertenecen a las subclases a
 
 Por ejemplo, la entidad Empleado puede ser una superclase que contenga atributos comunes como dni, nombre, apellidos y fecha_alta.
 
-### Subclase
+### 3.2. SUBCLASE
 
 Una **subclase** es una entidad que forma parte de una superclase y que añade atributos o relaciones específicas.
 
@@ -445,7 +480,7 @@ Por ejemplo, Operario y Encargado pueden ser subclases de Empleado:
 
 Otro ejemplo, en un centro de estudios, Persona podría ser una superclase, mientras que Alumno y Profesor serían subclases.
 
-### Generalización
+### 3.3. GENERALIZACIÓN
 
 La **generalización** es el proceso de definir una superclase a partir de las características comunes de varias subclases.
 
@@ -453,7 +488,7 @@ Por ejemplo, si Alumno y Profesor comparten dni, nombre y apellidos, se puede cr
 
 Una generalización se representa mediante un *triángulo invertido* que une la superclase con sus subclases.
 
-### Especialización
+### 3.4. ESPECIALIZACIÓN
 
 La **especialización** es el proceso inverso a la generalización. Consiste en identificar subclases dentro de una superclase, atendiendo a atributos, relaciones o restricciones específicas.
 
@@ -468,33 +503,47 @@ Conforme a las restricciones de existencia de las ocurrencias de las entidades, 
 - **Total**, si todas las ocurrencias de la superclase deben pertenecer a alguna subclase.
 - **Parcial**, si no todas las ocurrencias de la superclase tienen por qué pertenecer a alguna subclase.
 
+En el diagrama, la especialización **total** se indica con un círculo sobre el triángulo, y la **exclusiva**, con un arco que corta las líneas de las subclases. Si no hay círculo, es parcial; si no hay arco, es solapada.
+
 Estas restricciones pueden combinarse, dando lugar a los siguientes tipos:
 
-a) **Exclusiva total**
+#### a) Exclusiva total
 
-<div style="text-align: center;">
-    <img src="img/ampliado2.png" alt="Especialización exclusiva total" width="600" style="max-width: 100%; height: auto;">
+<div class="figura">
+  <img src="img/ampliado2.png" alt="Especialización exclusiva total" width="600">
 </div>
 
-b) **Exclusiva parcial**
+Todas las fichas son de autor o de tema, y ninguna puede ser de los dos tipos a la vez.
 
-<div style="text-align: center;">
-    <img src="img/ampliado3.png" alt="Especialización exclusiva parcial" width="600" style="max-width: 100%; height: auto;">
+
+#### b) Exclusiva parcial
+
+<div class="figura">
+  <img src="img/ampliado3.png" alt="Especialización exclusiva parcial" width="600">
 </div>
 
-c) **Solapada total**
+Un empleado del restaurante puede ser camarero, cocinero o pinche, pero solo una de esas cosas. También puede tener otro puesto que no se recoge como subclase.
 
-<div style="text-align: center;">
-    <img src="img/ampliado4.png" alt="Especialización solapada total" width="600" style="max-width: 100%; height: auto;">
+
+#### c) Solapada total
+
+<div class="figura">
+  <img src="img/ampliado4.png" alt="Especialización solapada total" width="600">
 </div>
 
-d) **Solapada parcial**
+Todo jugador juega al menos en una posición, y puede jugar en varias: un defensa puede jugar también como centrocampista.
 
-<div style="text-align: center;">
-    <img src="img/ampliado5.png" alt="Especialización solapada parcial" width="600" style="max-width: 100%; height: auto;">
-</div>  
 
-### Jerarquías con varios niveles
+#### d) Solapada parcial
+
+<div class="figura">
+  <img src="img/ampliado5.png" alt="Especialización solapada parcial" width="600">
+</div>
+
+Un participante en una película puede ser productor, director o actor, varias de esas cosas a la vez, o tener otro papel distinto.
+  
+
+### 3.5. JERARQUÍAS CON VARIOS NIVELES
 
 A veces una sola especialización no basta para recoger todas las reglas del enunciado. Ocurre, por ejemplo, cuando algunas subclases pueden solaparse entre sí y otras no.
 
@@ -505,13 +554,13 @@ En ese caso se agrupan las subclases que son excluyentes bajo una **entidad inte
 - **Nivel 1:** PERSONA se especializa en ALUMNO y PERSONAL. Es **total y solapada**: toda persona es alumno, personal o ambas cosas.
 - **Nivel 2:** PERSONAL se especializa en PDI y PAS. Es **total y exclusiva**: todo el personal es PDI o PAS, pero nunca las dos cosas.
 
-<div style="text-align: center;">
-    <img src="img/ampliado7.png" alt="Jerarquía de dos niveles: Persona, Alumno, Personal, PDI y PAS" width="650" style="max-width: 100%; height: auto;">
+<div class="figura">
+  <img src="img/ampliado7.png" alt="Jerarquía de dos niveles: Persona, Alumno, Personal, PDI y PAS" width="650">
 </div>
 
 PERSONAL hereda los atributos de PERSONA (dni, nombre…) y añade los suyos (fecha_alta, salario), que heredan a su vez PDI y PAS.
 
-> 💡 Si la entidad intermedia no tiene atributos propios, sigue siendo útil: permite expresar en el diagrama una regla que, con una sola especialización, habría que anotar aparte como restricción.
+> 💡 **Nota:** si la entidad intermedia no tiene atributos propios, sigue siendo útil: permite expresar en el diagrama una regla que, con una sola especialización, habría que anotar aparte como restricción.
 
 #### 📝 Problemas
 
@@ -519,6 +568,9 @@ PERSONAL hereda los atributos de PERSONA (dni, nombre…) y añade los suyos (fe
 > - Caso de diseño 5
 > - Caso de diseño 6
 
+
+
+[↑ Volver al índice](#indice)
 
 ## 4. MODELO RELACIONAL
 
@@ -532,9 +584,9 @@ El elemento principal del modelo relacional es la **relación**.
 
 Una relación es una tabla. Cada ocurrencia de la relación es una fila, denominada **tupla** o **registro**. Cada propiedad o característica de las ocurrencias es una **columna**, denominada **atributo**.
 
-> ⚠️ **Importante:** no debes confundir el concepto de relación en el modelo relacional con el concepto de relación en el modelo E-R.
+> ⚠️ **Importante:** no debes confundir el concepto de relación en el modelo relacional con el concepto de relación en el modelo E/R.
 
-#### Relación en el modelo E-R
+#### Relación en el modelo E/R
 
 Es un concepto lógico que representa una asociación entre entidades.
 
@@ -585,6 +637,8 @@ Son condiciones generales que deben cumplirse en toda base de datos que siga el 
 - La clave primaria no puede contener valores nulos.
 - La clave primaria no puede contener valores repetidos.
 - Una clave alternativa no puede contener valores repetidos.
+- Cada celda contiene un único valor (atómico): no puede haber listas de valores en una misma columna de una fila.
+- El orden de las filas y el de las columnas no es significativo: la información es la misma aunque se ordenen de otra forma.
 
 El usuario decide qué atributo o conjunto de atributos actúa como clave primaria, pero, una vez definida, el modelo relacional exige que cumpla las restricciones anteriores.
 
@@ -604,7 +658,7 @@ El usuario puede definir, entre otras, las siguientes restricciones:
 - Aserciones o asertos (`ASSERTION`).
 - Disparadores (`TRIGGER`).
 
-> ℹ️ Entre paréntesis se indican las palabras clave de SQL con las que estas restricciones se implementan en el modelo físico de la base de datos. Se estudiarán con detalle en temas posteriores.
+> 💡 **Nota:** entre paréntesis se indican las palabras clave de SQL con las que estas restricciones se implementan en el modelo físico de la base de datos. Se estudiarán con detalle en temas posteriores.
 
 
 ### 4.3. INTEGRIDAD REFERENCIAL
@@ -710,8 +764,8 @@ Existen distintas formas de representar un esquema relacional:
 
 En esta notación, cada tabla muestra sus atributos o columnas. Las líneas unen las tablas relacionadas mediante claves ajenas y pueden incluir la cardinalidad de la relación.
 
-<div style="text-align: center;">
-    <img src="img/esquema1.png" alt="Esquema relacional conectado a columnas" width="500" style="max-width: 100%; height: auto;">
+<div class="figura">
+  <img src="img/esquema1.png" alt="Esquema relacional conectado a columnas" width="500">
 </div>
 
 #### Esquema relacional con notación *crow's foot* o pata de cuervo
@@ -720,8 +774,8 @@ Esta notación representa las relaciones entre tablas mediante símbolos situado
 
 La pata de cuervo indica la parte “muchos” de una relación. En relaciones de tipo uno a muchos, suele situarse junto a la tabla que contiene la clave ajena.
 
-<div style="text-align: center;">
-    <img src="img/esquema2.png" alt="Esquema relacional con notación pata de cuervo" width="500" style="max-width: 100%; height: auto;">
+<div class="figura">
+  <img src="img/esquema2.png" alt="Esquema relacional con notación pata de cuervo" width="500">
 </div>
 
 #### Esquema relacional textual
@@ -730,8 +784,8 @@ En esta notación, cada relación se expresa mediante su nombre seguido de una l
 
 Los atributos subrayados forman la clave primaria. La flecha `→` indica que un atributo, o un conjunto de atributos, es una clave ajena, y a continuación se escribe la relación a la que referencia.
 
-<div style="text-align: center;">
-    <img src="img/esquema7.png" alt="Esquema relacional textual" width="500" style="max-width: 100%; height: auto;">
+<div class="figura">
+  <img src="img/esquema7.png" alt="Esquema relacional textual" width="500">
 </div>
 
 ### 4.5. PASO DEL MODELO E/R AL MODELO RELACIONAL
@@ -747,11 +801,14 @@ Estas reglas, con ejemplos de cada caso, se recogen en el **Anexo 2 – Del mode
 > - Caso de diseño 9
 > - Caso de diseño 10
 
+
+[↑ Volver al índice](#indice)
+
 ## 5. NORMALIZACIÓN
 
 Al diseñar una base de datos relacional es necesario evaluar la calidad del diseño. Uno de los criterios utilizados son las **formas normales**.
 
-La **normalización** es el proceso de organizar y, cuando sea necesario, descomponer las relaciones de una base de datos para reducir la redundancia y evitar anomalías.
+La **normalización** es el proceso de organizar y, cuando sea necesario, dividir las relaciones de una base de datos para que cada dato se guarde una sola vez.
 
 Un diseño normalizado busca:
 
@@ -760,45 +817,43 @@ Un diseño normalizado busca:
 - Mantener la coherencia e integridad de los datos.
 - Realizar descomposiciones sin pérdida de información.
 
-Las formas normales indican el grado de protección de una relación frente a redundancias e inconsistencias. Son acumulativas: para que una tabla esté en una forma normal determinada, debe cumplir también las formas normales anteriores.
+Las formas normales son **acumulativas**: para que una tabla esté en una forma normal determinada, debe cumplir también las anteriores (1FN → 2FN → 3FN).
 
-> Un diseño conceptual adecuado mediante el modelo Entidad-Relación facilita la normalización, pero no evita la necesidad de comprobar las relaciones obtenidas al transformarlo al modelo relacional.
+> 💡 **Nota:** un diseño conceptual adecuado mediante el modelo Entidad-Relación facilita la normalización, pero no evita la necesidad de comprobar las relaciones obtenidas al transformarlo al modelo relacional.
 
-### Ejemplo inicial
+### 5.1. UNA TABLA CON PROBLEMAS
 
 Relación SUMINISTROS:
 
-| cod_prov | cod_articulo | cantidad | ciudad_prov |
+> Clave primaria (cod_prov, cod_articulo)
+
+| cod_prov | cod_articulo | cantidad | ciudad |
 |---|---|---:|---|
-| P1 | C1 | 12 | Cantabria |
-| P1 | C2 | 25 | Cantabria |
-| P1 | C3 | 11 | Cantabria |
-| P2 | C1 | 52 | Valencia |
-| P2 | C2 | 35 | Valencia |
-| P3 | C5 | 22 | Valladolid |
+| P1 | A1 | 300 | Santander |
+| P1 | A2 | 200 | Santander |
+| P1 | A3 | 400 | Santander |
+| P2 | A1 | 300 | Bilbao |
+| P2 | A2 | 400 | Bilbao |
+| P3 | A2 | 200 | Oviedo |
 
-En esta tabla, la clave primaria es compuesta (cod_prov, cod_articulo).
+La clave primaria indica qué artículo suministra cada proveedor. Sin embargo, la ciudad depende únicamente del proveedor: **un proveedor está en una única ciudad**. Por eso la ciudad de P1 está guardada tres veces.
 
-Sin embargo, `ciudad_prov` depende únicamente de `cod_prov`, ya que **un proveedor tiene una única ciudad**. Por tanto, la ciudad se repite en todas las filas correspondientes al mismo proveedor.
+Esta redundancia provoca tres **anomalías**:
 
-Esta situación produce redundancia y puede originar anomalías:
+- **Anomalía de modificación:** si P1 se traslada a Torrelavega, hay que cambiar tres filas. Si se olvida alguna, la tabla se contradice.
+- **Anomalía de borrado:** si se borra el único suministro de P3, se pierde también que P3 está en Oviedo.
+- **Anomalía de inserción:** no se puede dar de alta a un proveedor P4 de León hasta que suministre algún artículo, porque cod_articulo forma parte de la clave primaria y no puede quedar vacío.
 
-- **Anomalía de modificación:** si el proveedor P1 cambia de ciudad, se deben modificar todas las filas en las que aparece.
-- **Anomalía de borrado:** si se elimina el último artículo suministrado por un proveedor, también se pierde la información sobre su ciudad.
-- **Anomalía de inserción:** no se puede registrar un proveedor y su ciudad si todavía no suministra ningún artículo, ya que faltaría el valor de cod_articulo, que forma parte de la clave primaria.
-
-El origen del problema es que la relación SUMINISTROS almacena dos hechos diferentes:
+El origen del problema es que la relación SUMINISTROS mezcla dos hechos diferentes, que deben almacenarse en relaciones distintas:
 
 - Qué artículos suministra cada proveedor y en qué cantidad.
 - En qué ciudad se encuentra cada proveedor.
 
-Estos hechos deben almacenarse en relaciones diferentes.
-
-### Definiciones previas
+### 5.2. DEPENDENCIAS FUNCIONALES
 
 #### Dependencia funcional
 
-Existe una dependencia funcional entre dos conjuntos de atributos cuando un valor de un atributo o conjunto de atributos determina un único valor de otro atributo.
+Existe una dependencia funcional entre dos conjuntos de atributos cuando cada valor de un atributo, o conjunto de atributos, determina un único valor de otro.
 
 Se representa mediante una flecha:
 
@@ -806,208 +861,131 @@ Se representa mediante una flecha:
 A → B
 ```
 
-Se lee: “A determina funcionalmente a B”.
+Se lee: «A determina funcionalmente a B». El atributo o conjunto de atributos situado a la izquierda de la flecha se denomina **determinante**.
 
 Por ejemplo:
 
 ```text
-cod_prov → ciudad_prov
+cod_prov → ciudad
 ```
 
-Cada proveedor tiene asociada una única ciudad.
+Conocido el proveedor, se conoce su ciudad.
 
-El atributo o conjunto de atributos situado a la izquierda de la flecha se denomina determinante.
+> ⚠️ **Importante:** las dependencias salen de las reglas del negocio, no de los datos que haya en la tabla en un momento dado.
 
 #### Dependencia funcional completa
 
 Una dependencia funcional es completa cuando un atributo depende de toda una clave compuesta y no solo de una parte de ella.
 
-Por ejemplo:
-
 ```text
 (cod_prov, cod_articulo) → cantidad
 ```
 
-La cantidad suministrada depende del proveedor y del artículo. Conocer solo el proveedor o solo el artículo no permite determinar la cantidad.
+Para saber la cantidad suministrada hacen falta el proveedor y el artículo: conocer solo uno de los dos no basta.
 
 #### Dependencia funcional parcial
 
 Existe una dependencia funcional parcial cuando un atributo no clave depende únicamente de una parte de una clave primaria compuesta.
 
-Por ejemplo:
-
 ```text
-cod_prov → ciudad_prov
+cod_prov → ciudad
 ```
 
-ciudad_prov depende solo de cod_prov, no de la clave completa. Esta situación incumple la segunda forma normal.
+La ciudad depende solo de cod_prov, no de la clave completa. Esta situación incumple la segunda forma normal.
 
 #### Dependencia funcional transitiva
 
 Existe una dependencia funcional transitiva cuando un atributo no clave depende de otro atributo no clave, que a su vez depende de la clave primaria.
 
-Se representa de la siguiente forma:
-
 ```text
 A → B → C
 ```
 
-### 5.1. PRIMERA FORMA NORMAL (1FN)
+Por ejemplo, en una tabla de pedidos, `id_orden → id_cliente → nom_cliente`. Esta situación incumple la tercera forma normal.
 
-Una relación está en 1FN cuando cada atributo contiene valores atómicos; es decir, cada celda contiene un único valor y no existen grupos repetitivos de atributos.
+### 5.3. PRIMERA FORMA NORMAL (1FN)
 
-#### Ejemplo a normalizar
+Una relación está en 1FN cuando cada celda contiene un único valor (atómico) y no existen grupos de columnas que se repiten.
 
-La siguiente relación no está en 1FN porque un pedido puede contener varios artículos y se han creado grupos de atributos repetidos para almacenarlos.
+Una tabla puede incumplir la 1FN de dos formas, que en el fondo son el mismo problema:
 
-Por ejemplo, un pedido con dos artículos podría almacenarse de la siguiente forma:
+- **Celdas multivaluadas:** por ejemplo, un pedido con `num_art = 3786 / 4011 / 9132`.
+- **Grupos repetitivos:** columnas como `num_art_1`, `nom_art_1`, `num_art_2`, `nom_art_2`…
 
-| id_orden | fecha | id_cliente | nom_cliente | ciudad | num_art_1 | nom_art_1 | cant_1 | precio_1 | num_art_2 | nom_art_2 | cant_2 | precio_2 |
-|---:|---|---:|---|---|---:|---|---:|---:|---:|---|---:|---:|
-| 2301 | 23/02/11 | 101 | Martín | Caracas | 3786 | Red | 3 | 35,00 | 4011 | Raqueta | 6 | 65,00 |
-| 2302 | 25/02/11 | 107 | Herman | Coro | 5794 | Paq-6 | 4 | 5,00 | NULL | NULL | NULL | NULL |
+En los dos casos, un pedido tiene varios artículos y la tabla no tiene sitio para ellos.
 
-Los grupos `num_art`, `nom_art`, `cant` y `precio` se repiten porque un pedido puede contener varios artículos. Si un pedido tuviera más artículos, sería necesario crear nuevos grupos de columnas.
+**Solución:** se lleva el grupo que se repite a otra tabla, junto con la clave de la tabla original.
 
-Para alcanzar la 1FN, se separan los datos del pedido de los datos de los artículos.
+Por ejemplo, la tabla de pedidos
 
-#### Tablas resultantes 1FN
+<p>ORDENES (<u>id_orden</u>, fecha, id_cliente, nom_cliente, ciudad, num_art, nom_art, cant, precio)</p>
 
-Tabla ORDENES:
-> Clave primaria (id_orden) <br/>
+con varios artículos en cada fila, se divide en:
 
-| id_orden | fecha | id_cliente | nom_cliente | ciudad |
-|---:|---|---:|---|---|
-| 2301 | 23/02/11 | 101 | Martín | Caracas |
-| 2302 | 25/02/11 | 107 | Herman | Coro |
+<p>ORDENES (<u>id_orden</u>, fecha, id_cliente, nom_cliente, ciudad)<br>
+ARTICULOS_ORDENES (<u>id_orden</u> → ORDENES, <u>num_art</u>, nom_art, cant, precio)</p>
 
-Tabla ARTICULOS_ORDENES:
-> Clave primaria (id_orden, num_art) <br/>
-> Clave ajena ORDENES(id_orden)
-
-| id_orden | num_art | nom_art | cant | precio |
-|---:|---:|---|---:|---:|
-| 2301 | 3786 | Red | 3 | 35,00 |
-| 2301 | 4011 | Raqueta | 6 | 65,00 |
-| 2302 | 5794 | Paq-6 | 4 | 5,00 |
-
-
-### 5.2. SEGUNDA FORMA NORMAL (2FN)
+### 5.4. SEGUNDA FORMA NORMAL (2FN)
 
 Una relación está en 2FN si cumple las dos condiciones siguientes:
 
 1. Está en 1FN.
 2. Todos los atributos no clave dependen funcionalmente de la clave primaria completa.
 
-> 🚨 **Atención**: La 2FN solo puede verse incumplida cuando la clave primaria es compuesta. Si una relación está en 1FN y su clave primaria está formada por un único atributo, cumple automáticamente la 2FN.
+> ⚠️ **Importante:** la 2FN solo puede incumplirse cuando la clave primaria es compuesta. Si una relación está en 1FN y su clave primaria está formada por un único atributo, cumple automáticamente la 2FN.
 
-#### Continuación del ejemplo
-
-Tras aplicar la 1FN, la tabla ORDENES ya está en 2FN porque su clave primaria es simple.
-
-Sin embargo, ARTICULOS_ORDENES no está en 2FN. Su clave primaria es compuesta.
-
-Los atributos nom_art y precio dependen únicamente de num_art:
+En el ejemplo, ORDENES ya está en 2FN porque su clave es simple. En cambio, en ARTICULOS_ORDENES el nombre y el precio dependen solo de una parte de la clave:
 
 ```text
 num_art → nom_art, precio
 ```
 
-Por tanto, existe una dependencia parcial.
+Los datos del artículo pasan a su propia tabla:
 
-Para alcanzar 2FN, se crea la relación ARTICULOS.
+<p>ARTICULOS_ORDENES (<u>id_orden</u> → ORDENES, <u>num_art</u> → ARTICULOS, cant)<br>
+ARTICULOS (<u>num_art</u>, nom_art, precio)</p>
 
-#### Tablas resultantes 2FN
-
-Tabla ARTICULOS_ORDENES:
-> Clave primaria (id_orden, num_art) <br/>
-> Clave ajena ORDENES(id_orden) <br/>
-> Clave ajena ARTICULOS(num_art)
-
-| id_orden | num_art | cant |
-|---:|---:|---:|
-| 2301 | 3786 | 3 |
-| 2301 | 4011 | 6 |
-| 2302 | 5794 | 4 |
-
-Tabla ARTICULOS:
-> Clave primaria (num_art)
-
-| num_art | nom_art | precio |
-|---:|---|---:|
-| 3786 | Red | 35,00 |
-| 4011 | Raqueta | 65,00 |
-| 5794 | Paq-6 | 5,00 |
-
-
-### 5.3. TERCERA FORMA NORMAL (3FN)
+### 5.5. TERCERA FORMA NORMAL (3FN)
 
 Una relación está en 3FN si cumple las dos condiciones siguientes:
 
 1. Está en 2FN.
-2. No contiene dependencias funcionales transitivas entre atributos no clave.
+2. Ningún atributo no clave depende de otro atributo no clave.
 
-Dicho de otro modo, los atributos no clave deben depender directamente de la clave primaria y no de otros atributos no clave.
+Dicho de otro modo, los atributos no clave deben depender directamente de la clave primaria.
 
-#### Continuación del ejemplo
-
-Tras aplicar la 2FN, las relaciones ARTICULOS y ARTICULOS_ORDENES ya están en 3FN.
-
-Sin embargo, la relación ORDENES no está en 3FN porque los atributos `nom_cliente` y `ciudad` dependen de `id_cliente`, que no es la clave primaria de la relación:
-
-```text
-id_orden → id_cliente
-
-id_cliente → nom_cliente, ciudad
-```
-
-Existe, por tanto, una dependencia transitiva:
+En el ejemplo, en ORDENES el nombre y la ciudad dependen del cliente, no del pedido:
 
 ```text
 id_orden → id_cliente → nom_cliente, ciudad
 ```
 
-Para alcanzar 3FN, se crea la relación CLIENTES.
+Los datos del cliente pasan a su propia tabla, e id_cliente se queda en ORDENES como clave ajena. El esquema final en 3FN es:
 
-#### Tablas finales 3FN
+<p>ORDENES (<u>id_orden</u>, fecha, id_cliente → CLIENTES)<br>
+CLIENTES (<u>id_cliente</u>, nom_cliente, ciudad)<br>
+ARTICULOS (<u>num_art</u>, nom_art, precio)<br>
+ARTICULOS_ORDENES (<u>id_orden</u> → ORDENES, <u>num_art</u> → ARTICULOS, cant)</p>
 
-Tabla ORDENES:
-> Clave primaria (id_orden) <br/>
-> Clave ajena CLIENTES(id_cliente)
+De una tabla se ha pasado a cuatro, y cada una guarda un único hecho: los pedidos, los clientes, los artículos y qué artículos lleva cada pedido.
 
-| id_orden | fecha | id_cliente |
-|---:|---|---:|
-| 2301 | 23/02/11 | 101 |
-| 2302 | 25/02/11 | 107 |
+> 💡 **Nota:** el ejemplo completo, con los datos de cada tabla en cada paso, está en la presentación **Normalización** (Classroom).
 
-Tabla CLIENTES:
-> Clave primaria (id_cliente)
+> 💡 **Para pensar:** con este diseño, si la raqueta pasa a costar 70 €, los pedidos antiguos parecerán más caros de lo que se cobró. El precio actual de un artículo y el precio al que se vendió en un pedido concreto son datos distintos. La solución habitual es guardar también precio_venta en ARTICULOS_ORDENES: no es redundancia, porque depende del pedido y del artículo a la vez.
 
-| id_cliente | nom_cliente | ciudad |
-|---:|---|---|
-| 101 | Martín | Caracas |
-| 107 | Herman | Coro |
+### 5.6. RESUMEN: TRES PREGUNTAS
 
-Tabla ARTICULOS:
-> Clave primaria (num_art)
+| Forma | Pregunta | Si la respuesta es sí… |
+|---|---|---|
+| 1FN | ¿Hay celdas con varios valores o columnas que se repiten? | Lleva el grupo a otra tabla junto con la clave original. |
+| 2FN | ¿Algún atributo depende solo de una parte de una clave compuesta? | Llévalo a una tabla cuya clave sea esa parte. |
+| 3FN | ¿Algún atributo depende de otro que no es clave? | Llévalo a una tabla cuya clave sea ese atributo, que se queda como clave ajena. |
 
-| num_art | nom_art | precio |
-|---:|---|---:|
-| 3786 | Red | 35,00 |
-| 4011 | Raqueta | 65,00 |
-| 5794 | Paq-6 | 5,00 |
-
-Tabla ARTICULOS_ORDENES:
-> Clave primaria (id_orden, num_art) <br/>
-> Clave ajena ORDENES(id_orden) <br/>
-> Clave ajena ARTICULOS(num_art)
-
-| id_orden | num_art | cant |
-|---:|---:|---:|
-| 2301 | 3786 | 3 |
-| 2301 | 4011 | 6 |
-| 2302 | 5794 | 4 |
+> 💡 **Nota:** existen formas normales superiores (FNBC, 4FN, 5FN), que no se estudian en este curso. En la práctica, la mayoría de los diseños se dan por buenos cuando están en 3FN.
 
 #### 📝 Problemas
 
+> - Presentaciones de clase «Normalización» y «Ejemplos de normalización» (en Classroom)
 > - Unidad 2 · Hoja de ejercicios 2 (Normalización): actividades 1 a 5
+
+[↑ Volver al índice](#indice)
