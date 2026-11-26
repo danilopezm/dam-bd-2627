@@ -24,3 +24,14 @@
 #main_content_wrap .inner {
   padding: 20px 0;
 }
+
+/* Figuras centradas y adaptables al ancho de la pantalla */
+.figura {
+  text-align: center;
+  margin: 1.2em 0;
+}
+
+.figura img {
+  max-width: 100%;
+  height: auto;
+}
